@@ -1,13 +1,16 @@
+// components\sections\FeaturedProjects.tsx
+// components/sections/FeaturedProjects.tsx
 "use client";
 
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Github } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import Card from "@/components/ui/Card";
 import Button from "@/components/ui/Button";
+import ProjectModal from "@/components/ui/ProjectModal";
 import { projects } from "@/lib/data/projects";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 
 export default function FeaturedProjects() {
@@ -17,7 +20,12 @@ export default function FeaturedProjects() {
   });
 
   const [selectedProject, setSelectedProject] = useState<string | null>(null);
+
+  // Filter by featured projects
   const featuredProjects = projects.filter((p) => p.featured);
+
+  // Get selected project object
+  const currentProject = projects.find((p) => p.id === selectedProject) || null;
 
   return (
     <motion.div
@@ -71,22 +79,21 @@ export default function FeaturedProjects() {
                 <p className="text-sm text-neutral-600 dark:text-neutral-400 line-clamp-2">
                   {project.description}
                 </p>
-                {project.tags.length <= 3 ? (
-                  <div className="flex flex-wrap gap-2">
-                    {project.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="px-3 py-1 text-xs font-medium bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-full"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                ) : (
-                  <p className="text-sm text-neutral-500 dark:text-neutral-500">
-                    Click to view {project.tags.length} technologies
-                  </p>
-                )}
+                <div className="flex flex-wrap gap-2">
+                  {project.tags.slice(0, 3).map((tag) => (
+                    <span
+                      key={tag}
+                      className="px-3 py-1 text-xs font-medium bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-full"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                  {project.tags.length > 3 && (
+                    <span className="px-3 py-1 text-xs font-medium bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400 rounded-full">
+                      +{project.tags.length - 3}
+                    </span>
+                  )}
+                </div>
               </div>
             </Card>
           </motion.div>
@@ -94,78 +101,11 @@ export default function FeaturedProjects() {
       </div>
 
       {/* Project Detail Modal */}
-      <AnimatePresence>
-        {selectedProject && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4"
-            onClick={() => setSelectedProject(null)}
-          >
-            <motion.div
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
-              onClick={(e) => e.stopPropagation()}
-              className="max-w-2xl w-full"
-            >
-              <Card className="p-6 space-y-4">
-                {(() => {
-                  const project = projects.find(
-                    (p) => p.id === selectedProject
-                  );
-                  if (!project) return null;
-                  return (
-                    <>
-                      <div className="relative aspect-video rounded-lg overflow-hidden">
-                        <Image
-                          src={project.image}
-                          alt={project.title}
-                          fill
-                          className="object-cover"
-                        />
-                      </div>
-                      <h3 className="text-2xl font-bold">{project.title}</h3>
-                      <p className="text-neutral-600 dark:text-neutral-400">
-                        {project.description}
-                      </p>
-                      <div className="flex flex-wrap gap-2">
-                        {project.tags.map((tag) => (
-                          <span
-                            key={tag}
-                            className="px-3 py-1 text-sm font-medium bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-full"
-                          >
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                      <div className="flex gap-4 pt-4">
-                        <a
-                          href={project.githubUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          <Button variant="primary" className="group">
-                            <Github className="w-5 h-5 mr-2" />
-                            View on GitHub
-                          </Button>
-                        </a>
-                        <Button
-                          variant="ghost"
-                          onClick={() => setSelectedProject(null)}
-                        >
-                          Close
-                        </Button>
-                      </div>
-                    </>
-                  );
-                })()}
-              </Card>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <ProjectModal
+        project={currentProject}
+        isOpen={selectedProject !== null}
+        onClose={() => setSelectedProject(null)}
+      />
     </motion.div>
   );
 }

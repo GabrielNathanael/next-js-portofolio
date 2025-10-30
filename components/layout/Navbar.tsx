@@ -40,7 +40,7 @@ export default function Navbar() {
             href="/"
             className="text-2xl font-bold bg-linear-to-r from-blue-600 to-violet-600 bg-clip-text text-transparent"
           >
-            Portfolio
+            Gabriel Nathanael
           </Link>
 
           {/* Desktop Navigation */}

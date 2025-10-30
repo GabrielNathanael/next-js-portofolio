@@ -1,3 +1,4 @@
+// app\layout.tsx
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
@@ -6,7 +7,7 @@ import { ThemeProvider } from "@/components/providers/ThemeProvider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Your Name - Portfolio",
+  title: "Gabriel Nathanel Purba - Portfolio",
   description:
     "Personal portfolio showcasing projects, certificates, and experience",
 };

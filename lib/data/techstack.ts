@@ -12,7 +12,7 @@ import {
   SiAmazon,
   SiGooglecloud,
 } from "react-icons/si";
-
+import { IoShieldOutline } from "react-icons/io5";
 export interface TechItem {
   name: string;
   category: "language" | "framework" | "cloud" | "security";
@@ -97,7 +97,7 @@ export const techStack: TechItem[] = [
   {
     name: "Cyber Security",
     category: "security",
-    icon: Shield,
+    icon: IoShieldOutline,
     color: "text-emerald-600 dark:text-emerald-400",
   },
 ];

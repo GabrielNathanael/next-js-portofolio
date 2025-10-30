@@ -125,7 +125,7 @@ export default function RecentExperience() {
               {/* Technologies */}
               <div className="space-y-3">
                 <h4 className="text-sm font-semibold text-neutral-700 dark:text-neutral-300 uppercase tracking-wide">
-                  Technologies
+                  Stack
                 </h4>
                 <div className="flex flex-wrap gap-2">
                   {recentExperiences[0].technologies.map((tech) => (

@@ -1,3 +1,4 @@
+// components\sections\About.tsx
 "use client";
 
 import Card from "@/components/ui/Card";
@@ -23,15 +24,23 @@ export default function About() {
             About Me
           </h2>
           <p className="text-neutral-600 dark:text-neutral-400 leading-relaxed">
-            I&apos;m a passionate full-stack developer with expertise in
-            building modern web applications. With a strong foundation in both
-            frontend and backend technologies, I specialize in creating scalable
-            solutions that deliver exceptional user experiences.
+            Hi, I’m Gabriel — a full-stack web developer and Computer Science
+            student at Universitas Pendidikan Ganesha (Undiksha), based in Bali,
+            Indonesia. I specialize in building modern, scalable web
+            applications using technologies like Next.js, React, Laravel, and
+            TypeScript.
           </p>
           <p className="text-neutral-600 dark:text-neutral-400 leading-relaxed">
-            Currently working on innovative projects using Next.js, React, and
-            cloud technologies. I love learning new technologies and solving
-            complex problems.
+            I enjoy working across the full stack — from crafting clean,
+            responsive interfaces to developing robust backend logic and API
+            integrations. My focus is on creating seamless, high-quality user
+            experiences supported by efficient and maintainable codebases.
+          </p>
+          <p className="text-neutral-600 dark:text-neutral-400 leading-relaxed">
+            Beyond development, I’m passionate about learning new technologies
+            and exploring topics like cybersecurity, performance optimization,
+            and cloud deployment to continually sharpen my skills and build
+            better digital products.
           </p>
         </div>
       </Card>

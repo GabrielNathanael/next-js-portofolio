@@ -9,19 +9,19 @@ const socials = [
   {
     name: "GitHub",
     icon: SiGithub,
-    href: "https://github.com/yourusername",
+    href: "https://github.com/GabrielNathanael",
     color: "hover:text-neutral-900 dark:hover:text-white",
   },
   {
     name: "Instagram",
     icon: SiInstagram,
-    href: "https://instagram.com/yourusername",
+    href: "https://instagram.com/gabrielnathanaelp",
     color: "hover:text-pink-600 dark:hover:text-pink-400",
   },
   {
     name: "LinkedIn",
     icon: SiLinkedin,
-    href: "https://linkedin.com/in/yourusername",
+    href: "https://www.linkedin.com/in/gabriel-nathanael-purba-549273376/",
     color: "hover:text-blue-600 dark:hover:text-blue-400",
   },
 ];
@@ -67,9 +67,6 @@ export default function SocialLinks() {
                   <div>
                     <p className="font-semibold text-neutral-700 dark:text-neutral-300">
                       {social.name}
-                    </p>
-                    <p className="text-sm text-neutral-500 dark:text-neutral-500">
-                      @yourusername
                     </p>
                   </div>
                 </motion.a>
