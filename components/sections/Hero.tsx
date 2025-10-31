@@ -1,4 +1,3 @@
-// components\sections\Hero.tsx
 "use client";
 
 import { ArrowRight, Download } from "lucide-react";
@@ -10,8 +9,8 @@ import { TypeAnimation } from "react-type-animation";
 
 export default function Hero() {
   return (
-    <section className="min-h-screen w-full bg-[#f8fafc] relative">
-      {/* Top Fade Grid Background */}
+    <section className="min-h-screen w-full bg-[#f8fafc] dark:bg-neutral-950 relative">
+      {/* Light Mode Grid */}
       <div
         className="absolute inset-0 z-0"
         style={{
@@ -27,11 +26,27 @@ export default function Hero() {
         }}
       />
 
+      {/* Dark Mode Grid */}
+      <div
+        className="absolute inset-0 z-0 hidden dark:block"
+        style={{
+          backgroundImage: `
+            linear-gradient(to right, rgba(120,120,120,0.03) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(120,120,120,0.03) 1px, transparent 1px)
+          `,
+          backgroundSize: "22px 32px",
+          WebkitMaskImage:
+            "radial-gradient(ellipse 70% 60% at 50% 0%, #000 60%, transparent 100%)",
+          maskImage:
+            "radial-gradient(ellipse 70% 60% at 50% 0%, #000 60%, transparent 100%)",
+        }}
+      />
+
       {/* Content */}
       <div className="relative z-10 flex items-center justify-center px-4 pt-20 pb-16 min-h-screen">
         <div className="max-w-7xl mx-auto w-full">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
-            {/* Left - Text Content */}
+            {/* Left Text */}
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
@@ -39,30 +54,29 @@ export default function Hero() {
               className="space-y-6"
             >
               <div className="space-y-4">
-                <motion.div
+                <motion.h2
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.2, duration: 0.6 }}
+                  className="text-lg md:text-xl from-blue-600 to-cyan-500 dark:from-blue-400 dark:to-cyan-300 bg-clip-text text-transparent bg-linear-to-r font-semibold"
                 >
-                  <h2 className="text-lg md:text-xl text-blue-600 dark:text-blue-400 font-semibold">
-                    Hi, I&apos;m
-                  </h2>
-                </motion.div>
+                  Hi, I&apos;m
+                </motion.h2>
 
                 <motion.h1
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.3, duration: 0.6 }}
-                  className="text-5xl md:text-7xl font-bold bg-linear-to-r from-blue-600 via-violet-600 to-purple-600 bg-clip-text text-transparent"
+                  className="text-4xl md:text-6xl font-bold from-blue-600 to-cyan-500 dark:from-blue-400 dark:to-cyan-300 bg-clip-text text-transparent bg-linear-to-r"
                 >
-                  Gabriel Nathanel
+                  Gabriel Nathanael
                 </motion.h1>
 
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.4, duration: 0.6 }}
-                  className="text-2xl md:text-3xl font-semibold text-neutral-700 dark:text-neutral-300 min-h-12"
+                  className="text-2xl md:text-3xl font-semibold text-neutral-700 dark:text-neutral-200 min-h-12"
                 >
                   <TypeAnimation
                     sequence={[
@@ -70,7 +84,7 @@ export default function Hero() {
                       2000,
                       "Cloud Enthusiast",
                       2000,
-                      "Full Stack Developer",
+                      "Full Stack Web Developer",
                       2000,
                     ]}
                     wrapper="span"
@@ -106,28 +120,32 @@ export default function Hero() {
                   </Button>
                 </Link>
 
-                <Button variant="ghost" size="lg" className="group">
+                <Button
+                  variant="ghost"
+                  size="lg"
+                  className="group dark:hover:bg-neutral-900"
+                >
                   <Download className="w-5 h-5 mr-2" />
                   Download Resume
                 </Button>
               </motion.div>
             </motion.div>
 
-            {/* Right - Image */}
+            {/* Right Image */}
             <motion.div
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, ease: "easeOut", delay: 0.3 }}
               className="relative"
             >
-              <div className="relative w-full aspect-square max-w-md mx-auto">
-                {/* Gradient Background */}
-                <div className="absolute inset-0 bg-linear-to-br from-blue-500 via-violet-500 to-purple-500 rounded-full blur-3xl opacity-30 animate-pulse" />
+              <div className="relative w-full aspect-square max-w-sm mx-auto">
+                {/* Gradient Glow */}
+                <div className="absolute inset-0 bg-linear-to-br from-blue-500 via-violet-500 to-purple-500 rounded-full blur-3xl opacity-30 animate-pulse dark:opacity-20" />
 
-                {/* Image Container */}
+                {/* Image */}
                 <div className="relative w-full h-full rounded-full overflow-hidden border-4 border-white dark:border-neutral-800 shadow-2xl">
                   <Image
-                    src="https://picsum.photos/seed/profile/500/500"
+                    src="/images/avatarful.webp"
                     alt="Profile"
                     fill
                     className="object-cover"
@@ -135,7 +153,7 @@ export default function Hero() {
                   />
                 </div>
 
-                {/* Floating Elements */}
+                {/* Floating Lights */}
                 <motion.div
                   animate={{ y: [0, -20, 0] }}
                   transition={{
@@ -143,7 +161,7 @@ export default function Hero() {
                     repeat: Infinity,
                     ease: "easeInOut",
                   }}
-                  className="absolute -top-4 -right-4 w-20 h-20 bg-blue-500 rounded-full blur-2xl opacity-50"
+                  className="absolute -top-4 -right-4 w-16 h-16 bg-blue-500 rounded-full blur-2xl opacity-40 dark:opacity-30"
                 />
                 <motion.div
                   animate={{ y: [0, 20, 0] }}
@@ -152,7 +170,7 @@ export default function Hero() {
                     repeat: Infinity,
                     ease: "easeInOut",
                   }}
-                  className="absolute -bottom-4 -left-4 w-24 h-24 bg-violet-500 rounded-full blur-2xl opacity-50"
+                  className="absolute -bottom-4 -left-4 w-20 h-20 bg-violet-500 rounded-full blur-2xl opacity-40 dark:opacity-30"
                 />
               </div>
             </motion.div>

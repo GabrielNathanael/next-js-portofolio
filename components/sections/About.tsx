@@ -1,9 +1,31 @@
-// components\sections\About.tsx
 "use client";
-
-import Card from "@/components/ui/Card";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
+import { SiGithub, SiInstagram, SiLinkedin } from "react-icons/si";
+import { MdEmail } from "react-icons/md";
+
+const socials = [
+  {
+    name: "GitHub",
+    icon: SiGithub,
+    href: "https://github.com/GabrielNathanael",
+  },
+  {
+    name: "Instagram",
+    icon: SiInstagram,
+    href: "https://instagram.com/gabrielnathanaelp",
+  },
+  {
+    name: "LinkedIn",
+    icon: SiLinkedin,
+    href: "https://www.linkedin.com/in/gabriel-nathanael-purba-549273376/",
+  },
+  {
+    name: "Email",
+    icon: MdEmail,
+    href: "mailto:gabriel@example.com",
+  },
+];
 
 export default function About() {
   const [ref, inView] = useInView({
@@ -12,38 +34,168 @@ export default function About() {
   });
 
   return (
-    <motion.div
+    <div
+      className="min-h-screen bg-white dark:bg-neutral-950 py-20 px-4 sm:px-6 lg:px-8 mt-4"
       ref={ref}
-      initial={{ opacity: 0, y: 30 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.6 }}
     >
-      <Card className="p-8 h-full" glass>
-        <div className="space-y-4">
-          <h2 className="text-3xl font-bold bg-linear-to-r from-blue-600 to-violet-600 bg-clip-text text-transparent">
-            About Me
-          </h2>
-          <p className="text-neutral-600 dark:text-neutral-400 leading-relaxed">
-            Hi, I’m Gabriel — a full-stack web developer and Computer Science
-            student at Universitas Pendidikan Ganesha (Undiksha), based in Bali,
-            Indonesia. I specialize in building modern, scalable web
-            applications using technologies like Next.js, React, Laravel, and
-            TypeScript.
-          </p>
-          <p className="text-neutral-600 dark:text-neutral-400 leading-relaxed">
-            I enjoy working across the full stack — from crafting clean,
-            responsive interfaces to developing robust backend logic and API
-            integrations. My focus is on creating seamless, high-quality user
-            experiences supported by efficient and maintainable codebases.
-          </p>
-          <p className="text-neutral-600 dark:text-neutral-400 leading-relaxed">
-            Beyond development, I’m passionate about learning new technologies
-            and exploring topics like cybersecurity, performance optimization,
-            and cloud deployment to continually sharpen my skills and build
-            better digital products.
-          </p>
+      <div className="max-w-7xl mx-auto">
+        {/* Grid Container */}
+        <div className="grid grid-cols-12 gap-6 lg:gap-8">
+          {/* About Me Title */}
+          <motion.div
+            className="col-span-12 lg:col-span-6"
+            initial={{ opacity: 0, y: 40 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.7 }}
+          >
+            <h2 className="text-6xl lg:text-8xl font-black tracking-tight">
+              <span className="bg-linear-to-r from-blue-600 to-cyan-500 dark:from-blue-400 dark:to-cyan-300 bg-clip-text text-transparent">
+                About
+              </span>
+              <br />
+              <span className="text-neutral-900 dark:text-white">Me</span>
+            </h2>
+          </motion.div>
+
+          {/* Let's Connect (desktop position only) */}
+          <motion.div
+            className="hidden lg:block col-span-12 lg:col-span-6 lg:col-start-7"
+            initial={{ opacity: 0, y: 40 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.7, delay: 0.1 }}
+          >
+            <div className="lg:text-right">
+              <h3 className="text-4xl lg:text-5xl font-bold tracking-tight mb-8">
+                <span className="text-neutral-400 dark:text-neutral-600">
+                  Let&apos;s
+                </span>
+                <br />
+                <span className="bg-linear-to-r from-cyan-500 to-blue-600 dark:from-cyan-300 dark:to-blue-400 bg-clip-text text-transparent">
+                  Connect
+                </span>
+              </h3>
+
+              <div className="flex gap-6 justify-start lg:justify-end">
+                {socials.map((social, idx) => {
+                  const Icon = social.icon;
+                  return (
+                    <motion.a
+                      key={social.name}
+                      href={social.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={inView ? { opacity: 1, scale: 1 } : {}}
+                      transition={{
+                        duration: 0.5,
+                        delay: 0.3 + idx * 0.1,
+                        type: "spring",
+                        stiffness: 200,
+                      }}
+                      className="transition-all duration-300 hover:scale-110"
+                      title={social.name}
+                    >
+                      <Icon className="w-8 h-8 lg:w-10 lg:h-10 text-neutral-700 dark:text-neutral-300" />
+                    </motion.a>
+                  );
+                })}
+              </div>
+            </div>
+          </motion.div>
+
+          {/* First Paragraph */}
+          <motion.div
+            className="col-span-12 lg:col-span-6 lg:col-start-1 lg:mt-4"
+            initial={{ opacity: 0, x: -20 }}
+            animate={inView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
+            <p className="text-lg lg:text-[1.1rem] text-neutral-700 dark:text-neutral-300 leading-relaxed max-w-2xl">
+              Hey, I&apos;m Gabriel — a full-stack web developer and Computer
+              Science student at Universitas Pendidikan Ganesha (Undiksha) in
+              Bali. I focus on building clean, scalable web applications using
+              technologies like Next.js, React, Laravel, and TypeScript.
+            </p>
+          </motion.div>
+
+          {/* Second Paragraph */}
+          <motion.div
+            className="col-span-12 lg:col-span-5 lg:col-start-7 lg:mt-36"
+            initial={{ opacity: 0, x: 20 }}
+            animate={inView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.35 }}
+          >
+            <div className="relative pl-6">
+              <div className="absolute left-0 top-1 w-[3px] h-14 bg-linear-to-b from-blue-500 to-cyan-400 dark:from-blue-400 dark:to-cyan-300 rounded-full" />
+              <p className="text-lg lg:text-[1.05rem] text-neutral-700 dark:text-neutral-300 leading-relaxed max-w-md">
+                I work across the full stack — from crafting responsive,
+                user-focused interfaces to developing solid backend logic and
+                API integrations. My goal is to deliver high-quality digital
+                experiences supported by efficient and maintainable code.
+              </p>
+            </div>
+          </motion.div>
+
+          {/* Third Paragraph */}
+          <motion.div
+            className="col-span-12 lg:col-span-5 lg:col-start-2 lg:mt-10"
+            initial={{ opacity: 0, x: -20 }}
+            animate={inView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.45 }}
+          >
+            <p className="text-lg lg:text-[1.05rem] text-neutral-600 dark:text-neutral-400 leading-relaxed max-w-lg italic">
+              I&apos;m also passionate about exploring new technologies,
+              especially in areas like cloud deployment, performance
+              optimization, and cybersecurity to keep improving as a developer.
+            </p>
+          </motion.div>
+
+          {/* Let's Connect (mobile position) */}
+          <motion.div
+            className="col-span-12 block lg:hidden mt-12"
+            initial={{ opacity: 0, y: 30 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.7, delay: 0.55 }}
+          >
+            <div className="text-center">
+              <h3 className="text-4xl font-bold tracking-tight mb-6">
+                <span className="text-neutral-400 dark:text-neutral-600">
+                  Let&apos;s
+                </span>{" "}
+                <span className="bg-linear-to-r from-cyan-500 to-blue-600 dark:from-cyan-300 dark:to-blue-400 bg-clip-text text-transparent">
+                  Connect
+                </span>
+              </h3>
+
+              <div className="flex justify-center gap-6">
+                {socials.map((social, idx) => {
+                  const Icon = social.icon;
+                  return (
+                    <motion.a
+                      key={social.name}
+                      href={social.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={inView ? { opacity: 1, scale: 1 } : {}}
+                      transition={{
+                        duration: 0.5,
+                        delay: 0.6 + idx * 0.1,
+                        type: "spring",
+                        stiffness: 200,
+                      }}
+                      className="transition-all duration-300 hover:scale-110"
+                      title={social.name}
+                    >
+                      <Icon className="w-8 h-8 text-neutral-700 dark:text-neutral-300" />
+                    </motion.a>
+                  );
+                })}
+              </div>
+            </div>
+          </motion.div>
         </div>
-      </Card>
-    </motion.div>
+      </div>
+    </div>
   );
 }

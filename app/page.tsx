@@ -6,14 +6,11 @@ import FeaturedProjects from "@/components/sections/FeaturedProjects";
 import RecentExperience from "@/components/sections/RecentExperience";
 import LatestCertificates from "@/components/sections/LatestCertificates";
 import TechStack from "@/components/sections/TechStack";
-import Contact from "@/components/sections/Contact";
-import SocialLinks from "@/components/sections/SocialLinks";
 
 export default function Home() {
   return (
-    <>
+    <div className="bg-white dark:bg-neutral-950 min-h-screen">
       <Navbar />
-
       <main className="min-h-screen">
         {/* Hero Section */}
         <Hero />
@@ -44,16 +41,9 @@ export default function Home() {
           <div className="w-full">
             <TechStack />
           </div>
-
-          {/* Contact Form + Social Links */}
-          <div className="grid lg:grid-cols-2 gap-8">
-            <Contact />
-            <SocialLinks />
-          </div>
         </section>
       </main>
-
       <Footer />
-    </>
+    </div>
   );
 }
