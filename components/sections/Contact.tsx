@@ -22,15 +22,15 @@ export default function Contact() {
       <Card className="p-8 h-full" glass>
         <div className="space-y-6">
           <div className="flex items-center gap-3">
-            <div className="p-3 rounded-lg bg-violet-100 dark:bg-violet-900/30">
+            <div className="p-3 rounded-lg bg-violet-100 dark:bg-violet-900/40">
               <Mail className="w-6 h-6 text-violet-600 dark:text-violet-400" />
             </div>
-            <h2 className="text-3xl font-bold bg-linear-to-r from-violet-600 to-purple-600 bg-clip-text text-transparent">
+            <h2 className="text-3xl font-bold bg-linear-to-r from-violet-600 to-purple-600 dark:from-violet-400 dark:to-purple-400 bg-clip-text text-transparent">
               Get In Touch
             </h2>
           </div>
 
-          <p className="text-neutral-600 dark:text-neutral-400">
+          <p className="text-neutral-600 dark:text-neutral-300">
             Have a project in mind or want to collaborate? Feel free to reach
             out!
           </p>
@@ -40,21 +40,21 @@ export default function Contact() {
               <input
                 type="text"
                 placeholder="Gabriel Nathanel"
-                className="w-full px-4 py-3 rounded-lg bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 focus:border-violet-500 dark:focus:border-violet-500 focus:outline-none transition-colors"
+                className="w-full px-4 py-3 rounded-lg bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-600 text-neutral-900 dark:text-neutral-100 placeholder:text-neutral-400 dark:placeholder:text-neutral-500 focus:border-violet-500 dark:focus:border-violet-400 focus:outline-none transition-colors"
               />
             </div>
             <div>
               <input
                 type="email"
                 placeholder="Your Email"
-                className="w-full px-4 py-3 rounded-lg bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 focus:border-violet-500 dark:focus:border-violet-500 focus:outline-none transition-colors"
+                className="w-full px-4 py-3 rounded-lg bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-600 text-neutral-900 dark:text-neutral-100 placeholder:text-neutral-400 dark:placeholder:text-neutral-500 focus:border-violet-500 dark:focus:border-violet-400 focus:outline-none transition-colors"
               />
             </div>
             <div>
               <textarea
                 placeholder="Your Message"
                 rows={4}
-                className="w-full px-4 py-3 rounded-lg bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 focus:border-violet-500 dark:focus:border-violet-500 focus:outline-none transition-colors resize-none"
+                className="w-full px-4 py-3 rounded-lg bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-600 text-neutral-900 dark:text-neutral-100 placeholder:text-neutral-400 dark:placeholder:text-neutral-500 focus:border-violet-500 dark:focus:border-violet-400 focus:outline-none transition-colors resize-none"
               />
             </div>
             <Button variant="secondary" size="lg" className="w-full group">

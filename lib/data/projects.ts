@@ -1,4 +1,3 @@
-// lib\data\projects.ts
 // lib/data/projects.ts
 export interface Project {
   id: string;
@@ -6,10 +5,12 @@ export interface Project {
   description: string;
   image: string;
   tags: string[];
-  githubUrl: string;
+  githubUrl: string | null;
+  demoUrl: string | null;
   featured: boolean;
   year: number;
   orientation: "vertical" | "horizontal";
+  projectType: "Indie" | "Collab"; // ✅ new field
 }
 
 export const TAG_CATEGORIES: Record<string, string[]> = {
@@ -24,10 +25,10 @@ export const TAG_CATEGORIES: Record<string, string[]> = {
 export const projects: Project[] = [
   {
     id: "1",
-    title: "E-Commerce Platform",
+    title: "Faithful streak app",
     description:
       "Full-stack e-commerce platform with payment integration, admin dashboard, and real-time inventory management.",
-    image: "https://picsum.photos/seed/project1/800/600",
+    image: "https://picsum.photos/seed/project5/800/600",
     tags: [
       "TypeScript",
       "Next.js",
@@ -38,16 +39,18 @@ export const projects: Project[] = [
       "Docker",
     ],
     githubUrl: "https://github.com/yourusername/project1",
+    demoUrl: null,
     featured: true,
     year: 2026,
     orientation: "horizontal",
+    projectType: "Collab",
   },
   {
     id: "2",
     title: "Task Management App",
     description:
       "Collaborative task management application with real-time updates and team collaboration features.",
-    image: "https://picsum.photos/seed/project2/600/800",
+    image: "https://picsum.photos/seed/project6/600/800",
     tags: [
       "React.js",
       "JavaScript",
@@ -56,34 +59,40 @@ export const projects: Project[] = [
       "Google Cloud",
       "Git",
     ],
-    githubUrl: "https://github.com/yourusername/project2",
+    githubUrl: null,
+    demoUrl: "https://yourdemo.com/taskapp",
     featured: true,
     year: 2024,
     orientation: "vertical",
+    projectType: "Collab",
   },
   {
     id: "3",
     title: "AI Chat Assistant",
     description:
       "Intelligent chatbot with NLP, real-time responses, and integration to cloud APIs.",
-    image: "https://picsum.photos/seed/project3/800/600",
+    image: "https://picsum.photos/seed/project5/800/600",
     tags: ["Python", "Next.js", "AWS", "PostgreSQL", "Docker", "Tailwind CSS"],
     githubUrl: "https://github.com/yourusername/project3",
+    demoUrl: "https://yourdemo.com/aichat",
     featured: true,
     year: 2023,
     orientation: "horizontal",
+    projectType: "Indie",
   },
   {
     id: "4",
     title: "Portfolio CMS",
     description:
       "Headless CMS for portfolio management with modular components and live preview.",
-    image: "https://picsum.photos/seed/project4/600/800",
+    image: "https://picsum.photos/seed/project6/600/800",
     tags: ["PHP", "Laravel", "MySQL", "Tailwind CSS", "Git", "Google Cloud"],
     githubUrl: "https://github.com/yourusername/project4",
+    demoUrl: "https://yourdemo.com/cms",
     featured: false,
     year: 2023,
     orientation: "vertical",
+    projectType: "Indie",
   },
   {
     id: "5",
@@ -93,9 +102,11 @@ export const projects: Project[] = [
     image: "https://picsum.photos/seed/project5/800/600",
     tags: ["React.js", "TypeScript", "Prisma", "PostgreSQL", "AWS", "Docker"],
     githubUrl: "https://github.com/yourusername/project5",
+    demoUrl: "https://yourdemo.com/weather",
     featured: false,
     year: 2023,
     orientation: "horizontal",
+    projectType: "Indie",
   },
   {
     id: "6",
@@ -105,9 +116,11 @@ export const projects: Project[] = [
     image: "https://picsum.photos/seed/project6/600/800",
     tags: ["Kotlin", "Firebase", "Tailwind CSS", "Google Cloud", "Git"],
     githubUrl: "https://github.com/yourusername/project6",
+    demoUrl: "https://yourdemo.com/fitness",
     featured: false,
     year: 2023,
     orientation: "vertical",
+    projectType: "Indie",
   },
   {
     id: "7",
@@ -117,9 +130,11 @@ export const projects: Project[] = [
     image: "https://picsum.photos/seed/project7/800/600",
     tags: ["Laravel", "PHP", "JavaScript", "MySQL", "Docker", "AWS"],
     githubUrl: "https://github.com/yourusername/project7",
+    demoUrl: "https://yourdemo.com/pos",
     featured: false,
     year: 2023,
     orientation: "horizontal",
+    projectType: "Collab",
   },
   {
     id: "8",
@@ -136,8 +151,10 @@ export const projects: Project[] = [
       "Google Cloud",
     ],
     githubUrl: "https://github.com/yourusername/project8",
+    demoUrl: "https://yourdemo.com/learning",
     featured: false,
     year: 2023,
     orientation: "horizontal",
+    projectType: "Collab",
   },
 ];

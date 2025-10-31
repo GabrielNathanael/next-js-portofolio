@@ -1,10 +1,10 @@
-// components\ui\ProjectFilter.tsx
 // components/ui/ProjectFilter.tsx
 "use client";
 
-import { useState } from "react";
+import * as Select from "@radix-ui/react-select";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronDown, ChevronRight } from "lucide-react";
+import { ChevronDown, ChevronRight, Check } from "lucide-react";
+import { useState } from "react";
 
 interface ProjectFilterProps {
   availableTags: string[];
@@ -26,6 +26,7 @@ export default function ProjectFilter({
   tagCategories,
 }: ProjectFilterProps) {
   const [expandedCategories, setExpandedCategories] = useState<string[]>([]);
+  const [isOpen, setIsOpen] = useState(false);
 
   const toggleTag = (tag: string) => {
     if (selectedTags.includes(tag)) {
@@ -45,6 +46,7 @@ export default function ProjectFilter({
 
   const clearAll = () => {
     onTagsChange([]);
+    setExpandedCategories([]); // Tutup semua kategori terbuka
   };
 
   return (
@@ -65,23 +67,64 @@ export default function ProjectFilter({
           )}
         </div>
 
+        {/* Sort Dropdown (Radix + Framer Motion, same as CertificateFilter) */}
         <div className="flex items-center gap-3">
           <span className="text-sm text-neutral-600 dark:text-neutral-400">
             {totalResults} {totalResults === 1 ? "project" : "projects"}
           </span>
-          <div className="relative">
-            <select
-              value={sortOrder}
-              onChange={(e) =>
-                onSortChange(e.target.value as "newest" | "oldest")
-              }
-              className="appearance-none pl-4 pr-10 py-2 text-sm font-medium bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer"
+
+          <Select.Root
+            value={sortOrder}
+            onValueChange={(value) =>
+              onSortChange(value as "newest" | "oldest")
+            }
+            onOpenChange={setIsOpen}
+          >
+            <Select.Trigger className="inline-flex items-center justify-between gap-2 rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 px-4 py-2 text-sm font-medium text-neutral-700 dark:text-neutral-300 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all min-w-40">
+              <Select.Value />
+              <motion.div
+                animate={{ rotate: isOpen ? 180 : 0 }}
+                transition={{ duration: 0.25, ease: "easeInOut" }}
+                className="flex items-center justify-center"
+              >
+                <ChevronDown className="w-4 h-4 text-neutral-600 dark:text-neutral-400" />
+              </motion.div>
+            </Select.Trigger>
+
+            <Select.Content
+              side="bottom"
+              align="end"
+              position="popper"
+              avoidCollisions={false}
+              sideOffset={4}
+              className="z-50 min-w-(--radix-select-trigger-width) rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 shadow-md overflow-hidden"
             >
-              <option value="newest">Newest First</option>
-              <option value="oldest">Oldest First</option>
-            </select>
-            <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-500 pointer-events-none" />
-          </div>
+              <Select.Viewport
+                className="p-1"
+                style={{ scrollBehavior: "auto" }}
+              >
+                <Select.Item
+                  value="newest"
+                  className="flex items-center justify-between gap-2 cursor-pointer rounded-md px-3 py-2 text-sm text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:bg-neutral-100 dark:focus:bg-neutral-700 focus:outline-none"
+                >
+                  <Select.ItemText>Newest First</Select.ItemText>
+                  {sortOrder === "newest" && (
+                    <Check className="w-4 h-4 text-blue-600" />
+                  )}
+                </Select.Item>
+
+                <Select.Item
+                  value="oldest"
+                  className="flex items-center justify-between gap-2 cursor-pointer rounded-md px-3 py-2 text-sm text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:bg-neutral-100 dark:focus:bg-neutral-700 focus:outline-none"
+                >
+                  <Select.ItemText>Oldest First</Select.ItemText>
+                  {sortOrder === "oldest" && (
+                    <Check className="w-4 h-4 text-blue-600" />
+                  )}
+                </Select.Item>
+              </Select.Viewport>
+            </Select.Content>
+          </Select.Root>
         </div>
       </div>
 
@@ -89,7 +132,6 @@ export default function ProjectFilter({
       <div className="flex flex-wrap gap-6">
         {Object.entries(tagCategories).map(([category, tags]) => {
           const isExpanded = expandedCategories.includes(category);
-          // Filter tags that exist in availableTags
           const categoryTags = tags.filter((tag) =>
             availableTags.includes(tag)
           );

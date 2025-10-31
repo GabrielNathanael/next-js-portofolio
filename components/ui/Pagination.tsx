@@ -1,13 +1,15 @@
-// components\ui\Pagination.tsx
 // components/ui/Pagination.tsx
 "use client";
 
+import { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 interface PaginationProps {
   currentPage: number;
   totalPages: number;
   onPageChange: (page: number) => void;
+  totalItems?: number;
+  itemsPerPage?: number;
 }
 
 export default function Pagination({
@@ -15,13 +17,26 @@ export default function Pagination({
   totalPages,
   onPageChange,
 }: PaginationProps) {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   // Generate page numbers with ellipsis logic
   const getPageNumbers = () => {
     const pages: (number | string)[] = [];
-    const showEllipsis = totalPages > 7;
+    const threshold = isMobile ? 6 : 7;
+    const showEllipsis = totalPages > threshold;
 
     if (!showEllipsis) {
-      // Show all pages if 7 or fewer
+      // Show all pages if threshold or fewer
       for (let i = 1; i <= totalPages; i++) {
         pages.push(i);
       }
@@ -72,61 +87,64 @@ export default function Pagination({
   };
 
   return (
-    <nav className="flex items-center gap-1" aria-label="Pagination">
-      {/* Previous Button */}
-      <button
-        onClick={handlePrevious}
-        disabled={currentPage === 1}
-        className="p-2 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-        aria-label="Previous page"
-      >
-        <ChevronLeft className="w-5 h-5" />
-      </button>
+    <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+      {/* Navigation */}
+      <nav className="flex items-center gap-1" aria-label="Pagination">
+        {/* Previous Button */}
+        <button
+          onClick={handlePrevious}
+          disabled={currentPage === 1}
+          className="p-2 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          aria-label="Previous page"
+        >
+          <ChevronLeft className="w-5 h-5" />
+        </button>
 
-      {/* Page Numbers */}
-      <div className="flex items-center gap-1">
-        {pageNumbers.map((page, idx) => {
-          if (page === "ellipsis") {
+        {/* Page Numbers */}
+        <div className="flex items-center gap-1">
+          {pageNumbers.map((page, idx) => {
+            if (page === "ellipsis") {
+              return (
+                <span
+                  key={`ellipsis-${idx}`}
+                  className="px-3 py-2 text-neutral-500"
+                >
+                  ...
+                </span>
+              );
+            }
+
+            const pageNum = page as number;
+            const isActive = pageNum === currentPage;
+
             return (
-              <span
-                key={`ellipsis-${idx}`}
-                className="px-3 py-2 text-neutral-500"
+              <button
+                key={pageNum}
+                onClick={() => onPageChange(pageNum)}
+                className={`min-w-10 px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
+                  isActive
+                    ? "bg-blue-600 text-white shadow-lg shadow-blue-500/30"
+                    : "hover:bg-neutral-100 dark:hover:bg-neutral-800 text-neutral-700 dark:text-neutral-300"
+                }`}
+                aria-label={`Page ${pageNum}`}
+                aria-current={isActive ? "page" : undefined}
               >
-                ...
-              </span>
+                {pageNum}
+              </button>
             );
-          }
+          })}
+        </div>
 
-          const pageNum = page as number;
-          const isActive = pageNum === currentPage;
-
-          return (
-            <button
-              key={pageNum}
-              onClick={() => onPageChange(pageNum)}
-              className={`min-w-10 px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
-                isActive
-                  ? "bg-blue-600 text-white shadow-lg shadow-blue-500/30"
-                  : "hover:bg-neutral-100 dark:hover:bg-neutral-800 text-neutral-700 dark:text-neutral-300"
-              }`}
-              aria-label={`Page ${pageNum}`}
-              aria-current={isActive ? "page" : undefined}
-            >
-              {pageNum}
-            </button>
-          );
-        })}
-      </div>
-
-      {/* Next Button */}
-      <button
-        onClick={handleNext}
-        disabled={currentPage === totalPages}
-        className="p-2 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-        aria-label="Next page"
-      >
-        <ChevronRight className="w-5 h-5" />
-      </button>
-    </nav>
+        {/* Next Button */}
+        <button
+          onClick={handleNext}
+          disabled={currentPage === totalPages}
+          className="p-2 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          aria-label="Next page"
+        >
+          <ChevronRight className="w-5 h-5" />
+        </button>
+      </nav>
+    </div>
   );
 }

@@ -41,11 +41,11 @@ export default function SocialLinks() {
     >
       <Card className="p-8 h-full" glass>
         <div className="space-y-6">
-          <h2 className="text-3xl font-bold bg-linear-to-r from-blue-600 to-violet-600 bg-clip-text text-transparent">
+          <h2 className="text-3xl font-bold bg-linear-to-r from-blue-600 to-violet-600 dark:from-blue-400 dark:to-violet-400 bg-clip-text text-transparent">
             Connect With Me
           </h2>
 
-          <p className="text-neutral-600 dark:text-neutral-400">
+          <p className="text-neutral-600 dark:text-neutral-300">
             Let&apos;s connect and build something amazing together!
           </p>
 
@@ -61,11 +61,11 @@ export default function SocialLinks() {
                   initial={{ opacity: 0, x: -20 }}
                   animate={inView ? { opacity: 1, x: 0 } : {}}
                   transition={{ duration: 0.4, delay: idx * 0.1 }}
-                  className={`flex items-center gap-4 p-4 rounded-lg bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 transition-all duration-300 group ${social.color}`}
+                  className={`flex items-center gap-4 p-4 rounded-lg bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-600 transition-all duration-300 group ${social.color}`}
                 >
-                  <Icon className="w-8 h-8 text-neutral-600 dark:text-neutral-400 group-hover:scale-110 transition-transform" />
+                  <Icon className="w-8 h-8 text-neutral-600 dark:text-neutral-300 group-hover:scale-110 transition-transform" />
                   <div>
-                    <p className="font-semibold text-neutral-700 dark:text-neutral-300">
+                    <p className="font-semibold text-neutral-700 dark:text-neutral-200">
                       {social.name}
                     </p>
                   </div>

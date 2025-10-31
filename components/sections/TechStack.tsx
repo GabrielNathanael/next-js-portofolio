@@ -5,8 +5,10 @@ import { techStack } from "@/lib/data/techstack";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import Marquee from "react-fast-marquee";
-
+import { useTheme } from "next-themes";
 export default function TechStack() {
+  const { theme } = useTheme(); // ← Tambahin ini
+
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
@@ -27,12 +29,12 @@ export default function TechStack() {
       transition={{ duration: 0.6, delay: 0.5 }}
       className="space-y-6"
     >
-      <h2 className="text-3xl font-bold bg-linear-to-r from-blue-600 to-violet-600 bg-clip-text text-transparent">
-        Technologies I’ve Worked With
+      <h2 className="text-3xl font-bold from-blue-600 to-cyan-500 dark:from-blue-400 dark:to-cyan-300 bg-clip-text text-transparent bg-linear-to-r">
+        Technologies I&apos;ve Worked With
       </h2>
-      <p className="text-neutral-600 dark:text-neutral-400 max-w-xl text-justify">
-        A collection of languages, frameworks, and tools I’ve used or explored
-        throughout my studies, work experience, and personal projects.
+      <p className="text-neutral-600 dark:text-neutral-300 max-w-xl text-justify">
+        A collection of languages, frameworks, and tools I&apos;ve used or
+        explored throughout my studies, work experience, and personal projects.
       </p>
 
       <div className="space-y-4">
@@ -41,7 +43,11 @@ export default function TechStack() {
             key={rowIdx}
             speed={70}
             gradient={true}
-            gradientColor="#f8fafc"
+            gradientColor={
+              theme === "dark"
+                ? "rgba(10, 10, 10, 1)"
+                : "rgba(255, 255, 255, 1)"
+            } // ← Ganti ini
             gradientWidth={50}
             direction={rowIdx % 2 === 0 ? "left" : "right"}
             pauseOnHover={true}
@@ -54,7 +60,7 @@ export default function TechStack() {
                     <Icon
                       className={`w-12 h-12 ${tech.color} group-hover:scale-110 transition-transform`}
                     />
-                    <span className="text-sm font-medium text-neutral-700 dark:text-neutral-300">
+                    <span className="text-sm font-medium text-neutral-700 dark:text-neutral-200">
                       {tech.name}
                     </span>
                   </Card>

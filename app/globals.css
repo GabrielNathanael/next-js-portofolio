@@ -1,3 +1,8 @@
+@theme inline {
+  --dark-mode-selector: ".dark";
+}
+
+@custom-variant dark (&:where(.dark, .dark *));
 @import "tailwindcss";
 
 :root {
@@ -18,7 +23,8 @@
 }
 
 body {
-  background: rgb(var(--background));
+  background: transparent;
+
   color: rgb(var(--foreground));
   font-family: system-ui, -apple-system, sans-serif;
   font-feature-settings: "rlig" 1, "calt" 1;

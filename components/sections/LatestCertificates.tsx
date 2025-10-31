@@ -17,7 +17,9 @@ export default function LatestCertificates() {
   });
 
   const [selectedCert, setSelectedCert] = useState<string | null>(null);
-  const latestCerts = certificates.slice(0, 3);
+  const latestCerts = [...certificates]
+    .sort((a, b) => Number(b.year) - Number(a.year)) // urutkan descending by tahun
+    .slice(0, 3);
 
   return (
     <motion.div
@@ -28,9 +30,15 @@ export default function LatestCertificates() {
       className="space-y-6"
     >
       <div className="flex items-center justify-between">
-        <h2 className="text-3xl font-bold">Latest Certificates</h2>
+        <h2 className="text-3xl font-bold from-blue-600 to-cyan-500 dark:from-blue-400 dark:to-cyan-300 bg-clip-text text-transparent bg-linear-to-r">
+          Latest Certificates
+        </h2>
         <Link href="/certificates">
-          <Button variant="ghost" size="sm" className="group">
+          <Button
+            variant="ghost"
+            size="sm"
+            className="group text-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-900"
+          >
             View All
             <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
           </Button>
@@ -59,12 +67,13 @@ export default function LatestCertificates() {
                 <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </div>
               <div className="p-4 space-y-2">
-                <h3 className="font-semibold group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors line-clamp-2">
+                <h3 className="font-semibold text-neutral-800 dark:text-neutral-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors line-clamp-2">
                   {cert.title}
                 </h3>
-                <div className="flex items-center justify-between text-sm text-neutral-600 dark:text-neutral-400">
+
+                <div className="flex items-center justify-between text-sm text-neutral-600 dark:text-neutral-300">
                   <span className="font-medium">{cert.issuer}</span>
-                  <span>{cert.date}</span>
+                  <span>{cert.year}</span>
                 </div>
               </div>
             </Card>
@@ -111,7 +120,7 @@ export default function LatestCertificates() {
                     <div className="text-center text-white space-y-2">
                       <h3 className="text-2xl font-bold">{cert.title}</h3>
                       <p className="text-lg">
-                        {cert.issuer} • {cert.date}
+                        {cert.issuer} • {cert.year}
                       </p>
                     </div>
                   </div>

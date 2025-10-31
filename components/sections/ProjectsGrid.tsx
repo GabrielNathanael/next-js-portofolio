@@ -1,10 +1,10 @@
-// components\sections\ProjectsGrid.tsx
 // components/sections/ProjectsGrid.tsx
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { User, Users } from "lucide-react";
 import Masonry from "react-masonry-css";
 import Card from "@/components/ui/Card";
 import Button from "@/components/ui/Button";
@@ -19,8 +19,6 @@ interface ProjectsGridProps {
   tagCategories: Record<string, string[]>;
 }
 
-const ITEMS_PER_PAGE = 6;
-
 export default function ProjectsGrid({
   projects,
   availableTags,
@@ -30,6 +28,57 @@ export default function ProjectsGrid({
   const [sortOrder, setSortOrder] = useState<"newest" | "oldest">("newest");
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedProject, setSelectedProject] = useState<string | null>(null);
+  const [itemsPerPage, setItemsPerPage] = useState(6);
+
+  // Handle responsive items per page
+  useEffect(() => {
+    const handleResize = () => {
+      const newItemsPerPage = window.innerWidth < 768 ? 3 : 6;
+      setItemsPerPage((prev) => {
+        // Reset to page 1 if items per page changes
+        if (prev !== newItemsPerPage) {
+          setCurrentPage(1);
+        }
+        return newItemsPerPage;
+      });
+    };
+
+    // Set initial value
+    handleResize();
+
+    // Add event listener
+    window.addEventListener("resize", handleResize);
+
+    // Cleanup
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  // Helper function for project type badge
+  const getProjectTypeBadge = (type: "Indie" | "Collab") => {
+    const config = {
+      Indie: {
+        icon: User,
+        bgColor: "bg-emerald-500",
+        textColor: "text-white",
+      },
+      Collab: {
+        icon: Users,
+        bgColor: "bg-violet-500",
+        textColor: "text-white",
+      },
+    };
+
+    const { icon: Icon, bgColor, textColor } = config[type];
+
+    return (
+      <div
+        className={`absolute top-3 right-3 z-10 flex items-center gap-1.5 px-3 py-1.5 rounded-full ${bgColor} ${textColor} backdrop-blur-sm bg-opacity-90 shadow-lg text-xs font-semibold`}
+      >
+        <Icon className="w-3.5 h-3.5" />
+        {type}
+      </div>
+    );
+  };
 
   // Filter and sort logic
   const filteredAndSortedProjects = useMemo(() => {
@@ -51,13 +100,11 @@ export default function ProjectsGrid({
   }, [projects, selectedTags, sortOrder]);
 
   // Pagination logic
-  const totalPages = Math.ceil(
-    filteredAndSortedProjects.length / ITEMS_PER_PAGE
-  );
-  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+  const totalPages = Math.ceil(filteredAndSortedProjects.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
   const paginatedProjects = filteredAndSortedProjects.slice(
     startIndex,
-    startIndex + ITEMS_PER_PAGE
+    startIndex + itemsPerPage
   );
 
   // Reset to page 1 when filters change
@@ -121,6 +168,9 @@ export default function ProjectsGrid({
                         : "aspect-4/3"
                     } overflow-hidden`}
                   >
+                    {/* Project Type Badge */}
+                    {getProjectTypeBadge(project.projectType)}
+
                     <Image
                       src={project.image}
                       alt={project.title}
@@ -170,6 +220,8 @@ export default function ProjectsGrid({
                 currentPage={currentPage}
                 totalPages={totalPages}
                 onPageChange={setCurrentPage}
+                totalItems={filteredAndSortedProjects.length}
+                itemsPerPage={itemsPerPage}
               />
             </div>
           )}
