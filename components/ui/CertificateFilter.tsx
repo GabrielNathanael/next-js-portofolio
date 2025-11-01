@@ -110,14 +110,13 @@ export default function CertificateFilter({
         <span className="text-sm font-medium text-neutral-600 dark:text-neutral-400">
           Filter by Issuer:
         </span>
-
         {availableIssuers.map((issuer) => {
           const isSelected = selectedIssuers.includes(issuer);
           return (
             <button
               key={issuer}
               onClick={() => toggleIssuer(issuer)}
-              className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
+              className={`px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm font-medium transition-all duration-200 whitespace-nowrap ${
                 isSelected
                   ? "bg-blue-600 text-white shadow-lg shadow-blue-500/30"
                   : "bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700"

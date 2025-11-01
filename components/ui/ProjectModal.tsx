@@ -77,11 +77,12 @@ export default function ProjectModal({
                   src={project.image}
                   alt={project.title}
                   fill
+                  sizes="(max-width: 640px) 100vw, (max-width: 768px) 90vw, 672px"
                   className="object-contain bg-white dark:bg-neutral-950"
                 />
               </div>
 
-              {/* Header — Desktop */}
+              {/* Header – Desktop */}
               <div className="hidden sm:flex items-start justify-between gap-4 flex-wrap">
                 <div className="flex items-center gap-3 flex-1">
                   <h3 className="text-2xl font-bold text-neutral-900 dark:text-neutral-100">
@@ -94,7 +95,7 @@ export default function ProjectModal({
                 </span>
               </div>
 
-              {/* Header — Mobile */}
+              {/* Header – Mobile */}
               <div className="flex sm:hidden flex-col space-y-3">
                 <h3 className="text-xl font-bold text-neutral-900 dark:text-neutral-100">
                   {project.title}

@@ -1,3 +1,7 @@
+/* === Import Font === */
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap");
+
+/* === Tailwind setup === */
 @theme inline {
   --dark-mode-selector: ".dark";
 }
@@ -5,6 +9,7 @@
 @custom-variant dark (&:where(.dark, .dark *));
 @import "tailwindcss";
 
+/* === Color variables === */
 :root {
   --background: 249 250 251; /* gray-50 */
   --foreground: 10 10 10; /* neutral-950 */
@@ -22,21 +27,22 @@
   --color-foreground: var(--foreground);
 }
 
+/* === Global body styles === */
 body {
   background: transparent;
-
   color: rgb(var(--foreground));
-  font-family: system-ui, -apple-system, sans-serif;
+  font-family: "Manrope", system-ui, -apple-system, sans-serif;
   font-feature-settings: "rlig" 1, "calt" 1;
+  font-optical-sizing: auto;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Smooth scrolling */
+/* === Smooth scrolling === */
 html {
   scroll-behavior: smooth;
 }
 
-/* Custom scrollbar */
+/* === Custom scrollbar === */
 ::-webkit-scrollbar {
   width: 10px;
 }
@@ -54,7 +60,7 @@ html {
   background: #4b5563;
 }
 
-/* Utilities */
+/* === Utilities === */
 .text-balance {
   text-wrap: balance;
 }

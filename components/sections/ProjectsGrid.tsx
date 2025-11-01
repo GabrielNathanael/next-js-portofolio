@@ -1,4 +1,3 @@
-// components\sections\ProjectsGrid.tsx
 // components/sections/ProjectsGrid.tsx
 "use client";
 
@@ -12,7 +11,7 @@ import Button from "@/components/ui/Button";
 import ProjectFilter from "@/components/ui/ProjectFilter";
 import Pagination from "@/components/ui/Pagination";
 import ProjectModal from "@/components/ui/ProjectModal";
-import { Project } from "@/lib/data/projects";
+import { Project } from "@/lib/contentful/types";
 
 interface ProjectsGridProps {
   projects: Project[];
@@ -26,22 +25,29 @@ export default function ProjectsGrid({
   tagCategories,
 }: ProjectsGridProps) {
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
-  const [sortOrder, setSortOrder] = useState<"newest" | "oldest">("newest");
+  const [sortBy, setSortBy] = useState<"default" | "newest" | "oldest">(
+    "default"
+  );
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedProject, setSelectedProject] = useState<string | null>(null);
   const [itemsPerPage, setItemsPerPage] = useState(6);
 
   // Ref untuk scroll ke section grid
   const gridRef = useRef<HTMLDivElement>(null);
+  const prevPageRef = useRef(currentPage);
 
-  // Scroll ke section grid setiap ganti page
+  // Scroll HANYA saat pagination berubah (bukan initial load atau filter change)
   useEffect(() => {
-    if (gridRef.current) {
-      gridRef.current.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
+    // Check if page actually changed from user clicking pagination
+    if (prevPageRef.current !== currentPage && prevPageRef.current !== 0) {
+      if (gridRef.current) {
+        gridRef.current.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }
     }
+    prevPageRef.current = currentPage;
   }, [currentPage]);
 
   // Handle responsive items per page
@@ -51,6 +57,7 @@ export default function ProjectsGrid({
       setItemsPerPage((prev) => {
         if (prev !== newItemsPerPage) {
           setCurrentPage(1);
+          prevPageRef.current = 0; // Reset to prevent scroll on resize
         }
         return newItemsPerPage;
       });
@@ -92,19 +99,32 @@ export default function ProjectsGrid({
   const filteredAndSortedProjects = useMemo(() => {
     let filtered = projects;
 
+    // Filter by tags
     if (selectedTags.length > 0) {
       filtered = filtered.filter((project) =>
         selectedTags.some((tag) => project.tags.includes(tag))
       );
     }
 
-    let sorted = [...filtered].sort((a, b) => a.sortOrder - b.sortOrder);
-    sorted = sorted.sort((a, b) =>
-      sortOrder === "newest" ? b.year - a.year : a.year - b.year
-    );
+    // Sort logic
+    const sorted = [...filtered].sort((a, b) => {
+      if (sortBy === "default") {
+        // Default: sort by sortOrder field only
+        return a.sortOrder - b.sortOrder;
+      }
+
+      // newest/oldest: sort by year, then sortOrder as tiebreaker
+      const yearSort = sortBy === "newest" ? b.year - a.year : a.year - b.year;
+
+      if (a.year === b.year) {
+        return a.sortOrder - b.sortOrder;
+      }
+
+      return yearSort;
+    });
 
     return sorted;
-  }, [projects, selectedTags, sortOrder]);
+  }, [projects, selectedTags, sortBy]);
 
   // Pagination
   const totalPages = Math.ceil(filteredAndSortedProjects.length / itemsPerPage);
@@ -117,11 +137,13 @@ export default function ProjectsGrid({
   const handleFilterChange = (tags: string[]) => {
     setSelectedTags(tags);
     setCurrentPage(1);
+    prevPageRef.current = 0; // Reset to prevent scroll on filter change
   };
 
   const handleSortChange = (order: "newest" | "oldest") => {
-    setSortOrder(order);
+    setSortBy(order);
     setCurrentPage(1);
+    prevPageRef.current = 0; // Reset to prevent scroll on sort change
   };
 
   const currentProject = projects.find((p) => p.id === selectedProject) || null;
@@ -139,7 +161,7 @@ export default function ProjectsGrid({
         availableTags={availableTags}
         selectedTags={selectedTags}
         onTagsChange={handleFilterChange}
-        sortOrder={sortOrder}
+        sortBy={sortBy}
         onSortChange={handleSortChange}
         totalResults={filteredAndSortedProjects.length}
         tagCategories={tagCategories}
@@ -177,13 +199,14 @@ export default function ProjectsGrid({
                       src={project.image}
                       alt={project.title}
                       fill
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                       className="object-cover group-hover:scale-110 transition-transform duration-500"
                     />
                     <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   </div>
                   <div className="p-6 space-y-3">
                     <div className="flex items-start justify-between gap-3">
-                      <h3 className="text-xl font-bold dark:text-neutral-200 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors flex-1">
+                      <h3 className="text-xl font-bold dark:text-neutral-200 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors flex-1 line-clamp-2">
                         {project.title}
                       </h3>
                       <span className="text-sm font-medium text-neutral-500 dark:text-neutral-400 shrink-0">
@@ -241,6 +264,7 @@ export default function ProjectsGrid({
             onClick={() => {
               setSelectedTags([]);
               setCurrentPage(1);
+              prevPageRef.current = 0; // Reset to prevent scroll
             }}
             className="mt-4"
           >

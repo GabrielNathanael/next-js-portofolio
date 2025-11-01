@@ -28,15 +28,20 @@ export default function CertificatesGrid({
 
   // Ref untuk scroll ke section grid
   const gridRef = useRef<HTMLDivElement>(null);
+  const prevPageRef = useRef(currentPage);
 
-  // Scroll ke section saat ganti halaman
+  // Scroll HANYA saat pagination berubah (bukan initial load atau filter change)
   useEffect(() => {
-    if (gridRef.current) {
-      gridRef.current.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
+    // Check if page actually changed from user clicking pagination
+    if (prevPageRef.current !== currentPage && prevPageRef.current !== 0) {
+      if (gridRef.current) {
+        gridRef.current.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }
     }
+    prevPageRef.current = currentPage;
   }, [currentPage]);
 
   // Handle responsive items per page
@@ -46,6 +51,7 @@ export default function CertificatesGrid({
       setItemsPerPage((prev) => {
         if (prev !== newItemsPerPage) {
           setCurrentPage(1);
+          prevPageRef.current = 0; // Reset to prevent scroll on resize
         }
         return newItemsPerPage;
       });
@@ -98,11 +104,13 @@ export default function CertificatesGrid({
   const handleIssuersChange = (issuers: string[]) => {
     setSelectedIssuers(issuers);
     setCurrentPage(1);
+    prevPageRef.current = 0; // Reset to prevent scroll on filter change
   };
 
   const handleSortChange = (order: "newest" | "oldest") => {
     setSortOrder(order);
     setCurrentPage(1);
+    prevPageRef.current = 0; // Reset to prevent scroll on sort change
   };
 
   // Get selected certificate object
@@ -141,7 +149,8 @@ export default function CertificatesGrid({
                       src={cert.image}
                       alt={cert.title}
                       fill
-                      className="object-cover group-hover:scale-110 transition-transform duration-500"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      className="object-contain group-hover:scale-110 transition-transform duration-500"
                     />
                     <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   </div>
@@ -189,6 +198,7 @@ export default function CertificatesGrid({
             onClick={() => {
               setSelectedIssuers([]);
               setCurrentPage(1);
+              prevPageRef.current = 0; // Reset to prevent scroll
             }}
             className="mt-4 px-6 py-2 rounded-lg bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 text-neutral-700 dark:text-neutral-300 font-medium transition-colors"
           >

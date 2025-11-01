@@ -13,12 +13,18 @@ import {
 } from "lucide-react";
 import Card from "@/components/ui/Card";
 import Button from "@/components/ui/Button";
-import { experiences } from "@/lib/data/experience";
+import { Experience } from "@/lib/contentful/types";
 import { motion, AnimatePresence } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { useState, useEffect } from "react";
 
-export default function RecentExperience() {
+interface RecentExperienceProps {
+  experience: Experience;
+}
+
+export default function RecentExperience({
+  experience,
+}: RecentExperienceProps) {
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
@@ -37,20 +43,6 @@ export default function RecentExperience() {
     window.addEventListener("resize", checkMobile);
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
-
-  // Get most recent experience (prioritize current job)
-  const sortedExperiences = [...experiences].sort((a, b) => {
-    // Current jobs first
-    if (a.iscurrent && !b.iscurrent) return -1;
-    if (!a.iscurrent && b.iscurrent) return 1;
-
-    // Then by start date
-    const dateA = new Date(a.startDate);
-    const dateB = new Date(b.startDate);
-    return dateB.getTime() - dateA.getTime();
-  });
-
-  const recentExperience = sortedExperiences[0];
 
   // Format date helper
   const formatDate = (dateStr: string | null) => {
@@ -89,8 +81,6 @@ export default function RecentExperience() {
         return "bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300";
     }
   };
-
-  if (!recentExperience) return null;
 
   return (
     <motion.div
@@ -154,29 +144,29 @@ export default function RecentExperience() {
               <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
                 <div className="space-y-2">
                   <h3 className="text-xl md:text-2xl font-bold text-neutral-900 dark:text-neutral-50">
-                    {recentExperience.position}
+                    {experience.position}
                   </h3>
                   <div className="flex flex-col sm:flex-row sm:items-center gap-2">
-                    {recentExperience.website ? (
+                    {experience.website ? (
                       <a
-                        href={recentExperience.website}
+                        href={experience.website}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-base md:text-lg text-blue-600 dark:text-blue-400 hover:underline font-medium inline-flex items-center gap-1 w-fit"
                       >
-                        {recentExperience.company}
+                        {experience.company}
                         <ExternalLink className="w-4 h-4" />
                       </a>
                     ) : (
                       <span className="text-base md:text-lg text-neutral-700 dark:text-neutral-200 font-medium">
-                        {recentExperience.company}
+                        {experience.company}
                       </span>
                     )}
                   </div>
                 </div>
 
                 <div className="flex flex-wrap gap-2">
-                  {recentExperience.iscurrent && (
+                  {experience.iscurrent && (
                     <div className="flex items-center gap-2 px-3 py-1.5 bg-green-100 dark:bg-green-900/40 text-green-700 dark:text-green-300 rounded-full text-sm font-medium">
                       <div className="w-2 h-2 bg-green-500 dark:bg-green-400 rounded-full animate-pulse" />
                       Current
@@ -184,10 +174,10 @@ export default function RecentExperience() {
                   )}
                   <div
                     className={`px-3 py-1.5 rounded-full text-sm font-medium ${getEmploymentTypeColor(
-                      recentExperience.employmentType
+                      experience.employmentType
                     )}`}
                   >
-                    {recentExperience.employmentType}
+                    {experience.employmentType}
                   </div>
                 </div>
               </div>
@@ -197,15 +187,13 @@ export default function RecentExperience() {
                 <div className="flex items-center gap-2">
                   <Calendar className="w-4 h-4" />
                   <span className="font-medium">
-                    {formatDate(recentExperience.startDate)} –{" "}
-                    {formatDate(recentExperience.endDate)}
+                    {formatDate(experience.startDate)} -{" "}
+                    {formatDate(experience.endDate)}
                   </span>
                 </div>
                 <div className="flex items-center gap-2">
                   <MapPin className="w-4 h-4" />
-                  <span className="font-medium">
-                    {recentExperience.location}
-                  </span>
+                  <span className="font-medium">{experience.location}</span>
                 </div>
               </div>
 
@@ -214,12 +202,12 @@ export default function RecentExperience() {
 
               {/* Description */}
               <p className="text-sm md:text-base text-neutral-600 dark:text-neutral-300 leading-relaxed">
-                {recentExperience.description}
+                {experience.description}
               </p>
 
               {/* Toggle Button (Now Always Visible) */}
-              {recentExperience.responsibilities &&
-                recentExperience.responsibilities.length > 0 && (
+              {experience.responsibilities &&
+                experience.responsibilities.length > 0 && (
                   <button
                     onClick={() => setIsExpanded(!isExpanded)}
                     className="flex items-center gap-2 text-sm font-medium text-blue-600 dark:text-blue-400 hover:underline"
@@ -239,8 +227,8 @@ export default function RecentExperience() {
                 )}
 
               {/* Responsibilities - Collapsible Everywhere */}
-              {recentExperience.responsibilities &&
-                recentExperience.responsibilities.length > 0 && (
+              {experience.responsibilities &&
+                experience.responsibilities.length > 0 && (
                   <AnimatePresence>
                     {isExpanded && (
                       <motion.div
@@ -255,11 +243,9 @@ export default function RecentExperience() {
                             Key Responsibilities
                           </h4>
                           <ul className="list-disc list-inside space-y-1 text-sm text-neutral-600 dark:text-neutral-300">
-                            {recentExperience.responsibilities.map(
-                              (resp, i) => (
-                                <li key={i}>{resp}</li>
-                              )
-                            )}
+                            {experience.responsibilities.map((resp, i) => (
+                              <li key={i}>{resp}</li>
+                            ))}
                           </ul>
                         </div>
 
@@ -269,7 +255,7 @@ export default function RecentExperience() {
                             Technologies
                           </h4>
                           <div className="flex flex-wrap gap-2">
-                            {recentExperience.technologies.map((tech) => (
+                            {experience.technologies.map((tech) => (
                               <span
                                 key={tech}
                                 className="px-3 py-1.5 text-sm font-medium bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 rounded-lg hover:scale-105 transition-transform"
@@ -281,39 +267,38 @@ export default function RecentExperience() {
                         </div>
 
                         {/* Tools */}
-                        {recentExperience.tools &&
-                          recentExperience.tools.length > 0 && (
-                            <div className="space-y-2">
-                              <h4 className="text-sm font-semibold text-neutral-700 dark:text-neutral-200 uppercase tracking-wide">
-                                Tools
-                              </h4>
-                              <div className="flex flex-wrap gap-2">
-                                {recentExperience.tools.map((tool) => (
-                                  <span
-                                    key={tool}
-                                    className="px-3 py-1.5 text-sm font-medium bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 rounded-lg hover:scale-105 transition-transform"
-                                  >
-                                    {tool}
-                                  </span>
-                                ))}
-                              </div>
+                        {experience.tools && experience.tools.length > 0 && (
+                          <div className="space-y-2">
+                            <h4 className="text-sm font-semibold text-neutral-700 dark:text-neutral-200 uppercase tracking-wide">
+                              Tools
+                            </h4>
+                            <div className="flex flex-wrap gap-2">
+                              {experience.tools.map((tool) => (
+                                <span
+                                  key={tool}
+                                  className="px-3 py-1.5 text-sm font-medium bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 rounded-lg hover:scale-105 transition-transform"
+                                >
+                                  {tool}
+                                </span>
+                              ))}
                             </div>
-                          )}
+                          </div>
+                        )}
                       </motion.div>
                     )}
                   </AnimatePresence>
                 )}
 
               {/* Technologies - Show on Desktop when no responsibilities */}
-              {(!recentExperience.responsibilities ||
-                recentExperience.responsibilities.length === 0) &&
+              {(!experience.responsibilities ||
+                experience.responsibilities.length === 0) &&
                 !isMobile && (
                   <div className="space-y-2">
                     <h4 className="text-sm font-semibold text-neutral-700 dark:text-neutral-200 uppercase tracking-wide">
                       Technologies
                     </h4>
                     <div className="flex flex-wrap gap-2">
-                      {recentExperience.technologies.map((tech) => (
+                      {experience.technologies.map((tech) => (
                         <span
                           key={tech}
                           className="px-3 py-1.5 text-sm font-medium bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 rounded-lg hover:scale-105 transition-transform"
@@ -326,17 +311,17 @@ export default function RecentExperience() {
                 )}
 
               {/* Tools - Show on Desktop when no responsibilities */}
-              {(!recentExperience.responsibilities ||
-                recentExperience.responsibilities.length === 0) &&
+              {(!experience.responsibilities ||
+                experience.responsibilities.length === 0) &&
                 !isMobile &&
-                recentExperience.tools &&
-                recentExperience.tools.length > 0 && (
+                experience.tools &&
+                experience.tools.length > 0 && (
                   <div className="space-y-2">
                     <h4 className="text-sm font-semibold text-neutral-700 dark:text-neutral-200 uppercase tracking-wide">
                       Tools
                     </h4>
                     <div className="flex flex-wrap gap-2">
-                      {recentExperience.tools.map((tool) => (
+                      {experience.tools.map((tool) => (
                         <span
                           key={tool}
                           className="px-3 py-1.5 text-sm font-medium bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 rounded-lg hover:scale-105 transition-transform"

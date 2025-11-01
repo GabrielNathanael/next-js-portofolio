@@ -2,7 +2,7 @@
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { SiGithub, SiInstagram, SiLinkedin } from "react-icons/si";
-import { MdEmail } from "react-icons/md";
+import { SiGmail } from "react-icons/si";
 
 const socials = [
   {
@@ -22,8 +22,8 @@ const socials = [
   },
   {
     name: "Email",
-    icon: MdEmail,
-    href: "mailto:gabriel@example.com",
+    icon: SiGmail,
+    href: "mailto:gabrielnathanael81@gmail.com",
   },
 ];
 
@@ -95,7 +95,11 @@ export default function About() {
                         stiffness: 260,
                         damping: 20,
                       }}
-                      whileHover={{ scale: 1.15, rotate: 5 }}
+                      whileHover={{
+                        rotate: 8,
+                        y: -3,
+                        transition: { duration: 0.3, ease: "easeOut" },
+                      }}
                       whileTap={{ scale: 0.95 }}
                       className="transition-all duration-300"
                       title={social.name}

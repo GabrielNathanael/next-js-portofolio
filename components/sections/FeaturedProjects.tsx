@@ -1,5 +1,4 @@
 // components\sections\FeaturedProjects.tsx
-// components/sections/FeaturedProjects.tsx
 "use client";
 
 import { useState } from "react";
@@ -9,20 +8,21 @@ import { ArrowRight, User, Users } from "lucide-react";
 import Card from "@/components/ui/Card";
 import Button from "@/components/ui/Button";
 import ProjectModal from "@/components/ui/ProjectModal";
-import { projects } from "@/lib/data/projects";
+import { Project } from "@/lib/contentful/types";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 
-export default function FeaturedProjects() {
+interface FeaturedProjectsProps {
+  projects: Project[];
+}
+
+export default function FeaturedProjects({ projects }: FeaturedProjectsProps) {
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
   });
 
   const [selectedProject, setSelectedProject] = useState<string | null>(null);
-
-  // Filter by featured projects
-  const featuredProjects = projects.filter((p) => p.featured);
 
   // Get selected project object
   const currentProject = projects.find((p) => p.id === selectedProject) || null;
@@ -97,7 +97,7 @@ export default function FeaturedProjects() {
 
       {/* Projects Grid with staggered positioning */}
       <div className="grid md:grid-cols-3 gap-6 relative">
-        {featuredProjects.map((project, idx) => {
+        {projects.map((project, idx) => {
           // Horizontal, Vertical, Horizontal pattern
           const isVertical = idx === 1;
 
@@ -140,7 +140,9 @@ export default function FeaturedProjects() {
                     src={project.image}
                     alt={project.title}
                     fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1280px) 33vw, 400px"
                     className="object-cover group-hover:scale-110 transition-transform duration-500"
+                    loading="eager"
                   />
                   <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </div>
