@@ -1,13 +1,16 @@
+// components\sections\LatestCertificates.tsx
+// components/sections/LatestCertificates.tsx
 "use client";
 
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, X } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import Card from "@/components/ui/Card";
 import Button from "@/components/ui/Button";
+import CertificateModal from "@/components/ui/CertificateModal";
 import { certificates } from "@/lib/data/certificates";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 
 export default function LatestCertificates() {
@@ -20,6 +23,10 @@ export default function LatestCertificates() {
   const latestCerts = [...certificates]
     .sort((a, b) => Number(b.year) - Number(a.year))
     .slice(0, 3);
+
+  // Dapatkan object cert dari ID terpilih
+  const currentCertificate =
+    certificates.find((c) => c.id === selectedCert) || null;
 
   return (
     <motion.div
@@ -34,10 +41,10 @@ export default function LatestCertificates() {
         initial={{ opacity: 0, scale: 0.8 }}
         animate={inView ? { opacity: 0.1, scale: 1 } : {}}
         transition={{ duration: 1, delay: 0.3 }}
-        className="absolute -top-24 -right-32 w-96 h-96 bg-gradient-to-bl from-blue-400 via-cyan-400 to-blue-500 rounded-full blur-3xl pointer-events-none"
+        className="absolute -top-24 -right-32 w-96 h-96 bg-linear-to-bl from-blue-400 via-cyan-400 to-blue-500 rounded-full blur-3xl pointer-events-none"
       />
 
-      {/* Header with decorative elements */}
+      {/* Header */}
       <div className="flex items-center justify-between relative">
         <motion.h2
           initial={{ opacity: 0, x: -30 }}
@@ -66,10 +73,9 @@ export default function LatestCertificates() {
         </motion.div>
       </div>
 
-      {/* Certificates Grid with asymmetric treatment */}
+      {/* Certificates Grid */}
       <div className="grid md:grid-cols-3 gap-6 relative">
         {latestCerts.map((cert, idx) => {
-          // Alternating animation pattern
           const getInitialPosition = () => {
             if (idx === 0) return { x: -30, y: 30 };
             if (idx === 1) return { y: -20 };
@@ -88,7 +94,6 @@ export default function LatestCertificates() {
               }}
               className="relative"
               style={{
-                // Subtle staggered positioning
                 marginTop: idx === 0 ? "1rem" : idx === 1 ? "0" : "1rem",
               }}
             >
@@ -105,7 +110,6 @@ export default function LatestCertificates() {
                   />
                   <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
-                  {/* Year badge with animation */}
                   <motion.div
                     initial={{ opacity: 0, y: -10 }}
                     animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -117,13 +121,12 @@ export default function LatestCertificates() {
                 </div>
 
                 <div className="p-4 space-y-2 relative">
-                  {/* Subtle corner accent on first card */}
                   {idx === 0 && (
                     <motion.div
                       initial={{ opacity: 0, scale: 0 }}
                       animate={inView ? { opacity: 0.3, scale: 1 } : {}}
                       transition={{ duration: 0.6, delay: 0.8 }}
-                      className="absolute bottom-2 right-2 w-16 h-16 bg-gradient-to-tl from-blue-400 to-cyan-300 rounded-full blur-xl"
+                      className="absolute bottom-2 right-2 w-16 h-16 bg-linear-to-tl from-blue-400 to-cyan-300 rounded-full blur-xl"
                     />
                   )}
 
@@ -135,80 +138,26 @@ export default function LatestCertificates() {
                     <span className="font-medium">{cert.issuer}</span>
                   </div>
                 </div>
-
-                {/* Hover glow - different positions */}
-                <motion.div
-                  className={`absolute ${
-                    idx === 0
-                      ? "-bottom-6 -left-6"
-                      : idx === 1
-                      ? "top-1/2 -right-6 -translate-y-1/2"
-                      : "-bottom-6 -right-6"
-                  } w-20 h-20 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-full blur-xl opacity-0 group-hover:opacity-25 transition-opacity duration-500`}
-                />
               </Card>
             </motion.div>
           );
         })}
       </div>
 
-      {/* Bottom left decorative blob */}
+      {/* Decorative blob */}
       <motion.div
         initial={{ opacity: 0, scale: 0.8 }}
         animate={inView ? { opacity: 0.08, scale: 1 } : {}}
         transition={{ duration: 1, delay: 0.7 }}
-        className="absolute -bottom-16 -left-24 w-72 h-72 bg-gradient-to-tr from-blue-500 to-cyan-400 rounded-full blur-3xl pointer-events-none"
+        className="absolute -bottom-16 -left-24 w-72 h-72 bg-linear-to-tr from-blue-500 to-cyan-400 rounded-full blur-3xl pointer-events-none"
       />
 
-      {/* Certificate Preview Modal */}
-      <AnimatePresence>
-        {selectedCert && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4"
-            onClick={() => setSelectedCert(null)}
-          >
-            <motion.div
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.8, opacity: 0 }}
-              onClick={(e) => e.stopPropagation()}
-              className="relative max-w-4xl w-full"
-            >
-              <button
-                onClick={() => setSelectedCert(null)}
-                className="absolute -top-12 right-0 p-2 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors"
-              >
-                <X className="w-6 h-6" />
-              </button>
-              {(() => {
-                const cert = certificates.find((c) => c.id === selectedCert);
-                if (!cert) return null;
-                return (
-                  <div className="space-y-4">
-                    <div className="relative aspect-video rounded-lg overflow-hidden">
-                      <Image
-                        src={cert.image}
-                        alt={cert.title}
-                        fill
-                        className="object-contain bg-white"
-                      />
-                    </div>
-                    <div className="text-center text-white space-y-2">
-                      <h3 className="text-2xl font-bold">{cert.title}</h3>
-                      <p className="text-lg">
-                        {cert.issuer} • {cert.year}
-                      </p>
-                    </div>
-                  </div>
-                );
-              })()}
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {/* Import modal eksternal */}
+      <CertificateModal
+        certificate={currentCertificate}
+        isOpen={!!selectedCert}
+        onClose={() => setSelectedCert(null)}
+      />
     </motion.div>
   );
 }

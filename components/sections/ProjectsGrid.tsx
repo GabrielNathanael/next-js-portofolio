@@ -1,7 +1,8 @@
+// components\sections\ProjectsGrid.tsx
 // components/sections/ProjectsGrid.tsx
 "use client";
 
-import { useState, useMemo, useEffect } from "react";
+import { useState, useMemo, useEffect, useRef } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { User, Users } from "lucide-react";
@@ -30,12 +31,24 @@ export default function ProjectsGrid({
   const [selectedProject, setSelectedProject] = useState<string | null>(null);
   const [itemsPerPage, setItemsPerPage] = useState(6);
 
+  // Ref untuk scroll ke section grid
+  const gridRef = useRef<HTMLDivElement>(null);
+
+  // Scroll ke section grid setiap ganti page
+  useEffect(() => {
+    if (gridRef.current) {
+      gridRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }
+  }, [currentPage]);
+
   // Handle responsive items per page
   useEffect(() => {
     const handleResize = () => {
       const newItemsPerPage = window.innerWidth < 768 ? 3 : 6;
       setItemsPerPage((prev) => {
-        // Reset to page 1 if items per page changes
         if (prev !== newItemsPerPage) {
           setCurrentPage(1);
         }
@@ -43,13 +56,8 @@ export default function ProjectsGrid({
       });
     };
 
-    // Set initial value
     handleResize();
-
-    // Add event listener
     window.addEventListener("resize", handleResize);
-
-    // Cleanup
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
@@ -80,29 +88,25 @@ export default function ProjectsGrid({
     );
   };
 
-  // Filter and sort logic
+  // Filter dan sort logic
   const filteredAndSortedProjects = useMemo(() => {
     let filtered = projects;
 
-    // Filter by tags
     if (selectedTags.length > 0) {
       filtered = filtered.filter((project) =>
         selectedTags.some((tag) => project.tags.includes(tag))
       );
     }
 
-    // Step 1: urut default berdasarkan sortOrder
     let sorted = [...filtered].sort((a, b) => a.sortOrder - b.sortOrder);
-
-    // Step 2: lalu urut lagi berdasar newest / oldest (by year)
-    sorted = sorted.sort((a, b) => {
-      return sortOrder === "newest" ? b.year - a.year : a.year - b.year;
-    });
+    sorted = sorted.sort((a, b) =>
+      sortOrder === "newest" ? b.year - a.year : a.year - b.year
+    );
 
     return sorted;
   }, [projects, selectedTags, sortOrder]);
 
-  // Pagination logic
+  // Pagination
   const totalPages = Math.ceil(filteredAndSortedProjects.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const paginatedProjects = filteredAndSortedProjects.slice(
@@ -110,7 +114,6 @@ export default function ProjectsGrid({
     startIndex + itemsPerPage
   );
 
-  // Reset to page 1 when filters change
   const handleFilterChange = (tags: string[]) => {
     setSelectedTags(tags);
     setCurrentPage(1);
@@ -121,10 +124,8 @@ export default function ProjectsGrid({
     setCurrentPage(1);
   };
 
-  // Get selected project object
   const currentProject = projects.find((p) => p.id === selectedProject) || null;
 
-  // Masonry breakpoints
   const breakpointColumns = {
     default: 3,
     1024: 2,
@@ -132,7 +133,7 @@ export default function ProjectsGrid({
   };
 
   return (
-    <div className="space-y-8">
+    <div ref={gridRef} className="space-y-8 scroll-mt-24">
       {/* Filter & Sort */}
       <ProjectFilter
         availableTags={availableTags}
@@ -171,9 +172,7 @@ export default function ProjectsGrid({
                         : "aspect-4/3"
                     } overflow-hidden`}
                   >
-                    {/* Project Type Badge */}
                     {getProjectTypeBadge(project.projectType)}
-
                     <Image
                       src={project.image}
                       alt={project.title}
@@ -183,7 +182,6 @@ export default function ProjectsGrid({
                     <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   </div>
                   <div className="p-6 space-y-3">
-                    {/* Title with Year */}
                     <div className="flex items-start justify-between gap-3">
                       <h3 className="text-xl font-bold dark:text-neutral-200 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors flex-1">
                         {project.title}
