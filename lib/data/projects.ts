@@ -10,7 +10,8 @@ export interface Project {
   featured: boolean;
   year: number;
   orientation: "vertical" | "horizontal";
-  projectType: "Indie" | "Collab"; // ✅ new field
+  projectType: "Indie" | "Collab";
+  sortOrder: number; //
 }
 
 export const TAG_CATEGORIES: Record<string, string[]> = {
@@ -25,7 +26,7 @@ export const TAG_CATEGORIES: Record<string, string[]> = {
 export const projects: Project[] = [
   {
     id: "1",
-    title: "Faithful streak app",
+    title: "Faithful Streak App",
     description:
       "Full-stack e-commerce platform with payment integration, admin dashboard, and real-time inventory management.",
     image: "https://picsum.photos/seed/project5/800/600",
@@ -44,6 +45,7 @@ export const projects: Project[] = [
     year: 2026,
     orientation: "horizontal",
     projectType: "Collab",
+    sortOrder: 1,
   },
   {
     id: "2",
@@ -65,6 +67,7 @@ export const projects: Project[] = [
     year: 2024,
     orientation: "vertical",
     projectType: "Collab",
+    sortOrder: 2,
   },
   {
     id: "3",
@@ -79,6 +82,7 @@ export const projects: Project[] = [
     year: 2023,
     orientation: "horizontal",
     projectType: "Indie",
+    sortOrder: 3,
   },
   {
     id: "4",
@@ -93,6 +97,7 @@ export const projects: Project[] = [
     year: 2023,
     orientation: "vertical",
     projectType: "Indie",
+    sortOrder: 4,
   },
   {
     id: "5",
@@ -107,6 +112,7 @@ export const projects: Project[] = [
     year: 2023,
     orientation: "horizontal",
     projectType: "Indie",
+    sortOrder: 5,
   },
   {
     id: "6",
@@ -121,6 +127,7 @@ export const projects: Project[] = [
     year: 2023,
     orientation: "vertical",
     projectType: "Indie",
+    sortOrder: 6,
   },
   {
     id: "7",
@@ -135,6 +142,7 @@ export const projects: Project[] = [
     year: 2023,
     orientation: "horizontal",
     projectType: "Collab",
+    sortOrder: 7,
   },
   {
     id: "8",
@@ -156,5 +164,6 @@ export const projects: Project[] = [
     year: 2023,
     orientation: "horizontal",
     projectType: "Collab",
+    sortOrder: 8,
   },
 ];

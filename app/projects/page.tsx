@@ -21,15 +21,17 @@ export default function ProjectsPage() {
 
   return (
     <>
-      <div className="min-h-screen py-20">
+      <div className="min-h-screen flex flex-col">
         <Navbar />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-2">
           {/* Hero Section */}
           <div className="mb-12 space-y-4">
-            <h1 className="text-4xl md:text-5xl font-bold">All Projects</h1>
+            <h1 className="text-4xl md:text-5xl font-bold dark:text-neutral-100">
+              All Projects
+            </h1>
             <p className="text-lg text-neutral-600 dark:text-neutral-400 max-w-2xl">
-              A collection of projects I’ve worked on, reflecting my journey in
-              learning, building, and creating through technology.
+              A collection of projects I&apos;ve worked on, reflecting my
+              journey in learning, building, and creating through technology.
             </p>
           </div>
 

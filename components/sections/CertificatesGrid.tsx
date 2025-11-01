@@ -65,10 +65,12 @@ export default function CertificatesGrid({
       );
     }
 
-    // Sort by year (year)
     const sorted = [...filtered].sort((a, b) => {
       const yearA = parseInt(a.year);
       const yearB = parseInt(b.year);
+
+      if (yearA === yearB) return a.sortOrder - b.sortOrder;
+
       return sortOrder === "newest" ? yearB - yearA : yearA - yearB;
     });
 
@@ -137,7 +139,7 @@ export default function CertificatesGrid({
                     <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   </div>
                   <div className="p-5 space-y-3">
-                    <h3 className="text-lg font-bold group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors line-clamp-2">
+                    <h3 className="text-lg font-bold dark:text-neutral-200 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors line-clamp-2">
                       {cert.title}
                     </h3>
                     <div className="flex items-center justify-between gap-3">

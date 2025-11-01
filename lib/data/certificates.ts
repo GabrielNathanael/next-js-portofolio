@@ -1,10 +1,11 @@
-// lib\data\certificates.ts
+// lib/data/certificates.ts
 export interface Certificate {
   id: string;
   title: string;
   issuer: string;
   year: string;
   image: string;
+  sortOrder: number;
 }
 
 export const certificates: Certificate[] = Array.from(
@@ -20,5 +21,6 @@ export const certificates: Certificate[] = Array.from(
         : "AWS Training",
     year: `202${3 + Math.floor(i / 7)}`,
     image: `https://picsum.photos/seed/cert${i + 1}/800/600`,
+    sortOrder: i + 1,
   })
 );

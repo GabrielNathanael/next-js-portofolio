@@ -91,8 +91,11 @@ export default function ProjectsGrid({
       );
     }
 
-    // Sort by year
-    const sorted = [...filtered].sort((a, b) => {
+    // Step 1: urut default berdasarkan sortOrder
+    let sorted = [...filtered].sort((a, b) => a.sortOrder - b.sortOrder);
+
+    // Step 2: lalu urut lagi berdasar newest / oldest (by year)
+    sorted = sorted.sort((a, b) => {
       return sortOrder === "newest" ? b.year - a.year : a.year - b.year;
     });
 
@@ -182,7 +185,7 @@ export default function ProjectsGrid({
                   <div className="p-6 space-y-3">
                     {/* Title with Year */}
                     <div className="flex items-start justify-between gap-3">
-                      <h3 className="text-xl font-bold group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors flex-1">
+                      <h3 className="text-xl font-bold dark:text-neutral-200 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors flex-1">
                         {project.title}
                       </h3>
                       <span className="text-sm font-medium text-neutral-500 dark:text-neutral-400 shrink-0">
