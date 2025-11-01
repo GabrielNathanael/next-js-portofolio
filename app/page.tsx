@@ -16,8 +16,8 @@ import {
 import { siteConfig, jsonLdWebsite, jsonLdPerson } from "@/lib/seo/config";
 import type { Metadata } from "next";
 
-// ISR: Revalidate every 1 hour (3600 seconds)
-export const revalidate = 3600;
+// ISR: Revalidate every 6 hours (21600 seconds)
+export const revalidate = 21600;
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),

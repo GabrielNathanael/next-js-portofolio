@@ -6,8 +6,8 @@ import { getExperiences } from "@/lib/contentful/api";
 import { siteConfig, jsonLdBreadcrumb } from "@/lib/seo/config";
 import type { Metadata } from "next";
 
-// ISR: Revalidate every 1 hour (3600 seconds)
-export const revalidate = 3600;
+// ISR: Revalidate every 6 hours (21600 seconds)
+export const revalidate = 21600;
 
 export const metadata: Metadata = {
   title: "Work Experience",
