@@ -1,5 +1,4 @@
 // components\sections\LatestCertificates.tsx
-// components/sections/LatestCertificates.tsx
 "use client";
 
 import { useState } from "react";
@@ -9,22 +8,25 @@ import { ArrowRight } from "lucide-react";
 import Card from "@/components/ui/Card";
 import Button from "@/components/ui/Button";
 import CertificateModal from "@/components/ui/CertificateModal";
-import { certificates } from "@/lib/data/certificates";
+import { Certificate } from "@/lib/contentful/types";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 
-export default function LatestCertificates() {
+interface LatestCertificatesProps {
+  certificates: Certificate[];
+}
+
+export default function LatestCertificates({
+  certificates,
+}: LatestCertificatesProps) {
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
   });
 
   const [selectedCert, setSelectedCert] = useState<string | null>(null);
-  const latestCerts = [...certificates]
-    .sort((a, b) => Number(b.year) - Number(a.year))
-    .slice(0, 3);
 
-  // Dapatkan object cert dari ID terpilih
+  // Get selected certificate object
   const currentCertificate =
     certificates.find((c) => c.id === selectedCert) || null;
 
@@ -75,7 +77,7 @@ export default function LatestCertificates() {
 
       {/* Certificates Grid */}
       <div className="grid md:grid-cols-3 gap-6 relative">
-        {latestCerts.map((cert, idx) => {
+        {certificates.map((cert, idx) => {
           const getInitialPosition = () => {
             if (idx === 0) return { x: -30, y: 30 };
             if (idx === 1) return { y: -20 };
@@ -106,7 +108,8 @@ export default function LatestCertificates() {
                     src={cert.image}
                     alt={cert.title}
                     fill
-                    className="object-cover group-hover:scale-110 transition-transform duration-500"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1280px) 33vw, 400px"
+                    className="object-contain group-hover:scale-110 transition-transform duration-500"
                   />
                   <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
@@ -152,7 +155,7 @@ export default function LatestCertificates() {
         className="absolute -bottom-16 -left-24 w-72 h-72 bg-linear-to-tr from-blue-500 to-cyan-400 rounded-full blur-3xl pointer-events-none"
       />
 
-      {/* Import modal eksternal */}
+      {/* Certificate Modal */}
       <CertificateModal
         certificate={currentCertificate}
         isOpen={!!selectedCert}

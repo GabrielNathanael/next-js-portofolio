@@ -1,4 +1,3 @@
-// components\ui\ProjectFilter.tsx
 // components/ui/ProjectFilter.tsx
 "use client";
 
@@ -11,7 +10,7 @@ interface ProjectFilterProps {
   availableTags: string[];
   selectedTags: string[];
   onTagsChange: (tags: string[]) => void;
-  sortOrder: "newest" | "oldest";
+  sortBy: "default" | "newest" | "oldest";
   onSortChange: (order: "newest" | "oldest") => void;
   totalResults: number;
   tagCategories: Record<string, string[]>;
@@ -21,7 +20,7 @@ export default function ProjectFilter({
   availableTags,
   selectedTags,
   onTagsChange,
-  sortOrder,
+  sortBy,
   onSortChange,
   totalResults,
   tagCategories,
@@ -47,42 +46,27 @@ export default function ProjectFilter({
 
   const clearAll = () => {
     onTagsChange([]);
-    setExpandedCategories([]); // Tutup semua kategori terbuka
+    setExpandedCategories([]);
   };
 
   return (
     <div className="space-y-6">
-      {/* Filter Header with Sort */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <div className="flex items-center gap-4">
-          <h3 className="text-sm font-semibold text-neutral-700 dark:text-neutral-300">
-            Filter by:
-          </h3>
-          {selectedTags.length > 0 && (
-            <button
-              onClick={clearAll}
-              className="text-sm text-blue-600 dark:text-blue-400 hover:underline"
-            >
-              Clear all ({selectedTags.length})
-            </button>
-          )}
-        </div>
-
-        {/* Sort Dropdown (Radix + Framer Motion, same as CertificateFilter) */}
-        <div className="flex items-center gap-3">
+      {/* Sort Dropdown - Mobile First */}
+      <div className="flex flex-col sm:hidden gap-3">
+        <div className="flex items-center justify-between">
           <span className="text-sm text-neutral-600 dark:text-neutral-400">
             {totalResults} {totalResults === 1 ? "project" : "projects"}
           </span>
 
           <Select.Root
-            value={sortOrder}
+            value={sortBy === "default" ? "" : sortBy}
             onValueChange={(value) =>
               onSortChange(value as "newest" | "oldest")
             }
             onOpenChange={setIsOpen}
           >
             <Select.Trigger className="inline-flex items-center justify-between gap-2 rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 px-4 py-2 text-sm font-medium text-neutral-700 dark:text-neutral-300 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all min-w-40">
-              <Select.Value />
+              <Select.Value placeholder="Sort by" />
               <motion.div
                 animate={{ rotate: isOpen ? 180 : 0 }}
                 transition={{ duration: 0.25, ease: "easeInOut" }}
@@ -109,7 +93,7 @@ export default function ProjectFilter({
                   className="flex items-center justify-between gap-2 cursor-pointer rounded-md px-3 py-2 text-sm text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:bg-neutral-100 dark:focus:bg-neutral-700 focus:outline-none"
                 >
                   <Select.ItemText>Newest First</Select.ItemText>
-                  {sortOrder === "newest" && (
+                  {sortBy === "newest" && (
                     <Check className="w-4 h-4 text-blue-600" />
                   )}
                 </Select.Item>
@@ -119,7 +103,7 @@ export default function ProjectFilter({
                   className="flex items-center justify-between gap-2 cursor-pointer rounded-md px-3 py-2 text-sm text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:bg-neutral-100 dark:focus:bg-neutral-700 focus:outline-none"
                 >
                   <Select.ItemText>Oldest First</Select.ItemText>
-                  {sortOrder === "oldest" && (
+                  {sortBy === "oldest" && (
                     <Check className="w-4 h-4 text-blue-600" />
                   )}
                 </Select.Item>
@@ -129,8 +113,100 @@ export default function ProjectFilter({
         </div>
       </div>
 
+      {/* Filter Header with Sort - Desktop */}
+      <div className="hidden sm:flex sm:items-center justify-between gap-4">
+        <div className="flex items-center gap-4">
+          <h3 className="text-sm font-semibold text-neutral-700 dark:text-neutral-300">
+            Filter by:
+          </h3>
+          {selectedTags.length > 0 && (
+            <button
+              onClick={clearAll}
+              className="text-sm text-blue-600 dark:text-blue-400 hover:underline"
+            >
+              Clear all ({selectedTags.length})
+            </button>
+          )}
+        </div>
+
+        {/* Sort Dropdown - Desktop */}
+        <div className="flex items-center gap-3">
+          <span className="text-sm text-neutral-600 dark:text-neutral-400">
+            {totalResults} {totalResults === 1 ? "project" : "projects"}
+          </span>
+
+          <Select.Root
+            value={sortBy === "default" ? "" : sortBy}
+            onValueChange={(value) =>
+              onSortChange(value as "newest" | "oldest")
+            }
+            onOpenChange={setIsOpen}
+          >
+            <Select.Trigger className="inline-flex items-center justify-between gap-2 rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 px-4 py-2 text-sm font-medium text-neutral-700 dark:text-neutral-300 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all min-w-40">
+              <Select.Value placeholder="Sort by" />
+              <motion.div
+                animate={{ rotate: isOpen ? 180 : 0 }}
+                transition={{ duration: 0.25, ease: "easeInOut" }}
+                className="flex items-center justify-center"
+              >
+                <ChevronDown className="w-4 h-4 text-neutral-600 dark:text-neutral-400" />
+              </motion.div>
+            </Select.Trigger>
+
+            <Select.Content
+              side="bottom"
+              align="end"
+              position="popper"
+              avoidCollisions={false}
+              sideOffset={4}
+              className="z-50 min-w-(--radix-select-trigger-width) rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 shadow-md overflow-hidden"
+            >
+              <Select.Viewport
+                className="p-1"
+                style={{ scrollBehavior: "auto" }}
+              >
+                <Select.Item
+                  value="newest"
+                  className="flex items-center justify-between gap-2 cursor-pointer rounded-md px-3 py-2 text-sm text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:bg-neutral-100 dark:focus:bg-neutral-700 focus:outline-none"
+                >
+                  <Select.ItemText>Newest First</Select.ItemText>
+                  {sortBy === "newest" && (
+                    <Check className="w-4 h-4 text-blue-600" />
+                  )}
+                </Select.Item>
+
+                <Select.Item
+                  value="oldest"
+                  className="flex items-center justify-between gap-2 cursor-pointer rounded-md px-3 py-2 text-sm text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:bg-neutral-100 dark:focus:bg-neutral-700 focus:outline-none"
+                >
+                  <Select.ItemText>Oldest First</Select.ItemText>
+                  {sortBy === "oldest" && (
+                    <Check className="w-4 h-4 text-blue-600" />
+                  )}
+                </Select.Item>
+              </Select.Viewport>
+            </Select.Content>
+          </Select.Root>
+        </div>
+      </div>
+
+      {/* Filter Header - Mobile Only */}
+      <div className="flex sm:hidden items-center gap-4">
+        <h3 className="text-sm font-semibold text-neutral-700 dark:text-neutral-300">
+          Filter by:
+        </h3>
+        {selectedTags.length > 0 && (
+          <button
+            onClick={clearAll}
+            className="text-sm text-blue-600 dark:text-blue-400 hover:underline"
+          >
+            Clear all ({selectedTags.length})
+          </button>
+        )}
+      </div>
+
       {/* Categorized Tag Chips */}
-      <div className="flex flex-wrap gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {Object.entries(tagCategories).map(([category, tags]) => {
           const isExpanded = expandedCategories.includes(category);
           const categoryTags = tags.filter((tag) =>

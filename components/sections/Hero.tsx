@@ -1,3 +1,4 @@
+// components\sections\Hero.tsx
 "use client";
 
 import { ArrowRight, Download } from "lucide-react";
@@ -6,8 +7,23 @@ import Link from "next/link";
 import Button from "@/components/ui/Button";
 import { motion } from "framer-motion";
 import { TypeAnimation } from "react-type-animation";
+import { Profile } from "@/lib/contentful/types";
 
-export default function Hero() {
+interface HeroProps {
+  profile: Profile | null;
+}
+
+export default function Hero({ profile }: HeroProps) {
+  // Fallback values if profile is null
+  const photoUrl = profile?.photo || "/images/avatarful.webp";
+  const resumeUrl = profile?.resume;
+
+  const handleDownloadResume = () => {
+    if (resumeUrl) {
+      window.open(resumeUrl, "_blank");
+    }
+  };
+
   return (
     <section className="min-h-screen w-full bg-[#f8fafc] dark:bg-neutral-950 relative">
       {/* Light Mode Grid */}
@@ -111,7 +127,7 @@ export default function Hero() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.6, duration: 0.6 }}
-                className="flex flex-wrap gap-4 pt-4"
+                className="flex flex-wrap gap-4 pt-4 justify-center lg:justify-start"
               >
                 <Link href="/projects">
                   <Button variant="primary" size="lg" className="group">
@@ -120,14 +136,17 @@ export default function Hero() {
                   </Button>
                 </Link>
 
-                <Button
-                  variant="ghost"
-                  size="lg"
-                  className="group dark:hover:bg-neutral-900"
-                >
-                  <Download className="w-5 h-5 mr-2" />
-                  Download Resume
-                </Button>
+                {resumeUrl && (
+                  <Button
+                    variant="ghost"
+                    size="lg"
+                    className="group dark:hover:bg-neutral-900"
+                    onClick={handleDownloadResume}
+                  >
+                    <Download className="w-5 h-5 mr-2 group-hover:animate-bounce transition-transform" />
+                    Get my Resume
+                  </Button>
+                )}
               </motion.div>
             </motion.div>
 
@@ -145,9 +164,10 @@ export default function Hero() {
                 {/* Image */}
                 <div className="relative w-full h-full rounded-full overflow-hidden border-4 border-white dark:border-neutral-800 shadow-2xl">
                   <Image
-                    src="/images/avatarful.webp"
+                    src={photoUrl}
                     alt="Profile"
                     fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 384px"
                     className="object-cover"
                     priority
                   />
