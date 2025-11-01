@@ -41,12 +41,12 @@ export default function About() {
       <div className="max-w-7xl mx-auto">
         {/* Grid Container */}
         <div className="grid grid-cols-12 gap-6 lg:gap-8">
-          {/* About Me Title */}
+          {/* About Me Title - Slide from Left */}
           <motion.div
             className="col-span-12 lg:col-span-6"
-            initial={{ opacity: 0, y: 40 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.7 }}
+            initial={{ opacity: 0, x: -60 }}
+            animate={inView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.8, ease: "easeOut" }}
           >
             <h2 className="text-6xl lg:text-8xl font-black tracking-tight">
               <span className="bg-linear-to-r from-blue-600 to-cyan-500 dark:from-blue-400 dark:to-cyan-300 bg-clip-text text-transparent">
@@ -57,12 +57,12 @@ export default function About() {
             </h2>
           </motion.div>
 
-          {/* Let's Connect (desktop position only) */}
+          {/* Let's Connect (desktop position only) - Slide from Right */}
           <motion.div
             className="hidden lg:block col-span-12 lg:col-span-6 lg:col-start-7"
-            initial={{ opacity: 0, y: 40 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.1 }}
+            initial={{ opacity: 0, x: 60 }}
+            animate={inView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.8, ease: "easeOut", delay: 0.1 }}
           >
             <div className="lg:text-right">
               <h3 className="text-4xl lg:text-5xl font-bold tracking-tight mb-8">
@@ -84,15 +84,20 @@ export default function About() {
                       href={social.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      animate={inView ? { opacity: 1, scale: 1 } : {}}
+                      initial={{ opacity: 0, scale: 0.5, rotate: -10 }}
+                      animate={
+                        inView ? { opacity: 1, scale: 1, rotate: 0 } : {}
+                      }
                       transition={{
-                        duration: 0.5,
-                        delay: 0.3 + idx * 0.1,
+                        duration: 0.6,
+                        delay: 0.4 + idx * 0.1,
                         type: "spring",
-                        stiffness: 200,
+                        stiffness: 260,
+                        damping: 20,
                       }}
-                      className="transition-all duration-300 hover:scale-110"
+                      whileHover={{ scale: 1.15, rotate: 5 }}
+                      whileTap={{ scale: 0.95 }}
+                      className="transition-all duration-300"
                       title={social.name}
                     >
                       <Icon className="w-8 h-8 lg:w-10 lg:h-10 text-neutral-700 dark:text-neutral-300" />
@@ -103,12 +108,12 @@ export default function About() {
             </div>
           </motion.div>
 
-          {/* First Paragraph */}
+          {/* First Paragraph - Slide from Left */}
           <motion.div
             className="col-span-12 lg:col-span-6 lg:col-start-1 lg:mt-4"
-            initial={{ opacity: 0, x: -20 }}
+            initial={{ opacity: 0, x: -50 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            transition={{ duration: 0.7, delay: 0.3, ease: "easeOut" }}
           >
             <p className="text-lg lg:text-[1.1rem] text-neutral-700 dark:text-neutral-300 leading-relaxed max-w-2xl">
               Hey, I&apos;m Gabriel — a full-stack web developer and Computer
@@ -118,15 +123,20 @@ export default function About() {
             </p>
           </motion.div>
 
-          {/* Second Paragraph */}
+          {/* Second Paragraph - Slide from Right with decorative bar */}
           <motion.div
             className="col-span-12 lg:col-span-5 lg:col-start-7 lg:mt-36"
-            initial={{ opacity: 0, x: 20 }}
+            initial={{ opacity: 0, x: 50 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.35 }}
+            transition={{ duration: 0.7, delay: 0.5, ease: "easeOut" }}
           >
             <div className="relative pl-6">
-              <div className="absolute left-0 top-1 w-[3px] h-14 bg-linear-to-b from-blue-500 to-cyan-400 dark:from-blue-400 dark:to-cyan-300 rounded-full" />
+              <motion.div
+                className="absolute left-0 top-1 w-[3px] h-14 bg-linear-to-b from-blue-500 to-cyan-400 dark:from-blue-400 dark:to-cyan-300 rounded-full"
+                initial={{ height: 0, opacity: 0 }}
+                animate={inView ? { height: 56, opacity: 1 } : {}}
+                transition={{ duration: 0.8, delay: 0.7, ease: "easeOut" }}
+              />
               <p className="text-lg lg:text-[1.05rem] text-neutral-700 dark:text-neutral-300 leading-relaxed max-w-md">
                 I work across the full stack — from crafting responsive,
                 user-focused interfaces to developing solid backend logic and
@@ -136,12 +146,12 @@ export default function About() {
             </div>
           </motion.div>
 
-          {/* Third Paragraph */}
+          {/* Third Paragraph - Slide from Left Bottom */}
           <motion.div
             className="col-span-12 lg:col-span-5 lg:col-start-2 lg:mt-10"
-            initial={{ opacity: 0, x: -20 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.45 }}
+            initial={{ opacity: 0, x: -40, y: 20 }}
+            animate={inView ? { opacity: 1, x: 0, y: 0 } : {}}
+            transition={{ duration: 0.7, delay: 0.7, ease: "easeOut" }}
           >
             <p className="text-lg lg:text-[1.05rem] text-neutral-600 dark:text-neutral-400 leading-relaxed max-w-lg italic">
               I&apos;m also passionate about exploring new technologies,
@@ -150,12 +160,12 @@ export default function About() {
             </p>
           </motion.div>
 
-          {/* Let's Connect (mobile position) */}
+          {/* Let's Connect (mobile position) - Fade + Scale Up */}
           <motion.div
             className="col-span-12 block lg:hidden mt-12"
-            initial={{ opacity: 0, y: 30 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.55 }}
+            initial={{ opacity: 0, y: 40, scale: 0.95 }}
+            animate={inView ? { opacity: 1, y: 0, scale: 1 } : {}}
+            transition={{ duration: 0.7, delay: 0.8, ease: "easeOut" }}
           >
             <div className="text-center">
               <h3 className="text-4xl font-bold tracking-tight mb-6">
@@ -176,15 +186,18 @@ export default function About() {
                       href={social.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      animate={inView ? { opacity: 1, scale: 1 } : {}}
+                      initial={{ opacity: 0, scale: 0.5, y: 20 }}
+                      animate={inView ? { opacity: 1, scale: 1, y: 0 } : {}}
                       transition={{
-                        duration: 0.5,
-                        delay: 0.6 + idx * 0.1,
+                        duration: 0.6,
+                        delay: 0.9 + idx * 0.1,
                         type: "spring",
-                        stiffness: 200,
+                        stiffness: 260,
+                        damping: 20,
                       }}
-                      className="transition-all duration-300 hover:scale-110"
+                      whileHover={{ scale: 1.15, y: -5 }}
+                      whileTap={{ scale: 0.95 }}
+                      className="transition-all duration-300"
                       title={social.name}
                     >
                       <Icon className="w-8 h-8 text-neutral-700 dark:text-neutral-300" />

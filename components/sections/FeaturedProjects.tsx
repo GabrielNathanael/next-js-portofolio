@@ -56,80 +56,151 @@ export default function FeaturedProjects() {
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 30 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.6, delay: 0.2 }}
-      className="space-y-6"
+      initial={{ opacity: 0 }}
+      animate={inView ? { opacity: 1 } : {}}
+      transition={{ duration: 0.6 }}
+      className="space-y-6 relative"
     >
-      <div className="flex items-center justify-between">
-        <h2 className="text-3xl font-bold from-blue-600 to-cyan-500 dark:from-blue-400 dark:to-cyan-300 bg-clip-text text-transparent bg-linear-to-r">
+      {/* Decorative floating blob - left side */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={inView ? { opacity: 0.08, scale: 1 } : {}}
+        transition={{ duration: 1, delay: 0.3 }}
+        className="absolute -top-2 -left-16 w-56 h-56 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-full blur-2xl pointer-events-none"
+      />
+
+      {/* Header with decorative elements */}
+      <div className="flex items-center justify-between relative">
+        <motion.h2
+          initial={{ opacity: 0, x: -30 }}
+          animate={inView ? { opacity: 1, x: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className="text-3xl font-bold from-blue-600 to-cyan-500 dark:from-blue-400 dark:to-cyan-300 bg-clip-text text-transparent bg-linear-to-r"
+        >
           Featured Projects
-        </h2>
-        <Link href="/projects">
-          <Button variant="ghost" size="sm" className="group">
-            View All
-            <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-          </Button>
-        </Link>
+        </motion.h2>
+
+        <motion.div
+          initial={{ opacity: 0, x: 30 }}
+          animate={inView ? { opacity: 1, x: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
+          <Link href="/projects">
+            <Button variant="ghost" size="sm" className="group">
+              View All
+              <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+            </Button>
+          </Link>
+        </motion.div>
       </div>
 
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {featuredProjects.map((project, idx) => (
-          <motion.div
-            key={project.id}
-            initial={{ opacity: 0, y: 20 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5, delay: idx * 0.1 }}
-          >
-            <Card
-              className="overflow-hidden cursor-pointer group"
-              onClick={() => setSelectedProject(project.id)}
+      {/* Projects Grid with staggered positioning */}
+      <div className="grid md:grid-cols-3 gap-6 relative">
+        {featuredProjects.map((project, idx) => {
+          // Horizontal, Vertical, Horizontal pattern
+          const isVertical = idx === 1;
+
+          // Different animation directions based on position
+          const getInitialPosition = () => {
+            if (idx === 0) return { x: -40, y: 20 }; // left bottom
+            if (idx === 1) return { x: 0, y: -40 }; // center top
+            return { x: 40, y: 20 }; // right bottom
+          };
+
+          return (
+            <motion.div
+              key={project.id}
+              initial={{ opacity: 0, ...getInitialPosition() }}
+              animate={inView ? { opacity: 1, x: 0, y: 0 } : {}}
+              transition={{
+                duration: 0.7,
+                delay: 0.3 + idx * 0.15,
+                ease: "easeOut",
+              }}
+              className="relative"
+              style={{
+                // Subtle vertical offset for visual interest
+                marginTop: idx === 1 ? "0" : idx === 0 ? "1.5rem" : "1.5rem",
+              }}
             >
-              <div
-                className={`relative ${
-                  project.orientation === "vertical"
-                    ? "aspect-3/4"
-                    : "aspect-4/3"
-                } overflow-hidden`}
+              <Card
+                className="overflow-hidden cursor-pointer group relative"
+                onClick={() => setSelectedProject(project.id)}
               >
-                {/* Project Type Badge */}
-                {getProjectTypeBadge(project.projectType)}
+                <div
+                  className={`relative ${
+                    isVertical ? "aspect-3/4" : "aspect-4/3"
+                  } overflow-hidden`}
+                >
+                  {/* Project Type Badge */}
+                  {getProjectTypeBadge(project.projectType)}
 
-                <Image
-                  src={project.image}
-                  alt={project.title}
-                  fill
-                  className="object-cover group-hover:scale-110 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              </div>
-              <div className="p-6 space-y-3">
-                <h3 className="text-xl font-bold text-neutral-900 dark:text-neutral-50 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-                  {project.title}
-                </h3>
-                <p className="text-sm text-neutral-600 dark:text-neutral-300 line-clamp-2">
-                  {project.description}
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  {project.tags.slice(0, 3).map((tag) => (
-                    <span
-                      key={tag}
-                      className="px-3 py-1 text-xs font-medium bg-blue-100 dark:bg-blue-900/40 text-blue-600 dark:text-blue-300 rounded-full"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                  {project.tags.length > 3 && (
-                    <span className="px-3 py-1 text-xs font-medium bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300 rounded-full">
-                      +{project.tags.length - 3}
-                    </span>
-                  )}
+                  <Image
+                    src={project.image}
+                    alt={project.title}
+                    fill
+                    className="object-cover group-hover:scale-110 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </div>
-              </div>
-            </Card>
-          </motion.div>
-        ))}
+
+                <div className="p-6 space-y-3 relative">
+                  {/* Subtle decorative line on card body */}
+                  {idx === 1 && (
+                    <motion.div
+                      initial={{ width: 0, opacity: 0 }}
+                      animate={inView ? { width: "2rem", opacity: 1 } : {}}
+                      transition={{ duration: 0.6, delay: 0.8 }}
+                      className="absolute top-3 right-6 h-0.5 bg-gradient-to-r from-blue-500 to-cyan-400 rounded-full"
+                    />
+                  )}
+
+                  <h3 className="text-xl font-bold text-neutral-900 dark:text-neutral-50 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                    {project.title}
+                  </h3>
+                  <p className="text-sm text-neutral-600 dark:text-neutral-300 line-clamp-2">
+                    {project.description}
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {project.tags.slice(0, 3).map((tag) => (
+                      <span
+                        key={tag}
+                        className="px-3 py-1 text-xs font-medium bg-blue-100 dark:bg-blue-900/40 text-blue-600 dark:text-blue-300 rounded-full"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                    {project.tags.length > 3 && (
+                      <span className="px-3 py-1 text-xs font-medium bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300 rounded-full">
+                        +{project.tags.length - 3}
+                      </span>
+                    )}
+                  </div>
+                </div>
+
+                {/* Subtle glow on hover - different per card */}
+                <motion.div
+                  className={`absolute ${
+                    idx === 0
+                      ? "-bottom-8 -left-8"
+                      : idx === 1
+                      ? "-top-8 -right-8"
+                      : "-bottom-8 -right-8"
+                  } w-24 h-24 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-full blur-2xl opacity-0 group-hover:opacity-30 transition-opacity duration-500`}
+                />
+              </Card>
+            </motion.div>
+          );
+        })}
       </div>
+
+      {/* Bottom right decorative accent blob */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={inView ? { opacity: 0.1, scale: 1 } : {}}
+        transition={{ duration: 1, delay: 0.6 }}
+        className="absolute -bottom-20 -right-20 w-64 h-64 bg-gradient-to-tl from-blue-500 to-cyan-400 rounded-full blur-3xl pointer-events-none"
+      />
 
       {/* Project Detail Modal */}
       <ProjectModal

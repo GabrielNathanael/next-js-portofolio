@@ -94,10 +94,10 @@ export default function Pagination({
         <button
           onClick={handlePrevious}
           disabled={currentPage === 1}
-          className="p-2 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          className="p-2 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-900 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
           aria-label="Previous page"
         >
-          <ChevronLeft className="w-5 h-5" />
+          <ChevronLeft className="w-5 h-5 text-neutral-700 dark:text-neutral-200" />
         </button>
 
         {/* Page Numbers */}
@@ -107,7 +107,7 @@ export default function Pagination({
               return (
                 <span
                   key={`ellipsis-${idx}`}
-                  className="px-3 py-2 text-neutral-500"
+                  className="px-3 py-2 text-neutral-400 dark:text-neutral-600 select-none"
                 >
                   ...
                 </span>
@@ -123,8 +123,8 @@ export default function Pagination({
                 onClick={() => onPageChange(pageNum)}
                 className={`min-w-10 px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
                   isActive
-                    ? "bg-blue-600 text-white shadow-lg shadow-blue-500/30"
-                    : "hover:bg-neutral-100 dark:hover:bg-neutral-800 text-neutral-700 dark:text-neutral-300"
+                    ? "bg-blue-600 text-white shadow-md shadow-blue-500/30 dark:shadow-blue-400/20"
+                    : "text-neutral-800 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-900"
                 }`}
                 aria-label={`Page ${pageNum}`}
                 aria-current={isActive ? "page" : undefined}
@@ -139,10 +139,10 @@ export default function Pagination({
         <button
           onClick={handleNext}
           disabled={currentPage === totalPages}
-          className="p-2 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          className="p-2 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-900 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
           aria-label="Next page"
         >
-          <ChevronRight className="w-5 h-5" />
+          <ChevronRight className="w-5 h-5 text-neutral-700 dark:text-neutral-200" />
         </button>
       </nav>
     </div>
