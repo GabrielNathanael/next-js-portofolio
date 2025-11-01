@@ -1,3 +1,4 @@
+// components\sections\FeaturedProjects.tsx
 // components/sections/FeaturedProjects.tsx
 "use client";
 
@@ -66,7 +67,7 @@ export default function FeaturedProjects() {
         initial={{ opacity: 0, scale: 0.8 }}
         animate={inView ? { opacity: 0.08, scale: 1 } : {}}
         transition={{ duration: 1, delay: 0.3 }}
-        className="absolute -top-2 -left-16 w-56 h-56 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-full blur-2xl pointer-events-none"
+        className="absolute -top-2 -left-16 w-56 h-56 bg-linear-to-br from-cyan-400 to-blue-500 rounded-full blur-2xl pointer-events-none"
       />
 
       {/* Header with decorative elements */}
@@ -151,7 +152,7 @@ export default function FeaturedProjects() {
                       initial={{ width: 0, opacity: 0 }}
                       animate={inView ? { width: "2rem", opacity: 1 } : {}}
                       transition={{ duration: 0.6, delay: 0.8 }}
-                      className="absolute top-3 right-6 h-0.5 bg-gradient-to-r from-blue-500 to-cyan-400 rounded-full"
+                      className="absolute top-3 right-6 h-0.5 bg-linear-to-r from-blue-500 to-cyan-400 rounded-full"
                     />
                   )}
 
@@ -186,7 +187,7 @@ export default function FeaturedProjects() {
                       : idx === 1
                       ? "-top-8 -right-8"
                       : "-bottom-8 -right-8"
-                  } w-24 h-24 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-full blur-2xl opacity-0 group-hover:opacity-30 transition-opacity duration-500`}
+                  } w-24 h-24 bg-linear-to-br from-cyan-400 to-blue-500 rounded-full blur-2xl opacity-0 group-hover:opacity-30 transition-opacity duration-500`}
                 />
               </Card>
             </motion.div>
@@ -199,7 +200,7 @@ export default function FeaturedProjects() {
         initial={{ opacity: 0, scale: 0.8 }}
         animate={inView ? { opacity: 0.1, scale: 1 } : {}}
         transition={{ duration: 1, delay: 0.6 }}
-        className="absolute -bottom-20 -right-20 w-64 h-64 bg-gradient-to-tl from-blue-500 to-cyan-400 rounded-full blur-3xl pointer-events-none"
+        className="absolute -bottom-20 -right-20 w-64 h-64 bg-linear-to-tl from-blue-500 to-cyan-400 rounded-full blur-3xl pointer-events-none"
       />
 
       {/* Project Detail Modal */}

@@ -1,7 +1,8 @@
+// components\sections\CertificatesGrid.tsx
 // components/sections/CertificatesGrid.tsx
 "use client";
 
-import { useState, useMemo, useEffect } from "react";
+import { useState, useMemo, useEffect, useRef } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import Card from "@/components/ui/Card";
@@ -25,12 +26,24 @@ export default function CertificatesGrid({
   );
   const [itemsPerPage, setItemsPerPage] = useState(6);
 
+  // Ref untuk scroll ke section grid
+  const gridRef = useRef<HTMLDivElement>(null);
+
+  // Scroll ke section saat ganti halaman
+  useEffect(() => {
+    if (gridRef.current) {
+      gridRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }
+  }, [currentPage]);
+
   // Handle responsive items per page
   useEffect(() => {
     const handleResize = () => {
       const newItemsPerPage = window.innerWidth < 768 ? 3 : 6;
       setItemsPerPage((prev) => {
-        // Reset to page 1 if items per page changes
         if (prev !== newItemsPerPage) {
           setCurrentPage(1);
         }
@@ -38,13 +51,8 @@ export default function CertificatesGrid({
       });
     };
 
-    // Set initial value
     handleResize();
-
-    // Add event listener
     window.addEventListener("resize", handleResize);
-
-    // Cleanup
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
@@ -54,11 +62,10 @@ export default function CertificatesGrid({
     return Array.from(issuers).sort();
   }, [certificates]);
 
-  // Filter and sort logic
+  // Filter dan sort logic
   const filteredAndSortedCertificates = useMemo(() => {
     let filtered = certificates;
 
-    // Filter by issuers
     if (selectedIssuers.length > 0) {
       filtered = filtered.filter((cert) =>
         selectedIssuers.includes(cert.issuer)
@@ -87,7 +94,7 @@ export default function CertificatesGrid({
     startIndex + itemsPerPage
   );
 
-  // Reset to page 1 when filters change
+  // Reset ke page 1 saat filter berubah
   const handleIssuersChange = (issuers: string[]) => {
     setSelectedIssuers(issuers);
     setCurrentPage(1);
@@ -103,7 +110,7 @@ export default function CertificatesGrid({
     certificates.find((c) => c.id === selectedCertificate) || null;
 
   return (
-    <div className="space-y-8">
+    <div ref={gridRef} className="space-y-8 scroll-mt-24">
       {/* Filter & Sort */}
       <CertificateFilter
         availableIssuers={availableIssuers}
