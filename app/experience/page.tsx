@@ -80,9 +80,8 @@ export default async function ExperiencePage() {
                 Work Experience
               </h1>
               <p className="text-lg text-neutral-600 dark:text-neutral-400 max-w-2xl">
-                My professional journey and the impactful projects I&apos;ve
-                contributed to. Each role has shaped my skills and passion for
-                building great software.
+                An overview of my work experience and the roles where I’ve
+                applied my skills to build and deliver real-world software.
               </p>
             </div>
             <ExperienceGrid experiences={experiences} />

@@ -19,8 +19,14 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         "bg-blue-600 text-white hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-400 shadow-lg shadow-blue-500/30 hover:shadow-xl hover:shadow-blue-500/40 dark:shadow-blue-500/20 dark:hover:shadow-blue-500/30",
       secondary:
         "bg-violet-600 text-white hover:bg-violet-700 dark:bg-violet-500 dark:hover:bg-violet-400 shadow-lg shadow-violet-500/30 hover:shadow-xl hover:shadow-violet-500/40 dark:shadow-violet-500/20 dark:hover:shadow-violet-500/30",
-      ghost:
-        "bg-neutral-100 dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100 hover:bg-neutral-200 dark:hover:bg-neutral-700",
+      ghost: `
+  bg-white/40 dark:bg-white/5
+  backdrop-blur-sm
+  text-neutral-800 dark:text-neutral-200
+  hover:bg-white/60 dark:hover:bg-white/10
+  border border-white/30 dark:border-white/10
+  transition-colors
+`,
     };
 
     const sizes = {
