@@ -2,17 +2,19 @@
 // components/sections/LatestCertificates.tsx
 "use client";
 
-import { useState } from "react";
+import { useState, lazy, Suspense } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import Card from "@/components/ui/Card";
 import Button from "@/components/ui/Button";
-import CertificateModal from "@/components/ui/CertificateModal";
 import { Certificate } from "@/lib/contentful/types";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { useIsMobile } from "@/hooks/useIsMobile";
+
+// Dynamic import modal - only load when needed
+const CertificateModal = lazy(() => import("@/components/ui/CertificateModal"));
 
 interface LatestCertificatesProps {
   certificates: Certificate[];
@@ -171,12 +173,16 @@ export default function LatestCertificates({
         />
       )}
 
-      {/* Certificate Modal */}
-      <CertificateModal
-        certificate={currentCertificate}
-        isOpen={!!selectedCert}
-        onClose={() => setSelectedCert(null)}
-      />
+      {/* Certificate Modal - Lazy loaded */}
+      {selectedCert && (
+        <Suspense fallback={null}>
+          <CertificateModal
+            certificate={currentCertificate}
+            isOpen={!!selectedCert}
+            onClose={() => setSelectedCert(null)}
+          />
+        </Suspense>
+      )}
     </motion.div>
   );
 }

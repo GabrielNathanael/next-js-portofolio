@@ -169,7 +169,7 @@ export default function Hero({ profile }: HeroProps) {
                   <div className="absolute inset-0 bg-linear-to-br from-blue-500 via-violet-500 to-purple-500 rounded-full blur-3xl opacity-30 animate-pulse dark:opacity-20" />
                 )}
 
-                {/* Image */}
+                {/* Image with fetchPriority="high" */}
                 <div className="relative w-full h-full rounded-full overflow-hidden border-4 border-white dark:border-neutral-800 shadow-2xl">
                   <Image
                     src={photoUrl}
@@ -178,6 +178,7 @@ export default function Hero({ profile }: HeroProps) {
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 384px"
                     className="object-cover"
                     priority
+                    fetchPriority="high"
                   />
                 </div>
 

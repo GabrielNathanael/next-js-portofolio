@@ -2,17 +2,19 @@
 // components/sections/FeaturedProjects.tsx
 "use client";
 
-import { useState } from "react";
+import { useState, lazy, Suspense } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, User, Users } from "lucide-react";
 import Card from "@/components/ui/Card";
 import Button from "@/components/ui/Button";
-import ProjectModal from "@/components/ui/ProjectModal";
 import { Project } from "@/lib/contentful/types";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { useIsMobile } from "@/hooks/useIsMobile";
+
+// Dynamic import modal - only load when needed
+const ProjectModal = lazy(() => import("@/components/ui/ProjectModal"));
 
 interface FeaturedProjectsProps {
   projects: Project[];
@@ -142,7 +144,6 @@ export default function FeaturedProjects({ projects }: FeaturedProjectsProps) {
                     fill
                     sizes="(max-width: 768px) 100vw, (max-width: 1280px) 33vw, 400px"
                     className="object-cover group-hover:scale-110 transition-transform duration-500"
-                    loading="eager"
                   />
                   <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </div>
@@ -207,12 +208,16 @@ export default function FeaturedProjects({ projects }: FeaturedProjectsProps) {
         className="absolute -bottom-20 -right-20 w-64 h-64 bg-linear-to-tl from-blue-500 to-cyan-400 rounded-full blur-3xl pointer-events-none"
       />
 
-      {/* Project Detail Modal */}
-      <ProjectModal
-        project={currentProject}
-        isOpen={selectedProject !== null}
-        onClose={() => setSelectedProject(null)}
-      />
+      {/* Project Detail Modal - Lazy loaded */}
+      {selectedProject && (
+        <Suspense fallback={null}>
+          <ProjectModal
+            project={currentProject}
+            isOpen={selectedProject !== null}
+            onClose={() => setSelectedProject(null)}
+          />
+        </Suspense>
+      )}
     </motion.div>
   );
 }

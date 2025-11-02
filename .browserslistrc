@@ -1,0 +1,18 @@
+
+# Chrome/Edge
+Chrome >= 90
+Edge >= 90
+
+# Safari
+Safari >= 15
+
+# Firefox
+Firefox >= 90
+
+# Mobile
+iOS >= 15
+ChromeAndroid >= 90
+
+# Exclude dead browsers
+not dead
+not op_mini all

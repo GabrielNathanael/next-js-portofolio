@@ -57,6 +57,13 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        {/* Preconnect to Contentful CDN - reduce resource load delay */}
+        <link rel="preconnect" href="https://images.ctfassets.net" />
+        <link rel="preconnect" href="https://assets.ctfassets.net" />
+        <link rel="dns-prefetch" href="https://images.ctfassets.net" />
+        <link rel="dns-prefetch" href="https://assets.ctfassets.net" />
+      </head>
       <body className={urbanist.className}>
         <ThemeProvider>{children}</ThemeProvider>
       </body>
