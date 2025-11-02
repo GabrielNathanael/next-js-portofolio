@@ -1,4 +1,5 @@
 // components\sections\LatestCertificates.tsx
+// components/sections/LatestCertificates.tsx
 "use client";
 
 import { useState } from "react";
@@ -11,6 +12,7 @@ import CertificateModal from "@/components/ui/CertificateModal";
 import { Certificate } from "@/lib/contentful/types";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 interface LatestCertificatesProps {
   certificates: Certificate[];
@@ -24,9 +26,9 @@ export default function LatestCertificates({
     threshold: 0.1,
   });
 
+  const isMobile = useIsMobile();
   const [selectedCert, setSelectedCert] = useState<string | null>(null);
 
-  // Get selected certificate object
   const currentCertificate =
     certificates.find((c) => c.id === selectedCert) || null;
 
@@ -41,7 +43,7 @@ export default function LatestCertificates({
       {/* Decorative floating blob - right side */}
       <motion.div
         initial={{ opacity: 0, scale: 0.8 }}
-        animate={inView ? { opacity: 0.1, scale: 1 } : {}}
+        animate={inView ? { opacity: isMobile ? 0.05 : 0.1, scale: 1 } : {}}
         transition={{ duration: 1, delay: 0.3 }}
         className="absolute -top-24 -right-32 w-96 h-96 bg-linear-to-bl from-blue-400 via-cyan-400 to-blue-500 rounded-full blur-3xl pointer-events-none"
       />
@@ -49,7 +51,7 @@ export default function LatestCertificates({
       {/* Header */}
       <div className="flex items-center justify-between relative">
         <motion.h2
-          initial={{ opacity: 0, x: -30 }}
+          initial={{ opacity: 0, x: isMobile ? 0 : -30 }}
           animate={inView ? { opacity: 1, x: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.1 }}
           className="text-3xl font-bold from-blue-600 to-cyan-500 dark:from-blue-400 dark:to-cyan-300 bg-clip-text text-transparent bg-linear-to-r"
@@ -58,7 +60,7 @@ export default function LatestCertificates({
         </motion.h2>
 
         <motion.div
-          initial={{ opacity: 0, x: 30 }}
+          initial={{ opacity: 0, x: isMobile ? 0 : 30 }}
           animate={inView ? { opacity: 1, x: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
@@ -78,7 +80,10 @@ export default function LatestCertificates({
       {/* Certificates Grid */}
       <div className="grid md:grid-cols-3 gap-6 relative">
         {certificates.map((cert, idx) => {
+          // Mobile: simple fade in
+          // Desktop: complex animation
           const getInitialPosition = () => {
+            if (isMobile) return {};
             if (idx === 0) return { x: -30, y: 30 };
             if (idx === 1) return { y: -20 };
             return { x: 30, y: 30 };
@@ -90,13 +95,19 @@ export default function LatestCertificates({
               initial={{ opacity: 0, ...getInitialPosition() }}
               animate={inView ? { opacity: 1, x: 0, y: 0 } : {}}
               transition={{
-                duration: 0.7,
-                delay: 0.3 + idx * 0.12,
+                duration: isMobile ? 0.5 : 0.7,
+                delay: 0.3 + idx * (isMobile ? 0.1 : 0.12),
                 ease: "easeOut",
               }}
               className="relative"
               style={{
-                marginTop: idx === 0 ? "1rem" : idx === 1 ? "0" : "1rem",
+                marginTop: isMobile
+                  ? 0
+                  : idx === 0
+                  ? "1rem"
+                  : idx === 1
+                  ? "0"
+                  : "1rem",
               }}
             >
               <Card
@@ -114,9 +125,9 @@ export default function LatestCertificates({
                   <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
                   <motion.div
-                    initial={{ opacity: 0, y: -10 }}
+                    initial={{ opacity: 0, y: isMobile ? 0 : -10 }}
                     animate={inView ? { opacity: 1, y: 0 } : {}}
-                    transition={{ delay: 0.6 + idx * 0.12 }}
+                    transition={{ delay: 0.6 + idx * (isMobile ? 0.1 : 0.12) }}
                     className="absolute top-3 right-3 px-3 py-1 bg-blue-500/90 dark:bg-blue-600/90 backdrop-blur-sm text-white text-xs font-bold rounded-full"
                   >
                     {cert.year}
@@ -124,7 +135,8 @@ export default function LatestCertificates({
                 </div>
 
                 <div className="p-4 space-y-2 relative">
-                  {idx === 0 && (
+                  {/* Decorative blob - disable on mobile */}
+                  {!isMobile && idx === 0 && (
                     <motion.div
                       initial={{ opacity: 0, scale: 0 }}
                       animate={inView ? { opacity: 0.3, scale: 1 } : {}}
@@ -150,7 +162,7 @@ export default function LatestCertificates({
       {/* Decorative blob */}
       <motion.div
         initial={{ opacity: 0, scale: 0.8 }}
-        animate={inView ? { opacity: 0.08, scale: 1 } : {}}
+        animate={inView ? { opacity: isMobile ? 0.05 : 0.08, scale: 1 } : {}}
         transition={{ duration: 1, delay: 0.7 }}
         className="absolute -bottom-16 -left-24 w-72 h-72 bg-linear-to-tr from-blue-500 to-cyan-400 rounded-full blur-3xl pointer-events-none"
       />

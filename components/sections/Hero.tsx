@@ -1,4 +1,5 @@
 // components\sections\Hero.tsx
+// components/sections/Hero.tsx
 "use client";
 
 import { ArrowRight, Download } from "lucide-react";
@@ -8,13 +9,14 @@ import Button from "@/components/ui/Button";
 import { motion } from "framer-motion";
 import { TypeAnimation } from "react-type-animation";
 import { Profile } from "@/lib/contentful/types";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 interface HeroProps {
   profile: Profile | null;
 }
 
 export default function Hero({ profile }: HeroProps) {
-  // Fallback values if profile is null
+  const isMobile = useIsMobile();
   const photoUrl = profile?.photo || "/images/avatarful.webp";
   const resumeUrl = profile?.resume;
 
@@ -64,34 +66,34 @@ export default function Hero({ profile }: HeroProps) {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Left Text */}
             <motion.div
-              initial={{ opacity: 0, x: -50 }}
+              initial={{ opacity: 0, x: isMobile ? 0 : -50 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, ease: "easeOut" }}
+              transition={{ duration: isMobile ? 0.5 : 0.8, ease: "easeOut" }}
               className="space-y-6"
             >
               <div className="space-y-4">
                 <motion.h2
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: isMobile ? 0 : 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.2, duration: 0.6 }}
+                  transition={{ delay: 0.2, duration: isMobile ? 0.4 : 0.6 }}
                   className="text-lg md:text-xl from-blue-600 to-cyan-500 dark:from-blue-400 dark:to-cyan-300 bg-clip-text text-transparent bg-linear-to-r font-semibold"
                 >
                   Hi, I&apos;m
                 </motion.h2>
 
                 <motion.h1
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: isMobile ? 0 : 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.3, duration: 0.6 }}
+                  transition={{ delay: 0.3, duration: isMobile ? 0.4 : 0.6 }}
                   className="text-4xl md:text-6xl font-bold from-blue-600 to-cyan-500 dark:from-blue-400 dark:to-cyan-300 bg-clip-text text-transparent bg-linear-to-r"
                 >
                   Gabriel Nathanael
                 </motion.h1>
 
                 <motion.div
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: isMobile ? 0 : 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.4, duration: 0.6 }}
+                  transition={{ delay: 0.4, duration: isMobile ? 0.4 : 0.6 }}
                   className="text-2xl md:text-3xl font-semibold text-neutral-700 dark:text-neutral-200 min-h-12"
                 >
                   <TypeAnimation
@@ -112,9 +114,9 @@ export default function Hero({ profile }: HeroProps) {
               </div>
 
               <motion.p
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: isMobile ? 0 : 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5, duration: 0.6 }}
+                transition={{ delay: 0.5, duration: isMobile ? 0.4 : 0.6 }}
                 className="text-lg text-neutral-600 dark:text-neutral-400 max-w-xl"
               >
                 Full-stack developer with a passion for building reliable,
@@ -124,9 +126,9 @@ export default function Hero({ profile }: HeroProps) {
               </motion.p>
 
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: isMobile ? 0 : 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.6, duration: 0.6 }}
+                transition={{ delay: 0.6, duration: isMobile ? 0.4 : 0.6 }}
                 className="flex flex-wrap gap-4 pt-4 justify-center lg:justify-start"
               >
                 <Link href="/projects">
@@ -152,9 +154,13 @@ export default function Hero({ profile }: HeroProps) {
 
             {/* Right Image */}
             <motion.div
-              initial={{ opacity: 0, x: 50 }}
+              initial={{ opacity: 0, x: isMobile ? 0 : 50 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, ease: "easeOut", delay: 0.3 }}
+              transition={{
+                duration: isMobile ? 0.5 : 0.8,
+                ease: "easeOut",
+                delay: isMobile ? 0.2 : 0.3,
+              }}
               className="relative"
             >
               <div className="relative w-full aspect-square max-w-sm mx-auto">
@@ -173,25 +179,37 @@ export default function Hero({ profile }: HeroProps) {
                   />
                 </div>
 
-                {/* Floating Lights */}
-                <motion.div
-                  animate={{ y: [0, -20, 0] }}
-                  transition={{
-                    duration: 3,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
-                  className="absolute -top-4 -right-4 w-16 h-16 bg-blue-500 rounded-full blur-2xl opacity-40 dark:opacity-30"
-                />
-                <motion.div
-                  animate={{ y: [0, 20, 0] }}
-                  transition={{
-                    duration: 4,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
-                  className="absolute -bottom-4 -left-4 w-20 h-20 bg-violet-500 rounded-full blur-2xl opacity-40 dark:opacity-30"
-                />
+                {/* Floating Lights - disable animation on mobile */}
+                {!isMobile && (
+                  <>
+                    <motion.div
+                      animate={{ y: [0, -20, 0] }}
+                      transition={{
+                        duration: 3,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                      }}
+                      className="absolute -top-4 -right-4 w-16 h-16 bg-blue-500 rounded-full blur-2xl opacity-40 dark:opacity-30"
+                    />
+                    <motion.div
+                      animate={{ y: [0, 20, 0] }}
+                      transition={{
+                        duration: 4,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                      }}
+                      className="absolute -bottom-4 -left-4 w-20 h-20 bg-violet-500 rounded-full blur-2xl opacity-40 dark:opacity-30"
+                    />
+                  </>
+                )}
+
+                {/* Static lights for mobile */}
+                {isMobile && (
+                  <>
+                    <div className="absolute -top-4 -right-4 w-16 h-16 bg-blue-500 rounded-full blur-2xl opacity-30 dark:opacity-20" />
+                    <div className="absolute -bottom-4 -left-4 w-20 h-20 bg-violet-500 rounded-full blur-2xl opacity-30 dark:opacity-20" />
+                  </>
+                )}
               </div>
             </motion.div>
           </div>

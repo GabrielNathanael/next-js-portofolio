@@ -1,4 +1,5 @@
 // components\sections\FeaturedProjects.tsx
+// components/sections/FeaturedProjects.tsx
 "use client";
 
 import { useState } from "react";
@@ -11,6 +12,7 @@ import ProjectModal from "@/components/ui/ProjectModal";
 import { Project } from "@/lib/contentful/types";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 interface FeaturedProjectsProps {
   projects: Project[];
@@ -22,12 +24,11 @@ export default function FeaturedProjects({ projects }: FeaturedProjectsProps) {
     threshold: 0.1,
   });
 
+  const isMobile = useIsMobile();
   const [selectedProject, setSelectedProject] = useState<string | null>(null);
 
-  // Get selected project object
   const currentProject = projects.find((p) => p.id === selectedProject) || null;
 
-  // Helper function for project type badge
   const getProjectTypeBadge = (type: "Indie" | "Collab") => {
     const config = {
       Indie: {
@@ -65,7 +66,7 @@ export default function FeaturedProjects({ projects }: FeaturedProjectsProps) {
       {/* Decorative floating blob - left side */}
       <motion.div
         initial={{ opacity: 0, scale: 0.8 }}
-        animate={inView ? { opacity: 0.08, scale: 1 } : {}}
+        animate={inView ? { opacity: isMobile ? 0.05 : 0.08, scale: 1 } : {}}
         transition={{ duration: 1, delay: 0.3 }}
         className="absolute -top-2 -left-16 w-56 h-56 bg-linear-to-br from-cyan-400 to-blue-500 rounded-full blur-2xl pointer-events-none"
       />
@@ -73,7 +74,7 @@ export default function FeaturedProjects({ projects }: FeaturedProjectsProps) {
       {/* Header with decorative elements */}
       <div className="flex items-center justify-between relative">
         <motion.h2
-          initial={{ opacity: 0, x: -30 }}
+          initial={{ opacity: 0, x: isMobile ? 0 : -30 }}
           animate={inView ? { opacity: 1, x: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.1 }}
           className="text-3xl font-bold from-blue-600 to-cyan-500 dark:from-blue-400 dark:to-cyan-300 bg-clip-text text-transparent bg-linear-to-r"
@@ -82,7 +83,7 @@ export default function FeaturedProjects({ projects }: FeaturedProjectsProps) {
         </motion.h2>
 
         <motion.div
-          initial={{ opacity: 0, x: 30 }}
+          initial={{ opacity: 0, x: isMobile ? 0 : 30 }}
           animate={inView ? { opacity: 1, x: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
@@ -98,14 +99,15 @@ export default function FeaturedProjects({ projects }: FeaturedProjectsProps) {
       {/* Projects Grid with staggered positioning */}
       <div className="grid md:grid-cols-3 gap-6 relative">
         {projects.map((project, idx) => {
-          // Horizontal, Vertical, Horizontal pattern
           const isVertical = idx === 1;
 
-          // Different animation directions based on position
+          // Mobile: simple fade in
+          // Desktop: complex animation
           const getInitialPosition = () => {
-            if (idx === 0) return { x: -40, y: 20 }; // left bottom
-            if (idx === 1) return { x: 0, y: -40 }; // center top
-            return { x: 40, y: 20 }; // right bottom
+            if (isMobile) return {};
+            if (idx === 0) return { x: -40, y: 20 };
+            if (idx === 1) return { x: 0, y: -40 };
+            return { x: 40, y: 20 };
           };
 
           return (
@@ -114,14 +116,13 @@ export default function FeaturedProjects({ projects }: FeaturedProjectsProps) {
               initial={{ opacity: 0, ...getInitialPosition() }}
               animate={inView ? { opacity: 1, x: 0, y: 0 } : {}}
               transition={{
-                duration: 0.7,
-                delay: 0.3 + idx * 0.15,
+                duration: isMobile ? 0.5 : 0.7,
+                delay: 0.3 + idx * (isMobile ? 0.1 : 0.15),
                 ease: "easeOut",
               }}
               className="relative"
               style={{
-                // Subtle vertical offset for visual interest
-                marginTop: idx === 1 ? "0" : idx === 0 ? "1.5rem" : "1.5rem",
+                marginTop: isMobile ? 0 : idx === 1 ? "0" : "1.5rem",
               }}
             >
               <Card
@@ -133,7 +134,6 @@ export default function FeaturedProjects({ projects }: FeaturedProjectsProps) {
                     isVertical ? "aspect-3/4" : "aspect-4/3"
                   } overflow-hidden`}
                 >
-                  {/* Project Type Badge */}
                   {getProjectTypeBadge(project.projectType)}
 
                   <Image
@@ -148,8 +148,8 @@ export default function FeaturedProjects({ projects }: FeaturedProjectsProps) {
                 </div>
 
                 <div className="p-6 space-y-3 relative">
-                  {/* Subtle decorative line on card body */}
-                  {idx === 1 && (
+                  {/* Subtle decorative line on card body - disable on mobile */}
+                  {!isMobile && idx === 1 && (
                     <motion.div
                       initial={{ width: 0, opacity: 0 }}
                       animate={inView ? { width: "2rem", opacity: 1 } : {}}
@@ -181,16 +181,18 @@ export default function FeaturedProjects({ projects }: FeaturedProjectsProps) {
                   </div>
                 </div>
 
-                {/* Subtle glow on hover - different per card */}
-                <motion.div
-                  className={`absolute ${
-                    idx === 0
-                      ? "-bottom-8 -left-8"
-                      : idx === 1
-                      ? "-top-8 -right-8"
-                      : "-bottom-8 -right-8"
-                  } w-24 h-24 bg-linear-to-br from-cyan-400 to-blue-500 rounded-full blur-2xl opacity-0 group-hover:opacity-30 transition-opacity duration-500`}
-                />
+                {/* Subtle glow on hover - disable on mobile */}
+                {!isMobile && (
+                  <motion.div
+                    className={`absolute ${
+                      idx === 0
+                        ? "-bottom-8 -left-8"
+                        : idx === 1
+                        ? "-top-8 -right-8"
+                        : "-bottom-8 -right-8"
+                    } w-24 h-24 bg-linear-to-br from-cyan-400 to-blue-500 rounded-full blur-2xl opacity-0 group-hover:opacity-30 transition-opacity duration-500`}
+                  />
+                )}
               </Card>
             </motion.div>
           );
@@ -200,7 +202,7 @@ export default function FeaturedProjects({ projects }: FeaturedProjectsProps) {
       {/* Bottom right decorative accent blob */}
       <motion.div
         initial={{ opacity: 0, scale: 0.8 }}
-        animate={inView ? { opacity: 0.1, scale: 1 } : {}}
+        animate={inView ? { opacity: isMobile ? 0.05 : 0.1, scale: 1 } : {}}
         transition={{ duration: 1, delay: 0.6 }}
         className="absolute -bottom-20 -right-20 w-64 h-64 bg-linear-to-tl from-blue-500 to-cyan-400 rounded-full blur-3xl pointer-events-none"
       />
