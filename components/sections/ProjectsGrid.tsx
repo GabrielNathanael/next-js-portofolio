@@ -1,3 +1,4 @@
+// components\sections\ProjectsGrid.tsx
 // components/sections/ProjectsGrid.tsx
 "use client";
 
@@ -206,7 +207,7 @@ export default function ProjectsGrid({
                   </div>
                   <div className="p-6 space-y-3">
                     <div className="flex items-start justify-between gap-3">
-                      <h3 className="text-xl font-bold dark:text-neutral-200 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors flex-1 line-clamp-2">
+                      <h3 className="text-xl font-bold text-neutral-900 dark:text-neutral-200 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors flex-1 line-clamp-2">
                         {project.title}
                       </h3>
                       <span className="text-sm font-medium text-neutral-500 dark:text-neutral-400 shrink-0">
@@ -226,7 +227,7 @@ export default function ProjectsGrid({
                         </span>
                       ))}
                       {project.tags.length > 3 && (
-                        <span className="px-3 py-1 text-xs font-medium bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400 rounded-full">
+                        <span className="px-3 py-1 text-xs font-medium bg-gray-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400 rounded-full">
                           +{project.tags.length - 3}
                         </span>
                       )}

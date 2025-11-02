@@ -1,3 +1,4 @@
+// components\ui\ThemeToggle.tsx
 "use client";
 
 import { Moon, Sun } from "lucide-react";
@@ -27,7 +28,7 @@ export default function ThemeToggle() {
   return (
     <button
       onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-      className="p-2 rounded-lg bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-all duration-200"
+      className="p-2 rounded-lg  hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-all duration-200"
       aria-label="Toggle theme"
     >
       {theme === "dark" ? (

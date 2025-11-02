@@ -1,4 +1,4 @@
-// app/page.tsx
+// app\page.tsx
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import Hero from "@/components/sections/Hero";
@@ -114,7 +114,7 @@ export default async function Home() {
           <Hero profile={profile} />
 
           {/* Main Content */}
-          <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 space-y-12">
+          <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 space-y-32 md:space-y-12">
             {/* About Section - Full Width */}
             <div className="w-full">
               <About />

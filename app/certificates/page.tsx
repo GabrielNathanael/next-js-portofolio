@@ -1,3 +1,4 @@
+// app\certificates\page.tsx
 // app/certificates/page.tsx
 import CertificatesGrid from "@/components/sections/CertificatesGrid";
 import Navbar from "@/components/layout/Navbar";
@@ -77,7 +78,7 @@ export default async function CertificatesPage() {
         <main className="grow pt-20 pb-2">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
             <div className="space-y-3">
-              <h1 className="text-4xl md:text-5xl font-bold dark:text-neutral-100">
+              <h1 className="text-4xl md:text-5xl font-bold text-neutral-900 dark:text-neutral-100">
                 Certificates
               </h1>
               <p className="text-lg text-neutral-600 dark:text-neutral-400 max-w-2xl">

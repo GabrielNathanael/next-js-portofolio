@@ -1,3 +1,4 @@
+// components\sections\TechStack.tsx
 "use client";
 import Card from "@/components/ui/Card";
 import { techStack } from "@/lib/data/techstack";
@@ -69,7 +70,7 @@ export default function TechStack() {
               gradientColor={
                 theme === "dark"
                   ? "rgba(10, 10, 10, 1)"
-                  : "rgba(255, 255, 255, 1)"
+                  : "rgba(248, 250, 252, 1)"
               }
               gradientWidth={50}
               direction={rowIdx % 2 === 0 ? "left" : "right"}

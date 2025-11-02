@@ -44,6 +44,7 @@ export interface CertificateFields {
   year: number;
   image?: Asset;
   sortOrder?: number;
+  highlight?: boolean;
 }
 
 export interface CertificateSkeleton {
@@ -122,6 +123,7 @@ export interface Certificate {
   year: string;
   image: string;
   sortOrder: number;
+  highlight: boolean;
 }
 
 export interface Experience {

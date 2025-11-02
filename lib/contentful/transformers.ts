@@ -72,6 +72,7 @@ export const transformCertificate = (
     year: String(fields.year as number), // Convert Integer → String
     image: getImageUrl(fields.image as Asset | undefined),
     sortOrder: (fields.sortOrder as number | undefined) || 0,
+    highlight: (fields.highlight as boolean | undefined) || false,
   };
 };
 

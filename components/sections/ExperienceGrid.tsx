@@ -1,5 +1,4 @@
 // components\sections\ExperienceGrid.tsx
-// components/sections/ExperienceGrid.tsx
 "use client";
 
 import { useState, useMemo, useEffect, useRef } from "react";
@@ -227,7 +226,7 @@ export default function ExperienceGrid({ experiences }: ExperienceGridProps) {
       {displayedExperiences.length > 0 ? (
         <div className="relative">
           {/* Timeline Line */}
-          <div className="absolute left-[11px] top-0 bottom-0 w-0.5 bg-neutral-200 dark:bg-neutral-700" />
+          <div className="absolute left-[11px] top-0 bottom-0 w-0.5 bg-gray-200 dark:bg-neutral-700" />
 
           {/* Experience Items */}
           <div className="space-y-8">
@@ -254,7 +253,7 @@ export default function ExperienceGrid({ experiences }: ExperienceGridProps) {
                         <div className="absolute inset-0 w-6 h-6 rounded-full bg-blue-600 dark:bg-blue-500 animate-ping opacity-75" />
                       </div>
                     ) : (
-                      <div className="w-6 h-6 rounded-full border-2 border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-800" />
+                      <div className="w-6 h-6 rounded-full border-2 border-gray-300 dark:border-neutral-600 bg-white dark:bg-neutral-800" />
                     )}
                   </div>
 
@@ -368,7 +367,7 @@ export default function ExperienceGrid({ experiences }: ExperienceGridProps) {
                                     {exp.technologies.map((tech) => (
                                       <span
                                         key={tech}
-                                        className="px-3 py-1 text-sm font-medium bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 rounded-full"
+                                        className="px-3 py-1 text-sm font-medium bg-gray-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 rounded-full"
                                       >
                                         {tech}
                                       </span>
@@ -386,7 +385,7 @@ export default function ExperienceGrid({ experiences }: ExperienceGridProps) {
                                       {exp.tools.map((tool) => (
                                         <span
                                           key={tool}
-                                          className="px-3 py-1 text-sm font-medium bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 rounded-full"
+                                          className="px-3 py-1 text-sm font-medium bg-gray-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 rounded-full"
                                         >
                                           {tool}
                                         </span>
@@ -411,7 +410,7 @@ export default function ExperienceGrid({ experiences }: ExperienceGridProps) {
                               {exp.technologies.map((tech) => (
                                 <span
                                   key={tech}
-                                  className="px-3 py-1 text-sm font-medium bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 rounded-full"
+                                  className="px-3 py-1 text-sm font-medium bg-gray-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 rounded-full"
                                 >
                                   {tech}
                                 </span>
@@ -434,7 +433,7 @@ export default function ExperienceGrid({ experiences }: ExperienceGridProps) {
                               {exp.tools.map((tool) => (
                                 <span
                                   key={tool}
-                                  className="px-3 py-1 text-sm font-medium bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 rounded-full"
+                                  className="px-3 py-1 text-sm font-medium bg-gray-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 rounded-full"
                                 >
                                   {tool}
                                 </span>
@@ -463,7 +462,7 @@ export default function ExperienceGrid({ experiences }: ExperienceGridProps) {
           </p>
           <button
             onClick={clearAllFilters}
-            className="mt-4 px-6 py-2 rounded-lg bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 text-neutral-700 dark:text-neutral-300 font-medium transition-colors"
+            className="mt-4 px-6 py-2 rounded-lg bg-gray-100 dark:bg-neutral-800 hover:bg-gray-200 dark:hover:bg-neutral-700 text-neutral-700 dark:text-neutral-300 font-medium transition-colors"
           >
             Clear Filters
           </button>

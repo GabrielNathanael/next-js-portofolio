@@ -115,14 +115,30 @@ export async function getFeaturedProjects(): Promise<Project[]> {
 
 /**
  * Get Latest Certificates (for homepage)
+ * Prioritizes highlighted certificates, then fills with non-highlighted
  * Sorts by year descending, takes top 3
  */
 export async function getLatestCertificates(): Promise<Certificate[]> {
   const certificates = await getCertificates();
 
-  return certificates
-    .sort((a, b) => Number(b.year) - Number(a.year))
-    .slice(0, 3);
+  // Separate highlighted and non-highlighted certificates
+  const highlighted = certificates
+    .filter((c) => c.highlight)
+    .sort((a, b) => Number(b.year) - Number(a.year));
+
+  const nonHighlighted = certificates
+    .filter((c) => !c.highlight)
+    .sort((a, b) => Number(b.year) - Number(a.year));
+
+  // Combine: take highlighted first, then fill with non-highlighted up to 3 total
+  const result = [...highlighted];
+
+  if (result.length < 3) {
+    const remaining = 3 - result.length;
+    result.push(...nonHighlighted.slice(0, remaining));
+  }
+
+  return result.slice(0, 3);
 }
 
 /**

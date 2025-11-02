@@ -1,5 +1,4 @@
 // components\sections\CertificatesGrid.tsx
-// components/sections/CertificatesGrid.tsx
 "use client";
 
 import { useState, useMemo, useEffect, useRef } from "react";
@@ -155,7 +154,7 @@ export default function CertificatesGrid({
                     <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   </div>
                   <div className="p-5 space-y-3">
-                    <h3 className="text-lg font-bold dark:text-neutral-200 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors line-clamp-2">
+                    <h3 className="text-lg font-bold text-neutral-900 dark:text-neutral-200 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors line-clamp-1">
                       {cert.title}
                     </h3>
                     <div className="flex items-center justify-between gap-3">
@@ -200,7 +199,7 @@ export default function CertificatesGrid({
               setCurrentPage(1);
               prevPageRef.current = 0; // Reset to prevent scroll
             }}
-            className="mt-4 px-6 py-2 rounded-lg bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 text-neutral-700 dark:text-neutral-300 font-medium transition-colors"
+            className="mt-4 px-6 py-2 rounded-lg bg-gray-100 dark:bg-neutral-800 hover:bg-gray-200 dark:hover:bg-neutral-700 text-neutral-700 dark:text-neutral-300 font-medium transition-colors"
           >
             Clear Filters
           </button>

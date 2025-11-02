@@ -1,11 +1,12 @@
+// app\layout.tsx
 // app/layout.tsx
 import type { Metadata, Viewport } from "next";
-import { Manrope } from "next/font/google";
+import { Urbanist } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import { siteConfig } from "@/lib/seo/config";
 
-const manrope = Manrope({
+const urbanist = Urbanist({
   subsets: ["latin"],
   display: "swap",
 });
@@ -56,7 +57,7 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={manrope.className}>
+      <body className={urbanist.className}>
         <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>

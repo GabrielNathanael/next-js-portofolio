@@ -78,7 +78,7 @@ export default function RecentExperience({
       case "Freelance":
         return "bg-cyan-100 dark:bg-cyan-900/40 text-cyan-700 dark:text-cyan-300";
       default:
-        return "bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300";
+        return "bg-gray-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300";
     }
   };
 
@@ -198,7 +198,7 @@ export default function RecentExperience({
               </div>
 
               {/* Divider */}
-              <div className="border-t border-neutral-200 dark:border-neutral-700" />
+              <div className="border-t border-gray-200 dark:border-neutral-700" />
 
               {/* Description */}
               <p className="text-sm md:text-base text-neutral-600 dark:text-neutral-300 leading-relaxed">
@@ -276,7 +276,7 @@ export default function RecentExperience({
                               {experience.tools.map((tool) => (
                                 <span
                                   key={tool}
-                                  className="px-3 py-1.5 text-sm font-medium bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 rounded-lg hover:scale-105 transition-transform"
+                                  className="px-3 py-1.5 text-sm font-medium bg-gray-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 rounded-lg hover:scale-105 transition-transform"
                                 >
                                   {tool}
                                 </span>
@@ -324,7 +324,7 @@ export default function RecentExperience({
                       {experience.tools.map((tool) => (
                         <span
                           key={tool}
-                          className="px-3 py-1.5 text-sm font-medium bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 rounded-lg hover:scale-105 transition-transform"
+                          className="px-3 py-1.5 text-sm font-medium bg-gray-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 rounded-lg hover:scale-105 transition-transform"
                         >
                           {tool}
                         </span>

@@ -1,3 +1,4 @@
+// app\projects\page.tsx
 // app/projects/page.tsx
 import ProjectsGrid from "@/components/sections/ProjectsGrid";
 import Navbar from "@/components/layout/Navbar";
@@ -80,7 +81,7 @@ export default async function ProjectsPage() {
         <div className="grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-2">
           {/* Hero Section */}
           <div className="mb-12 space-y-4">
-            <h1 className="text-4xl md:text-5xl font-bold dark:text-neutral-100">
+            <h1 className="text-4xl md:text-5xl font-bold text-neutral-900 dark:text-neutral-100">
               All Projects
             </h1>
             <p className="text-lg text-neutral-600 dark:text-neutral-400 max-w-2xl">

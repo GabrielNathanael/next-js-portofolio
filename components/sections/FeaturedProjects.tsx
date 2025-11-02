@@ -158,7 +158,7 @@ export default function FeaturedProjects({ projects }: FeaturedProjectsProps) {
                     />
                   )}
 
-                  <h3 className="text-xl font-bold text-neutral-900 dark:text-neutral-50 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                  <h3 className="text-xl font-bold text-neutral-900 dark:text-neutral-50 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors line-clamp-2">
                     {project.title}
                   </h3>
                   <p className="text-sm text-neutral-600 dark:text-neutral-300 line-clamp-2">
@@ -174,7 +174,7 @@ export default function FeaturedProjects({ projects }: FeaturedProjectsProps) {
                       </span>
                     ))}
                     {project.tags.length > 3 && (
-                      <span className="px-3 py-1 text-xs font-medium bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300 rounded-full">
+                      <span className="px-3 py-1 text-xs font-medium bg-gray-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300 rounded-full">
                         +{project.tags.length - 3}
                       </span>
                     )}

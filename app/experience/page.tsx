@@ -1,3 +1,4 @@
+// app\experience\page.tsx
 // app/experience/page.tsx
 import ExperienceGrid from "@/components/sections/ExperienceGrid";
 import Navbar from "@/components/layout/Navbar";
@@ -76,11 +77,11 @@ export default async function ExperiencePage() {
         <main className="grow pt-20 pb-2">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
             <div className="space-y-3">
-              <h1 className="text-4xl md:text-5xl font-bold dark:text-neutral-100">
+              <h1 className="text-4xl md:text-5xl font-bold text-neutral-900 dark:text-neutral-100">
                 Work Experience
               </h1>
               <p className="text-lg text-neutral-600 dark:text-neutral-400 max-w-2xl">
-                An overview of my work experience and the roles where I’ve
+                An overview of my work experience and the roles where I&apos;ve
                 applied my skills to build and deliver real-world software.
               </p>
             </div>

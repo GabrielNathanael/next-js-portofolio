@@ -54,7 +54,7 @@ export default function LatestCertificates({
           transition={{ duration: 0.6, delay: 0.1 }}
           className="text-3xl font-bold from-blue-600 to-cyan-500 dark:from-blue-400 dark:to-cyan-300 bg-clip-text text-transparent bg-linear-to-r"
         >
-          Latest Certificates
+          Highlighted Certifications
         </motion.h2>
 
         <motion.div
@@ -133,7 +133,7 @@ export default function LatestCertificates({
                     />
                   )}
 
-                  <h3 className="font-semibold text-neutral-800 dark:text-neutral-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors line-clamp-2">
+                  <h3 className="font-semibold text-neutral-800 dark:text-neutral-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors line-clamp-1">
                     {cert.title}
                   </h3>
 
