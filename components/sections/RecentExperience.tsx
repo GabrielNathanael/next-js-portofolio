@@ -16,7 +16,8 @@ import Button from "@/components/ui/Button";
 import { Experience } from "@/lib/contentful/types";
 import { motion, AnimatePresence } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 interface RecentExperienceProps {
   experience: Experience;
@@ -30,19 +31,8 @@ export default function RecentExperience({
     threshold: 0.1,
   });
 
+  const isMobile = useIsMobile();
   const [isExpanded, setIsExpanded] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
-
-  // Check if mobile
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
 
   // Format date helper
   const formatDate = (dateStr: string | null) => {
@@ -90,29 +80,31 @@ export default function RecentExperience({
       transition={{ duration: 0.6 }}
       className="space-y-6 relative"
     >
-      {/* Decorative floating blob - background accent */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={inView ? { opacity: 0.15, scale: 1 } : {}}
-        transition={{ duration: 1, delay: 0.3 }}
-        className="absolute -top-20 -right-20 w-64 h-64 bg-linear-to-br from-blue-500 to-cyan-400 rounded-full blur-3xl pointer-events-none"
-      />
+      {/* Decorative floating blob - background accent - desktop only */}
+      {!isMobile && (
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={inView ? { opacity: 0.15, scale: 1 } : {}}
+          transition={{ duration: 1, delay: 0.3 }}
+          className="absolute -top-20 -right-20 w-64 h-64 bg-linear-to-br from-blue-500 to-cyan-400 rounded-full blur-3xl pointer-events-none"
+        />
+      )}
 
       {/* Header with decorative bar */}
       <div className="flex items-center justify-between relative">
         <motion.h2
-          initial={{ opacity: 0, x: -30 }}
+          initial={{ opacity: 0, x: isMobile ? -20 : -30 }}
           animate={inView ? { opacity: 1, x: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.1 }}
+          transition={{ duration: isMobile ? 0.5 : 0.6, delay: 0.1 }}
           className="text-3xl font-bold from-blue-600 to-cyan-500 dark:from-blue-400 dark:to-cyan-300 bg-clip-text text-transparent bg-linear-to-r"
         >
           Work Experience
         </motion.h2>
 
         <motion.div
-          initial={{ opacity: 0, x: 30 }}
+          initial={{ opacity: 0, x: isMobile ? 20 : 30 }}
           animate={inView ? { opacity: 1, x: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.2 }}
+          transition={{ duration: isMobile ? 0.5 : 0.6, delay: 0.2 }}
         >
           <Link href="/experience">
             <Button variant="ghost" size="sm" className="group">
@@ -126,16 +118,28 @@ export default function RecentExperience({
       {/* Recent Experience Card */}
       <div className="relative">
         <motion.div
-          initial={{ opacity: 0, x: -40, y: 20 }}
+          initial={{
+            opacity: 0,
+            x: isMobile ? -15 : -40,
+            y: isMobile ? 10 : 20,
+          }}
           animate={inView ? { opacity: 1, x: 0, y: 0 } : {}}
-          transition={{ duration: 0.7, delay: 0.3, ease: "easeOut" }}
+          transition={{
+            duration: isMobile ? 0.5 : 0.7,
+            delay: 0.3,
+            ease: "easeOut",
+          }}
         >
           <Card className="p-6 md:p-8 group relative overflow-hidden" glass>
             {/* Decorative timeline marker */}
             <motion.div
               initial={{ height: 0 }}
               animate={inView ? { height: "100%" } : {}}
-              transition={{ duration: 1, delay: 0.5, ease: "easeOut" }}
+              transition={{
+                duration: isMobile ? 0.8 : 1,
+                delay: isMobile ? 0.4 : 0.5,
+                ease: "easeOut",
+              }}
               className="absolute left-0 top-0 w-1 bg-linear-to-b from-blue-500 via-cyan-400 to-transparent"
             />
 
@@ -334,13 +338,15 @@ export default function RecentExperience({
                 )}
             </div>
 
-            {/* Bottom right decorative accent */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0 }}
-              animate={inView ? { opacity: 0.5, scale: 1 } : {}}
-              transition={{ duration: 0.8, delay: 0.7 }}
-              className="absolute -bottom-10 -right-10 w-32 h-32 bg-linear-to-tl from-cyan-400 to-blue-500 rounded-full blur-2xl"
-            />
+            {/* Bottom right decorative accent - desktop only */}
+            {!isMobile && (
+              <motion.div
+                initial={{ opacity: 0, scale: 0 }}
+                animate={inView ? { opacity: 0.5, scale: 1 } : {}}
+                transition={{ duration: 0.8, delay: 0.7 }}
+                className="absolute -bottom-10 -right-10 w-32 h-32 bg-linear-to-tl from-cyan-400 to-blue-500 rounded-full blur-2xl"
+              />
+            )}
           </Card>
         </motion.div>
       </div>

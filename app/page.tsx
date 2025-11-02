@@ -22,7 +22,7 @@ export const revalidate = 21600;
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
-    default: `${siteConfig.name} | Full Stack Web Developer`,
+    default: `${siteConfig.name} | Full Stack Developer`,
     template: `%s | ${siteConfig.name}`,
   },
   description: siteConfig.description,
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     locale: siteConfig.locale,
     alternateLocale: siteConfig.alternateLocale,
     url: siteConfig.url,
-    title: `${siteConfig.name} | Full Stack Web Developer`,
+    title: `${siteConfig.name} | Full Stack Developer`,
     description: siteConfig.description,
     siteName: siteConfig.name,
     images: [
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
         url: siteConfig.ogImage,
         width: 1200,
         height: 630,
-        alt: `${siteConfig.name} - Full Stack Web Developer`,
+        alt: `${siteConfig.name} - Full Stack Developer`,
       },
     ],
   },
@@ -53,7 +53,7 @@ export const metadata: Metadata = {
   // Twitter Card
   twitter: {
     card: "summary_large_image",
-    title: `${siteConfig.name} | Full Stack Web Developer`,
+    title: `${siteConfig.name} | Full Stack Developer`,
     description: siteConfig.description,
     images: [siteConfig.ogImage],
     creator: "@gabrielnathanaelp",

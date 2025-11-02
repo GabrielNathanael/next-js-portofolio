@@ -39,10 +39,28 @@ export default function About() {
 
   return (
     <div
-      className="min-h-screen bg-white dark:bg-neutral-950 py-20 px-4 sm:px-6 lg:px-8 mt-4"
+      className="min-h-screen bg-white dark:bg-neutral-950 py-20 px-4 sm:px-6 lg:px-8 mt-4 relative"
       ref={ref}
     >
-      <div className="max-w-7xl mx-auto">
+      {/* Decorative blobs - desktop only */}
+      {!isMobile && (
+        <>
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={inView ? { opacity: 0.06, scale: 1 } : {}}
+            transition={{ duration: 1, delay: 0.3 }}
+            className="absolute -top-40 -left-40 w-96 h-96 bg-linear-to-br from-blue-400 to-cyan-500 rounded-full blur-3xl pointer-events-none"
+          />
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={inView ? { opacity: 0.06, scale: 1 } : {}}
+            transition={{ duration: 1, delay: 0.5 }}
+            className="absolute -bottom-40 -right-40 w-96 h-96 bg-linear-to-tl from-cyan-400 to-blue-500 rounded-full blur-3xl pointer-events-none"
+          />
+        </>
+      )}
+
+      <div className="max-w-7xl mx-auto relative z-10">
         {/* Grid Container */}
         <div className="grid grid-cols-12 gap-6 lg:gap-8">
           {/* About Me Title - Slide from Left */}

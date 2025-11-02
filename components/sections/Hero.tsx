@@ -164,8 +164,10 @@ export default function Hero({ profile }: HeroProps) {
               className="relative"
             >
               <div className="relative w-full aspect-square max-w-sm mx-auto">
-                {/* Gradient Glow */}
-                <div className="absolute inset-0 bg-linear-to-br from-blue-500 via-violet-500 to-purple-500 rounded-full blur-3xl opacity-30 animate-pulse dark:opacity-20" />
+                {/* Gradient Glow - desktop only */}
+                {!isMobile && (
+                  <div className="absolute inset-0 bg-linear-to-br from-blue-500 via-violet-500 to-purple-500 rounded-full blur-3xl opacity-30 animate-pulse dark:opacity-20" />
+                )}
 
                 {/* Image */}
                 <div className="relative w-full h-full rounded-full overflow-hidden border-4 border-white dark:border-neutral-800 shadow-2xl">

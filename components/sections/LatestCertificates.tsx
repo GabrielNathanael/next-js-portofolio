@@ -40,13 +40,15 @@ export default function LatestCertificates({
       transition={{ duration: 0.6 }}
       className="space-y-6 relative"
     >
-      {/* Decorative floating blob - right side */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={inView ? { opacity: isMobile ? 0.05 : 0.1, scale: 1 } : {}}
-        transition={{ duration: 1, delay: 0.3 }}
-        className="absolute -top-24 -right-32 w-96 h-96 bg-linear-to-bl from-blue-400 via-cyan-400 to-blue-500 rounded-full blur-3xl pointer-events-none"
-      />
+      {/* Decorative floating blob - right side - desktop only */}
+      {!isMobile && (
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={inView ? { opacity: 0.1, scale: 1 } : {}}
+          transition={{ duration: 1, delay: 0.3 }}
+          className="absolute -top-24 -right-32 w-96 h-96 bg-linear-to-bl from-blue-400 via-cyan-400 to-blue-500 rounded-full blur-3xl pointer-events-none"
+        />
+      )}
 
       {/* Header */}
       <div className="flex items-center justify-between relative">
@@ -159,13 +161,15 @@ export default function LatestCertificates({
         })}
       </div>
 
-      {/* Decorative blob */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={inView ? { opacity: isMobile ? 0.05 : 0.08, scale: 1 } : {}}
-        transition={{ duration: 1, delay: 0.7 }}
-        className="absolute -bottom-16 -left-24 w-72 h-72 bg-linear-to-tr from-blue-500 to-cyan-400 rounded-full blur-3xl pointer-events-none"
-      />
+      {/* Decorative blob - desktop only */}
+      {!isMobile && (
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={inView ? { opacity: 0.08, scale: 1 } : {}}
+          transition={{ duration: 1, delay: 0.7 }}
+          className="absolute -bottom-16 -left-24 w-72 h-72 bg-linear-to-tr from-blue-500 to-cyan-400 rounded-full blur-3xl pointer-events-none"
+        />
+      )}
 
       {/* Certificate Modal */}
       <CertificateModal
