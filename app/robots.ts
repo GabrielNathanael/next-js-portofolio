@@ -1,4 +1,3 @@
-// app/robots.ts
 import { MetadataRoute } from "next";
 import { siteConfig } from "@/lib/seo/config";
 
@@ -12,6 +11,5 @@ export default function robots(): MetadataRoute.Robots {
       },
     ],
     sitemap: `${siteConfig.url}/sitemap.xml`,
-    host: siteConfig.url,
   };
 }

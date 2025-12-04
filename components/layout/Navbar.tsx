@@ -10,7 +10,7 @@ const navLinks = [
   { href: "/", label: "Home", icon: Home },
   { href: "/projects", label: "Projects", icon: FolderOpen },
   { href: "/certificates", label: "Certificates", icon: Award },
-  { href: "/experience", label: "Experience", icon: Briefcase },
+  { href: "/experiences", label: "Experiences", icon: Briefcase },
 ];
 
 export default function Navbar() {

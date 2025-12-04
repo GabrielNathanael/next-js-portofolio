@@ -73,6 +73,7 @@ export interface ExperienceFields {
   technologies?: string[];
   tools?: string[];
   responsibilities?: string[];
+  projectWebsite?: string[];
 }
 
 export interface ExperienceSkeleton {
@@ -145,4 +146,5 @@ export interface Experience {
   technologies: string[];
   tools?: string[];
   responsibilities?: string[];
+  projectWebsite?: Array<{ title: string; url: string }>;
 }

@@ -65,7 +65,7 @@ export default function TechStack() {
           >
             <Marquee
               speed={70}
-              gradient={true}
+              gradient={false}
               gradientColor={
                 theme === "dark"
                   ? "rgba(10, 10, 10, 1)"

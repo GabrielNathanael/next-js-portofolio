@@ -93,6 +93,19 @@ export const transformExperience = (
     return `${year}-${month}`;
   };
 
+  const parseProjectWebsites = (
+    websites: string[] | undefined
+  ): Array<{ title: string; url: string }> => {
+    if (!websites) return [];
+
+    return websites.map((item) => {
+      const [title, url] = item.split("::");
+      return {
+        title: title?.trim() || "Website",
+        url: url?.trim() || "#",
+      };
+    });
+  };
   return {
     id: entry.sys.id,
     position: fields.position as string,
@@ -112,6 +125,9 @@ export const transformExperience = (
     technologies: (fields.technologies as string[] | undefined) || [],
     tools: fields.tools as string[] | undefined,
     responsibilities: fields.responsibilities as string[] | undefined,
+    projectWebsite: parseProjectWebsites(
+      fields.projectWebsite as string[] | undefined
+    ),
   };
 };
 

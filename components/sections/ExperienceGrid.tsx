@@ -12,7 +12,7 @@ import {
 } from "lucide-react";
 import Card from "@/components/ui/Card";
 import ExperienceFilter from "@/components/ui/ExperienceFilter";
-import { Experience } from "@/lib/data/experience";
+import { Experience } from "@/lib/contentful/types";
 
 interface ExperienceGridProps {
   experiences: Experience[];
@@ -393,6 +393,32 @@ export default function ExperienceGrid({ experiences }: ExperienceGridProps) {
                                     </div>
                                   </div>
                                 )}
+
+                                {/* Project Websites */}
+                                {exp.projectWebsite &&
+                                  exp.projectWebsite.length > 0 && (
+                                    <div className="space-y-2">
+                                      <h4 className="text-sm font-semibold text-neutral-700 dark:text-neutral-300">
+                                        Project Websites:
+                                      </h4>
+                                      <div className="flex flex-col gap-2">
+                                        {exp.projectWebsite.map(
+                                          (project, idx) => (
+                                            <a
+                                              key={idx}
+                                              href={project.url}
+                                              target="_blank"
+                                              rel="noopener noreferrer"
+                                              className="inline-flex items-center gap-2 text-sm font-medium text-blue-600 dark:text-blue-400 hover:underline w-fit"
+                                            >
+                                              <ExternalLink className="w-4 h-4" />
+                                              {project.title}
+                                            </a>
+                                          )
+                                        )}
+                                      </div>
+                                    </div>
+                                  )}
                               </motion.div>
                             )}
                           </AnimatePresence>
@@ -437,6 +463,33 @@ export default function ExperienceGrid({ experiences }: ExperienceGridProps) {
                                 >
                                   {tool}
                                 </span>
+                              ))}
+                            </div>
+                          </div>
+                        )}
+
+                      {/* Project Websites - Show on Desktop when no responsibilities */}
+                      {(!exp.responsibilities ||
+                        exp.responsibilities.length === 0) &&
+                        !isMobile &&
+                        exp.projectWebsite &&
+                        exp.projectWebsite.length > 0 && (
+                          <div className="space-y-2">
+                            <h4 className="text-sm font-semibold text-neutral-700 dark:text-neutral-300">
+                              Project Websites:
+                            </h4>
+                            <div className="flex flex-col gap-2">
+                              {exp.projectWebsite.map((project, idx) => (
+                                <a
+                                  key={idx}
+                                  href={project.url}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="inline-flex items-center gap-2 text-sm font-medium text-blue-600 dark:text-blue-400 hover:underline w-fit"
+                                >
+                                  <ExternalLink className="w-4 h-4" />
+                                  {project.title}
+                                </a>
                               ))}
                             </div>
                           </div>
