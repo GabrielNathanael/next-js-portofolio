@@ -1,4 +1,3 @@
-// app\layout.tsx
 // app/layout.tsx
 import type { Metadata, Viewport } from "next";
 import { Urbanist } from "next/font/google";
@@ -31,17 +30,32 @@ export const metadata: Metadata = {
   description: siteConfig.description,
   applicationName: siteConfig.name,
 
-  // Icons
+  // Icons - All sizes for perfect display across devices
   icons: {
     icon: [
-      { url: "/favicon.ico" },
+      { url: "/favicon.ico", sizes: "any" },
       { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
       { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
     ],
     apple: [
       { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
     ],
+    other: [
+      {
+        rel: "android-chrome",
+        url: "/android-chrome-192x192.png",
+        sizes: "192x192",
+      },
+      {
+        rel: "android-chrome",
+        url: "/android-chrome-512x512.png",
+        sizes: "512x512",
+      },
+    ],
   },
+
+  // Manifest - Next.js auto-generates from app/manifest.ts
+  // No need to specify here
 
   // Other
   formatDetection: {
@@ -63,6 +77,9 @@ export default function RootLayout({
         <link rel="preconnect" href="https://assets.ctfassets.net" />
         <link rel="dns-prefetch" href="https://images.ctfassets.net" />
         <link rel="dns-prefetch" href="https://assets.ctfassets.net" />
+
+        {/* Google Search Console Verification - Paste your meta tag here when ready */}
+        {/* Example: <meta name="google-site-verification" content="YOUR_CODE_HERE" /> */}
       </head>
       <body className={urbanist.className}>
         <ThemeProvider>{children}</ThemeProvider>

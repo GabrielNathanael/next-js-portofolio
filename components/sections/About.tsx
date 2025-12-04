@@ -146,7 +146,7 @@ export default function About() {
             }}
           >
             <p className="text-lg lg:text-[1.1rem] text-neutral-700 dark:text-neutral-300 leading-relaxed max-w-2xl">
-              Hey, I&apos;m Gabriel — a full-stack web developer and Computer
+              Hey, I&apos;m Gabriel — a full-stack developer and Computer
               Science student at Universitas Pendidikan Ganesha (Undiksha) in
               Bali. I focus on building clean, scalable web applications using
               technologies like Next.js, React, Laravel, and TypeScript.
