@@ -13,7 +13,7 @@ export const revalidate = 21600;
 export const metadata: Metadata = {
   title: "Work Experience",
   description:
-    "Professional journey of Gabriel Nathanael Purba as a Full Stack Web Developer. Explore my work experience, technical expertise, and impactful projects in web development.",
+    "Professional journey of Gabriel Nathanael Purba as a Full Stack Developer. Explore my work experience, technical expertise, and impactful projects in web development.",
   keywords: [
     ...siteConfig.keywords,
     "Work Experience",
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: `Work Experience | ${siteConfig.name}`,
     description:
-      "Professional journey and impactful projects as a Full Stack Web Developer specializing in Next.js and React.",
+      "Professional journey and impactful projects as a Full Stack Developer specializing in Next.js and React.",
     url: `${siteConfig.url}/experience`,
     type: "website",
     images: [

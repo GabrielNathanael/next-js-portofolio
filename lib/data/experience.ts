@@ -24,7 +24,7 @@ export interface Experience {
 export const experiences: Experience[] = [
   {
     id: "1",
-    position: "Full Stack Web Developer",
+    position: "Full Stack Developer",
     company: "Interlace Studies Bali",
     location: "Denpasar, Indonesia",
     startDate: "2025-08",

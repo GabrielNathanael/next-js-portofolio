@@ -106,7 +106,7 @@ export default function RecentExperience({
           animate={inView ? { opacity: 1, x: 0 } : {}}
           transition={{ duration: isMobile ? 0.5 : 0.6, delay: 0.2 }}
         >
-          <Link href="/experience">
+          <Link href="/experiences">
             <Button variant="ghost" size="sm" className="group">
               View All
               <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
@@ -288,6 +288,32 @@ export default function RecentExperience({
                             </div>
                           </div>
                         )}
+
+                        {/* Project Websites */}
+                        {experience.projectWebsite &&
+                          experience.projectWebsite.length > 0 && (
+                            <div className="space-y-2">
+                              <h4 className="text-sm font-semibold text-neutral-700 dark:text-neutral-200 uppercase tracking-wide">
+                                Project Websites
+                              </h4>
+                              <div className="flex flex-col gap-2">
+                                {experience.projectWebsite.map(
+                                  (project, idx) => (
+                                    <a
+                                      key={idx}
+                                      href={project.url}
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                      className="inline-flex items-center gap-2 text-sm font-medium text-blue-600 dark:text-blue-400 hover:underline w-fit"
+                                    >
+                                      <ExternalLink className="w-4 h-4" />
+                                      {project.title}
+                                    </a>
+                                  )
+                                )}
+                              </div>
+                            </div>
+                          )}
                       </motion.div>
                     )}
                   </AnimatePresence>
@@ -332,6 +358,33 @@ export default function RecentExperience({
                         >
                           {tool}
                         </span>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+              {/* Project Websites - Show on Desktop when no responsibilities */}
+              {(!experience.responsibilities ||
+                experience.responsibilities.length === 0) &&
+                !isMobile &&
+                experience.projectWebsite &&
+                experience.projectWebsite.length > 0 && (
+                  <div className="space-y-2">
+                    <h4 className="text-sm font-semibold text-neutral-700 dark:text-neutral-200 uppercase tracking-wide">
+                      Project Websites
+                    </h4>
+                    <div className="flex flex-col gap-2">
+                      {experience.projectWebsite.map((project, idx) => (
+                        <a
+                          key={idx}
+                          href={project.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-2 text-sm font-medium text-blue-600 dark:text-blue-400 hover:underline w-fit"
+                        >
+                          <ExternalLink className="w-4 h-4" />
+                          {project.title}
+                        </a>
                       ))}
                     </div>
                   </div>
