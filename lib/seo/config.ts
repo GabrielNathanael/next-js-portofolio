@@ -4,7 +4,7 @@ export const siteConfig = {
   shortName: "Gabriel Nathanael",
   description:
     "Full-stack web developer specializing in Next.js, React, Laravel, and TypeScript. Building scalable web applications with clean code and modern technologies.",
-  url: "https://gabrielnathanaelp.vercel.app",
+  url: "https://gabrielnathanael.vercel.app",
   ogImage: "/images/avatarful.webp",
   keywords: [
     "Gabriel Nathanael Purba",
@@ -16,6 +16,9 @@ export const siteConfig = {
     "Laravel Developer",
     "Frontend Developer",
     "Backend Developer",
+    "Jakarta Developer",
+    "Denpasar Developer",
+    "Singaraja Developer",
     "Bali Developer",
     "Indonesia Developer",
     "Undiksha",
@@ -27,7 +30,7 @@ export const siteConfig = {
   author: {
     name: "Gabriel Nathanael Purba",
     email: "gabrielnathanael81@gmail.com",
-    url: "https://gabrielnathanaelp.vercel.app",
+    url: "https://gabrielnathanael.vercel.app",
   },
   creator: "Gabriel Nathanael Purba",
   publisher: "Gabriel Nathanael Purba",
@@ -51,10 +54,14 @@ export const jsonLdWebsite = {
     "@type": "Person",
     name: siteConfig.author.name,
     email: siteConfig.author.email,
-    jobTitle: "Full Stack Web Developer",
+    jobTitle: "Full Stack Developer",
     url: siteConfig.author.url,
   },
   inLanguage: ["en", "id"],
+  publisher: {
+    "@type": "Person",
+    name: siteConfig.publisher,
+  },
 };
 
 export const jsonLdPerson = {
@@ -66,8 +73,42 @@ export const jsonLdPerson = {
   email: siteConfig.author.email,
   url: siteConfig.url,
   image: `${siteConfig.url}${siteConfig.ogImage}`,
-  jobTitle: "Full Stack Web Developer",
+  jobTitle: "Full Stack Developer",
   description: siteConfig.description,
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Jakarta",
+    addressRegion: "DKI Jakarta",
+    addressCountry: "Indonesia",
+  },
+  workLocation: [
+    {
+      "@type": "Place",
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Jakarta",
+        addressCountry: "Indonesia",
+      },
+    },
+    {
+      "@type": "Place",
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Denpasar",
+        addressRegion: "Bali",
+        addressCountry: "Indonesia",
+      },
+    },
+    {
+      "@type": "Place",
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Singaraja",
+        addressRegion: "Bali",
+        addressCountry: "Indonesia",
+      },
+    },
+  ],
   alumniOf: {
     "@type": "EducationalOrganization",
     name: "Universitas Pendidikan Ganesha",

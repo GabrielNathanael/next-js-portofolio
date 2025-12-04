@@ -1,6 +1,5 @@
 // components\sections\TechStack.tsx
 "use client";
-import Card from "@/components/ui/Card";
 import { techStack } from "@/lib/data/techstack";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
@@ -79,15 +78,16 @@ export default function TechStack() {
               {[...row, ...row].map((tech, idx) => {
                 const Icon = tech.icon;
                 return (
-                  <div key={`${tech.name}-${idx}`} className="mx-2">
-                    <Card className="p-5 md:p-6 flex flex-col items-center gap-3 text-center group cursor-pointer w-28 md:w-36 lg:w-40">
-                      <Icon
-                        className={`w-8 h-8 md:w-10 md:h-10 lg:w-12 lg:h-12 ${tech.color} group-hover:scale-110 transition-transform duration-300`}
-                      />
-                      <span className="text-xs md:text-sm font-medium text-neutral-700 dark:text-neutral-200">
-                        {tech.name}
-                      </span>
-                    </Card>
+                  <div
+                    key={`${tech.name}-${idx}`}
+                    className="mx-2 p-5 md:p-6 flex flex-col items-center gap-3 text-center group cursor-pointer w-28 md:w-36 lg:w-40 transition-all duration-300"
+                  >
+                    <Icon
+                      className={`w-8 h-8 md:w-10 md:h-10 lg:w-12 lg:h-12 ${tech.color} group-hover:scale-110 transition-transform duration-300`}
+                    />
+                    <span className="text-xs md:text-sm font-medium text-neutral-700 dark:text-neutral-200">
+                      {tech.name}
+                    </span>
                   </div>
                 );
               })}
