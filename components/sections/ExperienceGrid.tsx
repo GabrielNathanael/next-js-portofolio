@@ -144,7 +144,7 @@ export default function ExperienceGrid({ experiences }: ExperienceGridProps) {
     };
   }, [hasMore]);
 
-  // Toggle expand/collapse on mobile
+  // Toggle expand/collapse for all breakpoints
   const toggleExpand = (id: string) => {
     setExpandedItems((prev) => {
       const newSet = new Set(prev);
@@ -232,8 +232,8 @@ export default function ExperienceGrid({ experiences }: ExperienceGridProps) {
           <div className="space-y-8">
             {displayedExperiences.map((exp, idx) => {
               const isExpanded = expandedItems.has(exp.id);
-              const isMobile =
-                typeof window !== "undefined" && window.innerWidth < 768;
+              const hasDetails =
+                exp.responsibilities && exp.responsibilities.length > 0;
 
               return (
                 <motion.div
@@ -307,46 +307,46 @@ export default function ExperienceGrid({ experiences }: ExperienceGridProps) {
                         </div>
                       </div>
 
-                      {/* Description - Collapsible on Mobile */}
+                      {/* Description */}
                       <div className="space-y-2">
                         <p className="text-neutral-700 dark:text-neutral-300 leading-relaxed">
                           {exp.description}
                         </p>
 
-                        {/* Mobile Toggle Button */}
-                        {exp.responsibilities &&
-                          exp.responsibilities.length > 0 && (
-                            <button
-                              onClick={() => toggleExpand(exp.id)}
-                              className="md:hidden flex items-center gap-2 text-sm font-medium text-blue-600 dark:text-blue-400 hover:underline"
-                            >
-                              {isExpanded ? (
-                                <>
-                                  <ChevronUp className="w-4 h-4" />
-                                  Hide Details
-                                </>
-                              ) : (
-                                <>
-                                  <ChevronDown className="w-4 h-4" />
-                                  Show Details
-                                </>
-                              )}
-                            </button>
-                          )}
+                        {/* Toggle Button - Available on all breakpoints */}
+                        {hasDetails && (
+                          <button
+                            onClick={() => toggleExpand(exp.id)}
+                            className="flex items-center gap-2 text-sm font-medium text-blue-600 dark:text-blue-400 hover:underline"
+                          >
+                            {isExpanded ? (
+                              <>
+                                <ChevronUp className="w-4 h-4" />
+                                Hide Details
+                              </>
+                            ) : (
+                              <>
+                                <ChevronDown className="w-4 h-4" />
+                                Show Details
+                              </>
+                            )}
+                          </button>
+                        )}
                       </div>
 
-                      {/* Responsibilities - Show on Desktop, Collapsible on Mobile */}
-                      {exp.responsibilities &&
-                        exp.responsibilities.length > 0 && (
-                          <AnimatePresence>
-                            {(isExpanded || !isMobile) && (
-                              <motion.div
-                                initial={{ height: 0, opacity: 0 }}
-                                animate={{ height: "auto", opacity: 1 }}
-                                exit={{ height: 0, opacity: 0 }}
-                                transition={{ duration: 0.3 }}
-                                className="overflow-hidden space-y-4"
-                              >
+                      {/* Details - Collapsible on all breakpoints */}
+                      {hasDetails && (
+                        <AnimatePresence>
+                          {isExpanded && (
+                            <motion.div
+                              initial={{ height: 0, opacity: 0 }}
+                              animate={{ height: "auto", opacity: 1 }}
+                              exit={{ height: 0, opacity: 0 }}
+                              transition={{ duration: 0.3 }}
+                              className="overflow-hidden space-y-4"
+                            >
+                              {/* Responsibilities */}
+                              {exp.responsibilities && (
                                 <div className="space-y-2">
                                   <h4 className="text-sm font-semibold text-neutral-700 dark:text-neutral-300">
                                     Key Responsibilities:
@@ -357,121 +357,114 @@ export default function ExperienceGrid({ experiences }: ExperienceGridProps) {
                                     ))}
                                   </ul>
                                 </div>
+                              )}
 
-                                {/* Technologies */}
+                              {/* Technologies */}
+                              <div className="space-y-2">
+                                <h4 className="text-sm font-semibold text-neutral-700 dark:text-neutral-300">
+                                  Technologies:
+                                </h4>
+                                <div className="flex flex-wrap gap-2">
+                                  {exp.technologies.map((tech) => (
+                                    <span
+                                      key={tech}
+                                      className="px-3 py-1 text-sm font-medium bg-gray-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 rounded-full"
+                                    >
+                                      {tech}
+                                    </span>
+                                  ))}
+                                </div>
+                              </div>
+
+                              {/* Tools */}
+                              {exp.tools && exp.tools.length > 0 && (
                                 <div className="space-y-2">
                                   <h4 className="text-sm font-semibold text-neutral-700 dark:text-neutral-300">
-                                    Technologies:
+                                    Tools:
                                   </h4>
                                   <div className="flex flex-wrap gap-2">
-                                    {exp.technologies.map((tech) => (
+                                    {exp.tools.map((tool) => (
                                       <span
-                                        key={tech}
+                                        key={tool}
                                         className="px-3 py-1 text-sm font-medium bg-gray-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 rounded-full"
                                       >
-                                        {tech}
+                                        {tool}
                                       </span>
                                     ))}
                                   </div>
                                 </div>
+                              )}
 
-                                {/* Tools */}
-                                {exp.tools && exp.tools.length > 0 && (
+                              {/* Project Websites */}
+                              {exp.projectWebsite &&
+                                exp.projectWebsite.length > 0 && (
                                   <div className="space-y-2">
                                     <h4 className="text-sm font-semibold text-neutral-700 dark:text-neutral-300">
-                                      Tools:
+                                      Project Websites:
                                     </h4>
-                                    <div className="flex flex-wrap gap-2">
-                                      {exp.tools.map((tool) => (
-                                        <span
-                                          key={tool}
-                                          className="px-3 py-1 text-sm font-medium bg-gray-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 rounded-full"
-                                        >
-                                          {tool}
-                                        </span>
-                                      ))}
+                                    <div className="flex flex-col gap-2">
+                                      {exp.projectWebsite.map(
+                                        (project, idx) => (
+                                          <a
+                                            key={idx}
+                                            href={project.url}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="inline-flex items-center gap-2 text-sm font-medium text-blue-600 dark:text-blue-400 hover:underline w-fit"
+                                          >
+                                            <ExternalLink className="w-4 h-4" />
+                                            {project.title}
+                                          </a>
+                                        )
+                                      )}
                                     </div>
                                   </div>
                                 )}
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
+                      )}
 
-                                {/* Project Websites */}
-                                {exp.projectWebsite &&
-                                  exp.projectWebsite.length > 0 && (
-                                    <div className="space-y-2">
-                                      <h4 className="text-sm font-semibold text-neutral-700 dark:text-neutral-300">
-                                        Project Websites:
-                                      </h4>
-                                      <div className="flex flex-col gap-2">
-                                        {exp.projectWebsite.map(
-                                          (project, idx) => (
-                                            <a
-                                              key={idx}
-                                              href={project.url}
-                                              target="_blank"
-                                              rel="noopener noreferrer"
-                                              className="inline-flex items-center gap-2 text-sm font-medium text-blue-600 dark:text-blue-400 hover:underline w-fit"
-                                            >
-                                              <ExternalLink className="w-4 h-4" />
-                                              {project.title}
-                                            </a>
-                                          )
-                                        )}
-                                      </div>
-                                    </div>
-                                  )}
-                              </motion.div>
-                            )}
-                          </AnimatePresence>
-                        )}
-
-                      {/* Technologies - Show on Desktop when no responsibilities */}
-                      {(!exp.responsibilities ||
-                        exp.responsibilities.length === 0) &&
-                        !isMobile && (
-                          <div className="space-y-2">
-                            <h4 className="text-sm font-semibold text-neutral-700 dark:text-neutral-300">
-                              Technologies:
-                            </h4>
-                            <div className="flex flex-wrap gap-2">
-                              {exp.technologies.map((tech) => (
-                                <span
-                                  key={tech}
-                                  className="px-3 py-1 text-sm font-medium bg-gray-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 rounded-full"
-                                >
-                                  {tech}
-                                </span>
-                              ))}
-                            </div>
+                      {/* Technologies - Show when no responsibilities */}
+                      {!hasDetails && (
+                        <div className="space-y-2">
+                          <h4 className="text-sm font-semibold text-neutral-700 dark:text-neutral-300">
+                            Technologies:
+                          </h4>
+                          <div className="flex flex-wrap gap-2">
+                            {exp.technologies.map((tech) => (
+                              <span
+                                key={tech}
+                                className="px-3 py-1 text-sm font-medium bg-gray-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 rounded-full"
+                              >
+                                {tech}
+                              </span>
+                            ))}
                           </div>
-                        )}
+                        </div>
+                      )}
 
-                      {/* Tools - Show on Desktop when no responsibilities */}
-                      {(!exp.responsibilities ||
-                        exp.responsibilities.length === 0) &&
-                        !isMobile &&
-                        exp.tools &&
-                        exp.tools.length > 0 && (
-                          <div className="space-y-2">
-                            <h4 className="text-sm font-semibold text-neutral-700 dark:text-neutral-300">
-                              Tools:
-                            </h4>
-                            <div className="flex flex-wrap gap-2">
-                              {exp.tools.map((tool) => (
-                                <span
-                                  key={tool}
-                                  className="px-3 py-1 text-sm font-medium bg-gray-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 rounded-full"
-                                >
-                                  {tool}
-                                </span>
-                              ))}
-                            </div>
+                      {/* Tools - Show when no responsibilities */}
+                      {!hasDetails && exp.tools && exp.tools.length > 0 && (
+                        <div className="space-y-2">
+                          <h4 className="text-sm font-semibold text-neutral-700 dark:text-neutral-300">
+                            Tools:
+                          </h4>
+                          <div className="flex flex-wrap gap-2">
+                            {exp.tools.map((tool) => (
+                              <span
+                                key={tool}
+                                className="px-3 py-1 text-sm font-medium bg-gray-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 rounded-full"
+                              >
+                                {tool}
+                              </span>
+                            ))}
                           </div>
-                        )}
+                        </div>
+                      )}
 
-                      {/* Project Websites - Show on Desktop when no responsibilities */}
-                      {(!exp.responsibilities ||
-                        exp.responsibilities.length === 0) &&
-                        !isMobile &&
+                      {/* Project Websites - Show when no responsibilities */}
+                      {!hasDetails &&
                         exp.projectWebsite &&
                         exp.projectWebsite.length > 0 && (
                           <div className="space-y-2">
