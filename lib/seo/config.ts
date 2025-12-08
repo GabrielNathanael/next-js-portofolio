@@ -4,7 +4,7 @@ export const siteConfig = {
   shortName: "Gabriel Nathanael",
   description:
     "Full-stack web developer specializing in Next.js, React, Laravel, and TypeScript. Building scalable web applications with clean code and modern technologies.",
-  url: "https://gabrielnathanael.vercel.app",
+  url: "https://gabrielnathanael.site",
   ogImage: "/images/avatarful.webp",
   keywords: [
     "Gabriel Nathanael Purba",
@@ -30,7 +30,7 @@ export const siteConfig = {
   author: {
     name: "Gabriel Nathanael Purba",
     email: "gabrielnathanael81@gmail.com",
-    url: "https://gabrielnathanael.vercel.app",
+    url: "https://gabrielnathanael.site",
   },
   creator: "Gabriel Nathanael Purba",
   publisher: "Gabriel Nathanael Purba",
