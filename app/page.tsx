@@ -1,4 +1,4 @@
-// app\page.tsx
+// app/page.tsx
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import Hero from "@/components/sections/Hero";
@@ -13,7 +13,7 @@ import {
   getRecentExperience,
   getProfile,
 } from "@/lib/contentful/api";
-import { siteConfig, jsonLdWebsite, jsonLdPerson } from "@/lib/seo/config";
+import { siteConfig, jsonLdWebsite, jsonLdProfilePage } from "@/lib/seo/config";
 import type { Metadata } from "next";
 
 // ISR: Revalidate every 6 hours (21600 seconds)
@@ -22,8 +22,8 @@ export const revalidate = 21600;
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
-    default: `${siteConfig.name} | Full Stack Developer`,
-    template: `%s | ${siteConfig.name}`,
+    default: `${siteConfig.name} - Full Stack Developer`,
+    template: `%s - ${siteConfig.name}`,
   },
   description: siteConfig.description,
   keywords: siteConfig.keywords,
@@ -33,11 +33,11 @@ export const metadata: Metadata = {
 
   // Open Graph
   openGraph: {
-    type: "website",
+    type: "profile",
     locale: siteConfig.locale,
     alternateLocale: siteConfig.alternateLocale,
     url: siteConfig.url,
-    title: `${siteConfig.name} | Full Stack Developer`,
+    title: `${siteConfig.name} - Full Stack Developer`,
     description: siteConfig.description,
     siteName: siteConfig.name,
     images: [
@@ -53,7 +53,7 @@ export const metadata: Metadata = {
   // Twitter Card
   twitter: {
     card: "summary_large_image",
-    title: `${siteConfig.name} | Full Stack Developer`,
+    title: `${siteConfig.name} - Full Stack Developer`,
     description: siteConfig.description,
     images: [siteConfig.ogImage],
     creator: "@gabrielnathanael",
@@ -97,14 +97,14 @@ export default async function Home() {
 
   return (
     <>
-      {/* JSON-LD Structured Data */}
+      {/* Enhanced JSON-LD Structured Data */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdWebsite) }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdPerson) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdProfilePage) }}
       />
 
       <div className="bg-white dark:bg-neutral-950 min-h-screen">

@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   ],
 
   openGraph: {
-    title: `Work Experience | ${siteConfig.name}`,
+    title: `Work Experience - ${siteConfig.name}`,
     description:
       "Professional journey and impactful projects as a Full Stack Developer specializing in Next.js and React.",
     url: `${siteConfig.url}/experience`,
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
 
   twitter: {
     card: "summary_large_image",
-    title: `Work Experience | ${siteConfig.name}`,
+    title: `Work Experience - ${siteConfig.name}`,
     description:
       "Professional journey and impactful projects as a Full Stack Web Developer.",
     images: [siteConfig.ogImage],

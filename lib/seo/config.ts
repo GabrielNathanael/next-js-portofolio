@@ -44,42 +44,55 @@ export const siteConfig = {
   },
 };
 
+// Enhanced WebSite Schema with better structure
 export const jsonLdWebsite = {
   "@context": "https://schema.org",
   "@type": "WebSite",
+  "@id": `${siteConfig.url}/#website`,
   name: siteConfig.name,
   description: siteConfig.description,
   url: siteConfig.url,
-  author: {
-    "@type": "Person",
-    name: siteConfig.author.name,
-    email: siteConfig.author.email,
-    jobTitle: "Full Stack Developer",
-    url: siteConfig.author.url,
-  },
   inLanguage: ["en", "id"],
   publisher: {
-    "@type": "Person",
-    name: siteConfig.publisher,
+    "@id": `${siteConfig.url}/#person`,
+  },
+  potentialAction: {
+    "@type": "SearchAction",
+    target: {
+      "@type": "EntryPoint",
+      urlTemplate: `${siteConfig.url}/?s={search_term_string}`,
+    },
+    "query-input": "required name=search_term_string",
   },
 };
 
+// Enhanced Person Schema with mainEntityOfPage
 export const jsonLdPerson = {
   "@context": "https://schema.org",
   "@type": "Person",
+  "@id": `${siteConfig.url}/#person`,
   name: siteConfig.name,
   givenName: "Gabriel Nathanael",
   familyName: "Purba",
   email: siteConfig.author.email,
   url: siteConfig.url,
-  image: `${siteConfig.url}${siteConfig.ogImage}`,
+  image: {
+    "@type": "ImageObject",
+    "@id": `${siteConfig.url}/#personImage`,
+    url: `${siteConfig.url}${siteConfig.ogImage}`,
+    caption: siteConfig.name,
+  },
   jobTitle: "Full Stack Developer",
   description: siteConfig.description,
+  mainEntityOfPage: {
+    "@type": "WebPage",
+    "@id": siteConfig.url,
+  },
   address: {
     "@type": "PostalAddress",
     addressLocality: "Jakarta",
     addressRegion: "DKI Jakarta",
-    addressCountry: "Indonesia",
+    addressCountry: "ID",
   },
   workLocation: [
     {
@@ -87,7 +100,7 @@ export const jsonLdPerson = {
       address: {
         "@type": "PostalAddress",
         addressLocality: "Jakarta",
-        addressCountry: "Indonesia",
+        addressCountry: "ID",
       },
     },
     {
@@ -96,7 +109,7 @@ export const jsonLdPerson = {
         "@type": "PostalAddress",
         addressLocality: "Denpasar",
         addressRegion: "Bali",
-        addressCountry: "Indonesia",
+        addressCountry: "ID",
       },
     },
     {
@@ -105,7 +118,7 @@ export const jsonLdPerson = {
         "@type": "PostalAddress",
         addressLocality: "Singaraja",
         addressRegion: "Bali",
-        addressCountry: "Indonesia",
+        addressCountry: "ID",
       },
     },
   ],
@@ -117,7 +130,7 @@ export const jsonLdPerson = {
       "@type": "PostalAddress",
       addressLocality: "Singaraja",
       addressRegion: "Bali",
-      addressCountry: "Indonesia",
+      addressCountry: "ID",
     },
   },
   knowsAbout: [
@@ -132,6 +145,18 @@ export const jsonLdPerson = {
     "Frontend Development",
     "Backend Development",
   ],
+  knowsLanguage: [
+    {
+      "@type": "Language",
+      name: "English",
+      alternateName: "en",
+    },
+    {
+      "@type": "Language",
+      name: "Indonesian",
+      alternateName: "id",
+    },
+  ],
   sameAs: [
     siteConfig.social.github,
     siteConfig.social.linkedin,
@@ -139,6 +164,24 @@ export const jsonLdPerson = {
   ],
 };
 
+// ProfilePage Schema for homepage
+export const jsonLdProfilePage = {
+  "@context": "https://schema.org",
+  "@type": "ProfilePage",
+  "@id": `${siteConfig.url}/#profilepage`,
+  name: `${siteConfig.name} - Full Stack Developer Portfolio`,
+  description: siteConfig.description,
+  url: siteConfig.url,
+  mainEntity: {
+    "@id": `${siteConfig.url}/#person`,
+  },
+  inLanguage: ["en", "id"],
+  isPartOf: {
+    "@id": `${siteConfig.url}/#website`,
+  },
+};
+
+// Breadcrumb helper
 export const jsonLdBreadcrumb = (items: { name: string; url: string }[]) => ({
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",

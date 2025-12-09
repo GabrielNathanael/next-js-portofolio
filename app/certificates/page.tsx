@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   ],
 
   openGraph: {
-    title: `Certificates | ${siteConfig.name}`,
+    title: `Certificates - ${siteConfig.name}`,
     description:
       "Professional certifications showcasing commitment to continuous learning in web development and technology.",
     url: `${siteConfig.url}/certificates`,
@@ -43,7 +43,7 @@ export const metadata: Metadata = {
 
   twitter: {
     card: "summary_large_image",
-    title: `Certificates | ${siteConfig.name}`,
+    title: `Certificates - ${siteConfig.name}`,
     description:
       "Professional certifications showcasing commitment to continuous learning in web development.",
     images: [siteConfig.ogImage],

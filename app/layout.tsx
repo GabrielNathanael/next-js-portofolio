@@ -3,7 +3,7 @@ import type { Metadata, Viewport } from "next";
 import { Urbanist } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
-import { siteConfig } from "@/lib/seo/config";
+import { siteConfig, jsonLdPerson } from "@/lib/seo/config";
 
 const urbanist = Urbanist({
   subsets: ["latin"],
@@ -24,8 +24,8 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
-    default: `${siteConfig.name} | Full Stack Developer`,
-    template: `%s | ${siteConfig.name}`,
+    default: `${siteConfig.name} - Full Stack Developer`,
+    template: `%s - ${siteConfig.name}`,
   },
   description: siteConfig.description,
   applicationName: siteConfig.name,
@@ -54,9 +54,6 @@ export const metadata: Metadata = {
     ],
   },
 
-  // Manifest - Next.js auto-generates from app/manifest.ts
-  // No need to specify here
-
   // Other
   formatDetection: {
     telephone: false,
@@ -72,6 +69,14 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        {/* Global Person Schema - Helps Google recognize brand across all pages */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(jsonLdPerson),
+          }}
+        />
+
         {/* Preconnect to Contentful CDN - reduce resource load delay */}
         <link rel="preconnect" href="https://images.ctfassets.net" />
         <link rel="preconnect" href="https://assets.ctfassets.net" />
