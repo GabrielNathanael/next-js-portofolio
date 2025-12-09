@@ -3,6 +3,7 @@ import type { Metadata, Viewport } from "next";
 import { Urbanist } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
+import { Toaster } from "sonner";
 import { siteConfig, jsonLdPerson } from "@/lib/seo/config";
 
 const urbanist = Urbanist({
@@ -87,7 +88,10 @@ export default function RootLayout({
         {/* Example: <meta name="google-site-verification" content="YOUR_CODE_HERE" /> */}
       </head>
       <body className={urbanist.className}>
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>
+          {children}
+          <Toaster position="top-right" expand={false} richColors closeButton />
+        </ThemeProvider>
       </body>
     </html>
   );
