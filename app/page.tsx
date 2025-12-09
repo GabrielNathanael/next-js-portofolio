@@ -7,6 +7,7 @@ import FeaturedProjects from "@/components/sections/FeaturedProjects";
 import RecentExperience from "@/components/sections/RecentExperience";
 import LatestCertificates from "@/components/sections/LatestCertificates";
 import TechStack from "@/components/sections/TechStack";
+import ContactForm from "@/components/sections/Contact";
 import {
   getFeaturedProjects,
   getLatestCertificates,
@@ -119,27 +120,27 @@ export default async function Home() {
             <div className="w-full">
               <About />
             </div>
-
             {/* Experience - Responsive Grid */}
             {recentExperience && (
               <div className="w-full">
                 <RecentExperience experience={recentExperience} />
               </div>
             )}
-
             {/* Featured Projects - Full Width */}
             <div className="w-full">
               <FeaturedProjects projects={featuredProjects} />
             </div>
-
             {/* Certificates - 3 Columns */}
             <div className="w-full">
               <LatestCertificates certificates={latestCertificates} />
             </div>
-
             {/* Tech Stack - Full Width dengan Grid */}
             <div className="w-full">
               <TechStack />
+            </div>{" "}
+            {/* Contact Form - Full Width */}
+            <div className="w-full">
+              <ContactForm />
             </div>
           </section>
         </main>
