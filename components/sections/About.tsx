@@ -145,7 +145,7 @@ export default function About() {
               ease: "easeOut",
             }}
           >
-            <p className="text-lg lg:text-[1.1rem] text-neutral-700 dark:text-neutral-300 leading-relaxed max-w-2xl">
+            <p className="text-lg lg:text-[1.1rem] text-neutral-700 dark:text-neutral-300 leading-relaxed max-w-2xl text-justify">
               Hey, I&apos;m Gabriel — a full-stack developer and Computer
               Science student at Universitas Pendidikan Ganesha (Undiksha) in
               Bali. I focus on building clean, scalable web applications using
@@ -175,7 +175,7 @@ export default function About() {
                   ease: "easeOut",
                 }}
               />
-              <p className="text-lg lg:text-[1.05rem] text-neutral-700 dark:text-neutral-300 leading-relaxed max-w-md">
+              <p className="text-lg lg:text-[1.05rem] text-neutral-700 dark:text-neutral-300 leading-relaxed max-w-md text-justify">
                 I work across the full stack — from crafting responsive,
                 user-focused interfaces to developing solid backend logic and
                 API integrations. My goal is to deliver high-quality digital
@@ -199,7 +199,7 @@ export default function About() {
               ease: "easeOut",
             }}
           >
-            <p className="text-lg lg:text-[1.05rem] text-neutral-600 dark:text-neutral-400 leading-relaxed max-w-lg italic">
+            <p className="text-lg lg:text-[1.05rem] text-neutral-600 dark:text-neutral-400 leading-relaxed max-w-lg italic text-justify">
               I&apos;m also passionate about exploring new technologies,
               especially in areas like cloud deployment, performance
               optimization, and cybersecurity to keep improving as a developer.

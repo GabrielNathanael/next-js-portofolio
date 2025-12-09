@@ -35,19 +35,9 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const handleNavClick = (href: string) => {
+  const handleNavClick = () => {
     setIsOpen(false);
-
-    // Handle smooth scroll for anchor links
-    if (href.startsWith("/#")) {
-      const id = href.substring(2);
-      const element = document.getElementById(id);
-      if (element) {
-        element.scrollIntoView({ behavior: "smooth" });
-      }
-    }
   };
-
   return (
     <>
       <nav
@@ -75,12 +65,7 @@ export default function Navbar() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  onClick={(e) => {
-                    if (link.href.startsWith("/#")) {
-                      e.preventDefault();
-                      handleNavClick(link.href);
-                    }
-                  }}
+                  onClick={handleNavClick}
                   className="text-neutral-800 dark:text-neutral-200 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200 font-medium"
                 >
                   {link.label}
@@ -132,12 +117,7 @@ export default function Navbar() {
                   <Link
                     key={link.href}
                     href={link.href}
-                    onClick={(e) => {
-                      if (link.href.startsWith("/#")) {
-                        e.preventDefault();
-                      }
-                      handleNavClick(link.href);
-                    }}
+                    onClick={handleNavClick}
                     className="relative animate-slide-down group"
                     style={{
                       animationDelay: `${index * 0.1}s`,
