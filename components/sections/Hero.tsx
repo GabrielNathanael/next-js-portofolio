@@ -2,7 +2,7 @@
 // components/sections/Hero.tsx
 "use client";
 
-import { ArrowRight, Download } from "lucide-react";
+import { MailOpen, Download } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import Button from "@/components/ui/Button";
@@ -94,18 +94,16 @@ export default function Hero({ profile }: HeroProps) {
                   </div>
                 </div>
 
-                <p className="text-lg text-neutral-600 dark:text-neutral-400 max-w-xl">
-                  Full-stack developer with a passion for building reliable,
-                  high-performance web applications. I focus on crafting
-                  seamless user experiences and scalable backend architectures
-                  powered by modern technologies.
+                <p className="text-lg text-neutral-600 dark:text-neutral-400 max-w-xl text-justify">
+                  From concept to production — solving challenges through
+                  thoughtful code.
                 </p>
 
                 <div className="flex flex-wrap gap-4 pt-4 justify-center lg:justify-start">
-                  <Link href="/projects">
+                  <Link href="/#contact">
                     <Button variant="primary" size="lg" className="group">
-                      View Projects
-                      <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+                      Contact Me
+                      <MailOpen className="w-5 h-5 ml-2 group-hover:animate-bounce transition-transform" />
                     </Button>
                   </Link>
 
@@ -175,12 +173,10 @@ export default function Hero({ profile }: HeroProps) {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.5, duration: 0.6 }}
-                  className="text-lg text-neutral-600 dark:text-neutral-400 max-w-xl"
+                  className="text-lg text-neutral-600 dark:text-neutral-400 max-w-xl text-justify"
                 >
-                  Full-stack developer with a passion for building reliable,
-                  high-performance web applications. I focus on crafting
-                  seamless user experiences and scalable backend architectures
-                  powered by modern technologies.
+                  From concept to production — solving challenges through
+                  thoughtful code.
                 </motion.p>
 
                 <motion.div
@@ -189,10 +185,10 @@ export default function Hero({ profile }: HeroProps) {
                   transition={{ delay: 0.6, duration: 0.6 }}
                   className="flex flex-wrap gap-4 pt-4 justify-center lg:justify-start"
                 >
-                  <Link href="/projects">
+                  <Link href="/#contact">
                     <Button variant="primary" size="lg" className="group">
-                      View Projects
-                      <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+                      Contact Me
+                      <MailOpen className="w-5 h-5 ml-2 group-hover:animate-bounce transition-transform" />
                     </Button>
                   </Link>
 

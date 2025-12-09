@@ -90,7 +90,7 @@ export default function ContactForm() {
 
     try {
       const response = await fetch(
-        "https://formsubmit.co/gabrielnathanael81@gmail.com",
+        "https://formsubmit.co/ajax/gabrielnathanael81@gmail.com",
         {
           method: "POST",
           headers: {
@@ -101,14 +101,17 @@ export default function ContactForm() {
             name: formData.name,
             email: formData.email,
             message: formData.message,
-            _subject: `New Message from ${formData.name}`,
+            _subject: `New Message from [${formData.name}]`,
             _captcha: "true",
-            _template: "table",
+            _template: "box",
           }),
         }
       );
 
-      if (response.ok) {
+      const data = await response.json(); // Tambahin ini
+
+      if (response.ok && data.success) {
+        // Cek data.success juga
         toast.success(
           "Message sent successfully! I'll get back to you as soon as possible."
         );
@@ -172,7 +175,6 @@ export default function ContactForm() {
                   onFocus={() => setFocusedField("name")}
                   onBlur={() => setFocusedField("")}
                   disabled={isSubmitting}
-                  required
                   className={`peer w-full px-4 pt-6 pb-2 bg-white dark:bg-black border-2 rounded-xl text-neutral-900 dark:text-neutral-100 placeholder-transparent focus:outline-none transition-all disabled:opacity-50 disabled:cursor-not-allowed ${
                     errors.name
                       ? "border-red-500 dark:border-red-500"
@@ -223,7 +225,6 @@ export default function ContactForm() {
                   onFocus={() => setFocusedField("email")}
                   onBlur={() => setFocusedField("")}
                   disabled={isSubmitting}
-                  required
                   className={`peer w-full px-4 pt-6 pb-2 bg-white dark:bg-black border-2 rounded-xl text-neutral-900 dark:text-neutral-100 placeholder-transparent focus:outline-none transition-all disabled:opacity-50 disabled:cursor-not-allowed ${
                     errors.email
                       ? "border-red-500 dark:border-red-500"
@@ -273,7 +274,6 @@ export default function ContactForm() {
                   onFocus={() => setFocusedField("message")}
                   onBlur={() => setFocusedField("")}
                   disabled={isSubmitting}
-                  required
                   rows={5}
                   className={`peer w-full px-4 pt-6 pb-2 bg-white dark:bg-black border-2 rounded-xl text-neutral-900 dark:text-neutral-100 placeholder-transparent focus:outline-none transition-all resize-none disabled:opacity-50 disabled:cursor-not-allowed ${
                     errors.message
