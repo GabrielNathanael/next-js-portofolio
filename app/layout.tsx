@@ -4,6 +4,7 @@ import { Urbanist } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import { Toaster } from "sonner";
+import { Analytics } from "@vercel/analytics/next";
 import { siteConfig, jsonLdPerson } from "@/lib/seo/config";
 
 const urbanist = Urbanist({
@@ -89,6 +90,7 @@ export default function RootLayout({
           {children}
           <Toaster position="top-right" expand={false} richColors closeButton />
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   );
