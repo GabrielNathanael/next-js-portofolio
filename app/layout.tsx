@@ -83,9 +83,6 @@ export default function RootLayout({
         <link rel="preconnect" href="https://assets.ctfassets.net" />
         <link rel="dns-prefetch" href="https://images.ctfassets.net" />
         <link rel="dns-prefetch" href="https://assets.ctfassets.net" />
-
-        {/* Google Search Console Verification - Paste your meta tag here when ready */}
-        {/* Example: <meta name="google-site-verification" content="YOUR_CODE_HERE" /> */}
       </head>
       <body className={urbanist.className}>
         <ThemeProvider>
