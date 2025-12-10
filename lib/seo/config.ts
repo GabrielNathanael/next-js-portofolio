@@ -3,7 +3,7 @@ export const siteConfig = {
   name: "Gabriel Nathanael Purba",
   shortName: "Gabriel Nathanael",
   description:
-    "Full-stack web developer specializing in Next.js, React, Laravel, and TypeScript. Building scalable web applications with clean code and modern technologies.",
+    "Full-stack developer specializing in Next.js, React, Laravel, and TypeScript. Building scalable web applications with clean code and modern technologies.",
   url: "https://gabrielnathanael.site",
   ogImage: "/images/avatarful.webp",
   keywords: [
