@@ -1,3 +1,4 @@
+// app/sitemap.ts
 import { MetadataRoute } from "next";
 import { siteConfig } from "@/lib/seo/config";
 
@@ -5,8 +6,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const routes = [
     {
       route: "",
-      priority: 1,
-      changefreq: "weekly" as const,
+      priority: 1.0,
+      changefreq: "daily" as const,
     },
     {
       route: "/projects",

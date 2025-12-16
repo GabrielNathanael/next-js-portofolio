@@ -14,7 +14,12 @@ import {
   getRecentExperience,
   getProfile,
 } from "@/lib/contentful/api";
-import { siteConfig, jsonLdWebsite, jsonLdProfilePage } from "@/lib/seo/config";
+import {
+  siteConfig,
+  jsonLdWebsite,
+  jsonLdProfilePage,
+  jsonLdBreadcrumb, // ✅ ADD THIS IMPORT
+} from "@/lib/seo/config";
 import type { Metadata } from "next";
 
 // ISR: Revalidate every 6 hours (21600 seconds)
@@ -96,6 +101,9 @@ export default async function Home() {
       getProfile(),
     ]);
 
+  // ✅ ADD THIS: Homepage breadcrumb
+  const breadcrumb = jsonLdBreadcrumb([{ name: "Home", url: "/" }]);
+
   return (
     <>
       {/* Enhanced JSON-LD Structured Data */}
@@ -106,6 +114,12 @@ export default async function Home() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdProfilePage) }}
+      />
+
+      {/* ✅ ADD THIS: Breadcrumb Schema for Homepage */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
       />
 
       <div className="bg-white dark:bg-neutral-950 min-h-screen">

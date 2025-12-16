@@ -1,3 +1,4 @@
+// components/layout/Footer.tsx
 export default function Footer() {
   return (
     <footer className="bg-white dark:bg-neutral-950 border-t border-neutral-200 dark:border-neutral-700 mt-10">
@@ -8,6 +9,10 @@ export default function Footer() {
           </p>
           <p className="text-neutral-500 dark:text-neutral-400 text-xs">
             © {new Date().getFullYear()} Gabriel Nathanael Purba
+          </p>
+          {/* ✅ ADD THIS: Last updated indicator */}
+          <p className="text-neutral-400 dark:text-neutral-500 text-xs">
+            Last updated: December 2025
           </p>
         </div>
       </div>
