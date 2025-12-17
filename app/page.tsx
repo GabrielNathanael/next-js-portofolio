@@ -81,10 +81,6 @@ export const metadata: Metadata = {
   // Alternate languages
   alternates: {
     canonical: siteConfig.url,
-    languages: {
-      "en-US": siteConfig.url,
-      "id-ID": siteConfig.url,
-    },
   },
 
   // Additional
