@@ -49,7 +49,7 @@ export const metadata: Metadata = {
   },
 
   alternates: {
-    canonical: `${siteConfig.url}/experience`,
+    canonical: `${siteConfig.url}/experiences`,
   },
 };
 

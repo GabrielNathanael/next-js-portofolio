@@ -9,23 +9,19 @@ export const siteConfig = {
   keywords: [
     "Gabriel Nathanael Purba",
     "Full Stack Developer",
-    "Web Developer",
+    "Software Engineer",
+    "Web Developer Portfolio",
     "Next.js Developer",
     "React Developer",
     "TypeScript Developer",
+    "JavaScript Developer",
     "Laravel Developer",
     "Frontend Developer",
     "Backend Developer",
     "Jakarta Developer",
-    "Denpasar Developer",
-    "Singaraja Developer",
-    "Bali Developer",
     "Indonesia Developer",
-    "Undiksha",
-    "Computer Science Student",
     "Web Development",
     "API Development",
-    "UI/UX Implementation",
   ],
   author: {
     name: "Gabriel Nathanael Purba",
@@ -34,8 +30,8 @@ export const siteConfig = {
   },
   creator: "Gabriel Nathanael Purba",
   publisher: "Gabriel Nathanael Purba",
-  locale: "en_US",
-  alternateLocale: "id_ID",
+  locale: "id_ID",
+  alternateLocale: "en_US",
   social: {
     github: "https://github.com/GabrielNathanael",
     linkedin: "https://www.linkedin.com/in/gabriel-nathanael-purba-549273376/",
@@ -52,7 +48,7 @@ export const jsonLdWebsite = {
   name: siteConfig.name,
   description: siteConfig.description,
   url: siteConfig.url,
-  inLanguage: ["en", "id"],
+  inLanguage: ["id", "en"],
   publisher: {
     "@id": `${siteConfig.url}/#person`,
   },
@@ -112,15 +108,6 @@ export const jsonLdPerson = {
         addressCountry: "ID",
       },
     },
-    {
-      "@type": "Place",
-      address: {
-        "@type": "PostalAddress",
-        addressLocality: "Singaraja",
-        addressRegion: "Bali",
-        addressCountry: "ID",
-      },
-    },
   ],
   alumniOf: {
     "@type": "EducationalOrganization",
@@ -175,7 +162,7 @@ export const jsonLdProfilePage = {
   mainEntity: {
     "@id": `${siteConfig.url}/#person`,
   },
-  inLanguage: ["en", "id"],
+  inLanguage: ["id", "en"],
   isPartOf: {
     "@id": `${siteConfig.url}/#website`,
   },

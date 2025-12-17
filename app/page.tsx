@@ -62,7 +62,7 @@ export const metadata: Metadata = {
     title: `${siteConfig.name} - Full Stack Developer`,
     description: siteConfig.description,
     images: [siteConfig.ogImage],
-    creator: "@gabrielnathanael",
+    creator: "@gabrielnp",
   },
 
   // Robots

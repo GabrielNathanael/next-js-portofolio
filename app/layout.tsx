@@ -55,6 +55,12 @@ export default function RootLayout({
           }}
         />
 
+        {/* Geographic Meta Tags for Local SEO */}
+        <meta name="geo.region" content="ID-JK" />
+        <meta name="geo.placename" content="Jakarta" />
+        <meta name="geo.position" content="-6.2088;106.8456" />
+        <meta name="ICBM" content="-6.2088, 106.8456" />
+
         {/* Preconnect to Contentful CDN - reduce resource load delay */}
         <link rel="preconnect" href="https://images.ctfassets.net" />
         <link rel="preconnect" href="https://assets.ctfassets.net" />
