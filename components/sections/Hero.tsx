@@ -68,9 +68,9 @@ export default function Hero({ profile }: HeroProps) {
             {isMobile ? (
               <div className="space-y-6">
                 <div className="space-y-4">
-                  <h1 className="text-4xl md:text-6xl font-bold bg-clip-text text-transparent bg-linear-to-r">
+                  <h1 className="text-4xl md:text-6xl font-bold from-blue-600 to-cyan-500 dark:from-blue-400 dark:to-cyan-300 bg-clip-text text-transparent bg-linear-to-r">
                     <span className="block text-lg md:text-xl font-semibold mb-2">
-                      Hi, I&apos;m
+                      Hi, I&apos;m{" "}
                     </span>
                     <span className="block">Gabriel Nathanael</span>
                   </h1>
@@ -133,7 +133,7 @@ export default function Hero({ profile }: HeroProps) {
                     className="text-4xl md:text-6xl font-bold from-blue-600 to-cyan-500 dark:from-blue-400 dark:to-cyan-300 bg-clip-text text-transparent bg-linear-to-r"
                   >
                     <span className="block text-lg md:text-xl font-semibold mb-2">
-                      Hi, I&apos;m
+                      Hi, I&apos;m{" "}
                     </span>
                     Gabriel Nathanael
                   </motion.h1>
