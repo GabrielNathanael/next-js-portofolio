@@ -15,7 +15,7 @@ const socials = [
   {
     name: "Instagram",
     icon: SiInstagram,
-    href: "https://instagram.com/gabrielnathanaelp",
+    href: "https://www.instagram.com/gabrielnathanaelp?igsh=MXN5YXRqZ2Y0OXU0bw==",
   },
   {
     name: "LinkedIn",

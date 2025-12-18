@@ -68,11 +68,10 @@ export default function Hero({ profile }: HeroProps) {
             {isMobile ? (
               <div className="space-y-6">
                 <div className="space-y-4">
-                  <h2 className="text-lg md:text-xl from-blue-600 to-cyan-500 dark:from-blue-400 dark:to-cyan-300 bg-clip-text text-transparent bg-linear-to-r font-semibold">
-                    Hi, I&apos;m
-                  </h2>
-
                   <h1 className="text-4xl md:text-6xl font-bold from-blue-600 to-cyan-500 dark:from-blue-400 dark:to-cyan-300 bg-clip-text text-transparent bg-linear-to-r">
+                    <span className="block text-lg md:text-xl font-semibold mb-2">
+                      Hi, I&apos;m
+                    </span>
                     Gabriel Nathanael
                   </h1>
 
@@ -128,21 +127,15 @@ export default function Hero({ profile }: HeroProps) {
                 className="space-y-6"
               >
                 <div className="space-y-4">
-                  <motion.h2
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.2, duration: 0.6 }}
-                    className="text-lg md:text-xl from-blue-600 to-cyan-500 dark:from-blue-400 dark:to-cyan-300 bg-clip-text text-transparent bg-linear-to-r font-semibold"
-                  >
-                    Hi, I&apos;m
-                  </motion.h2>
-
                   <motion.h1
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.3, duration: 0.6 }}
+                    transition={{ delay: 0.2, duration: 0.6 }}
                     className="text-4xl md:text-6xl font-bold from-blue-600 to-cyan-500 dark:from-blue-400 dark:to-cyan-300 bg-clip-text text-transparent bg-linear-to-r"
                   >
+                    <span className="block text-lg md:text-xl font-semibold mb-2">
+                      Hi, I&apos;m
+                    </span>
                     Gabriel Nathanael
                   </motion.h1>
 
