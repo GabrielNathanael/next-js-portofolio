@@ -148,8 +148,9 @@ export default function About() {
             <p className="text-lg lg:text-[1.1rem] text-neutral-700 dark:text-neutral-300 leading-relaxed max-w-2xl text-justify">
               Hey, I&apos;m Gabriel — a full-stack developer and Computer
               Science student at Universitas Pendidikan Ganesha (Undiksha) in
-              Bali. I focus on building clean, scalable web applications using
-              technologies like Next.js, React, Laravel, and TypeScript.
+              Bali. I build clean, scalable web applications using technologies
+              like Next.js, React, Laravel, and TypeScript, with a focus on
+              maintainable code and solid system design.
             </p>
           </motion.div>
 
@@ -176,10 +177,11 @@ export default function About() {
                 }}
               />
               <p className="text-lg lg:text-[1.05rem] text-neutral-700 dark:text-neutral-300 leading-relaxed max-w-md text-justify">
-                I work across the full stack — from crafting responsive,
-                user-focused interfaces to developing solid backend logic and
-                API integrations. My goal is to deliver high-quality digital
-                experiences supported by efficient and maintainable code.
+                I work across the full stack, from crafting responsive user
+                interfaces to developing backend logic, RESTful APIs, and
+                database-driven features. I enjoy translating complex
+                requirements into clear, structured implementations that are
+                easy to maintain and evolve.
               </p>
             </div>
           </motion.div>
@@ -200,9 +202,11 @@ export default function About() {
             }}
           >
             <p className="text-lg lg:text-[1.05rem] text-neutral-600 dark:text-neutral-400 leading-relaxed max-w-lg italic text-justify">
-              I&apos;m also passionate about exploring new technologies,
-              especially in areas like cloud deployment, performance
-              optimization, and cybersecurity to keep improving as a developer.
+              Beyond application development, I explore DevOps and cloud
+              fundamentals such as deployment workflows, containerization, and
+              basic infrastructure concepts, while also learning about
+              cybersecurity principles and secure application design to build
+              more reliable systems.
             </p>
           </motion.div>
 
