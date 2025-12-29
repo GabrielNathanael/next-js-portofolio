@@ -5,12 +5,11 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
         <div className="flex flex-col items-center justify-center space-y-3 text-center">
           <p className="text-neutral-600 dark:text-neutral-300 text-sm">
-            From ideas to code — I build modern, scalable web applications.
+            From ideas to code, I build modern, scalable web applications.
           </p>
           <p className="text-neutral-500 dark:text-neutral-400 text-xs">
             © {new Date().getFullYear()} Gabriel Nathanael Purba
           </p>
-          {/* ✅ ADD THIS: Last updated indicator */}
           <p className="text-neutral-400 dark:text-neutral-500 text-xs">
             Last updated: December 2025
           </p>

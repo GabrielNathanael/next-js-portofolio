@@ -11,9 +11,9 @@ import type { Metadata } from "next";
 export const revalidate = 21600;
 
 export const metadata: Metadata = {
-  title: "Work Experience",
+  title: "Work Experiences",
   description:
-    "Professional journey of Gabriel Nathanael Purba as a Full Stack Developer. Explore my work experience, technical expertise, and impactful projects in web development.",
+    "Professional journey of Gabriel Nathanael Purba as a Full Stack Developer. Explore my work experiences, technical expertise, and impactful projects in web development.",
   keywords: [
     ...siteConfig.keywords,
     "Work Experience",
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   ],
 
   openGraph: {
-    title: `Work Experience - ${siteConfig.name}`,
+    title: `Work Experiences - ${siteConfig.name}`,
     description:
       "Professional journey and impactful projects as a Full Stack Developer specializing in Next.js and React.",
     url: `${siteConfig.url}/experience`,
@@ -35,14 +35,14 @@ export const metadata: Metadata = {
         url: siteConfig.ogImage,
         width: 1200,
         height: 630,
-        alt: `Work Experience - ${siteConfig.name}`,
+        alt: `Work Experiences - ${siteConfig.name}`,
       },
     ],
   },
 
   twitter: {
     card: "summary_large_image",
-    title: `Work Experience - ${siteConfig.name}`,
+    title: `Work Experiences - ${siteConfig.name}`,
     description:
       "Professional journey and impactful projects as a Full Stack Web Developer.",
     images: [siteConfig.ogImage],
@@ -55,7 +55,7 @@ export const metadata: Metadata = {
 
 const breadcrumbItems = [
   { name: "Home", url: "/" },
-  { name: "Work Experience", url: "/experience" },
+  { name: "Work Experiences", url: "/experience" },
 ];
 
 export default async function ExperiencePage() {
@@ -78,11 +78,11 @@ export default async function ExperiencePage() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
             <div className="space-y-3">
               <h1 className="text-4xl md:text-5xl font-bold text-neutral-900 dark:text-neutral-100">
-                Work Experience
+                Work Experiences
               </h1>
               <p className="text-lg text-neutral-600 dark:text-neutral-400 max-w-2xl">
-                An overview of my work experience and the roles where I&apos;ve
-                applied my skills to build and deliver real-world software.
+                An overview of my work experiences and the roles where I&apos;ve
+                applied my skills to build and deliver real world software.
               </p>
             </div>
             <ExperienceGrid experiences={experiences} />

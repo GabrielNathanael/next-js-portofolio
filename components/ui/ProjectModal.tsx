@@ -29,7 +29,7 @@ export default function ProjectModal({
       },
       Collab: {
         icon: Users,
-        bgColor: "bg-violet-500",
+        bgColor: "bg-cyan-500",
         textColor: "text-white",
       },
     };
@@ -131,7 +131,7 @@ export default function ProjectModal({
                 {hasDemo && hasGithub && (
                   <DropdownMenu.Root>
                     <DropdownMenu.Trigger asChild>
-                      <button className="w-full group py-3 px-6 text-base font-semibold bg-linear-to-r from-blue-600 to-violet-500 hover:from-blue-700 hover:to-violet-600 text-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2">
+                      <button className="w-full group py-3 px-6 text-base font-semibold bg-linear-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2">
                         View Project
                         <ChevronDown className="w-5 h-5 group-data-[state=open]:rotate-180 transition-transform duration-200" />
                       </button>
@@ -188,7 +188,7 @@ export default function ProjectModal({
                     href={project.demoUrl!}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-full py-3 px-6 text-base font-semibold bg-linear-to-r from-blue-600 to-violet-500 hover:from-blue-700 hover:to-violet-600 text-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2"
+                    className="w-full py-3 px-6 text-base font-semibold bg-linear-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2"
                   >
                     <ExternalLink className="w-5 h-5" />
                     Live Demo

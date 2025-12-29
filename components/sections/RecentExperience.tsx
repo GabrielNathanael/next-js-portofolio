@@ -98,7 +98,7 @@ export default function RecentExperience({
           transition={{ duration: isMobile ? 0.5 : 0.6, delay: 0.1 }}
           className="text-3xl font-bold from-blue-600 to-cyan-500 dark:from-blue-400 dark:to-cyan-300 bg-clip-text text-transparent bg-linear-to-r"
         >
-          Work Experience
+          Work Experiences
         </motion.h2>
 
         <motion.div

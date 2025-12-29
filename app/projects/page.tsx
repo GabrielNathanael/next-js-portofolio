@@ -13,7 +13,7 @@ export const revalidate = 21600;
 export const metadata: Metadata = {
   title: "Projects",
   description:
-    "Explore my portfolio of web development projects built with Next.js, React, TypeScript, and Laravel. From full-stack applications to responsive frontends, see how I solve real-world problems with code.",
+    "Explore my portfolio of web development projects built with Next.js, React, TypeScript, and Laravel. From full-stack applications to responsive frontends, see how I solve real world problems with code.",
   keywords: [
     ...siteConfig.keywords,
     "Web Development Projects",

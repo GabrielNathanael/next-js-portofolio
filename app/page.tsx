@@ -18,7 +18,7 @@ import {
   siteConfig,
   jsonLdWebsite,
   jsonLdProfilePage,
-  jsonLdBreadcrumb, // ✅ ADD THIS IMPORT
+  jsonLdBreadcrumb,
 } from "@/lib/seo/config";
 import type { Metadata } from "next";
 
@@ -97,7 +97,6 @@ export default async function Home() {
       getProfile(),
     ]);
 
-  // ✅ ADD THIS: Homepage breadcrumb
   const breadcrumb = jsonLdBreadcrumb([{ name: "Home", url: "/" }]);
 
   return (
@@ -111,8 +110,6 @@ export default async function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdProfilePage) }}
       />
-
-      {/* ✅ ADD THIS: Breadcrumb Schema for Homepage */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
@@ -124,31 +121,38 @@ export default async function Home() {
           {/* Hero Section */}
           <Hero profile={profile} />
 
-          {/* Main Content */}
+          {/* Main Content - WITH CONTAINER */}
           <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 space-y-32 md:space-y-12">
-            {/* About Section - Full Width */}
+            {/* About Section */}
             <div className="w-full">
               <About />
             </div>
-            {/* Experience - Responsive Grid */}
+
+            {/* Experience */}
             {recentExperience && (
               <div className="w-full">
                 <RecentExperience experience={recentExperience} />
               </div>
             )}
-            {/* Featured Projects - Full Width */}
+
+            {/* Featured Projects */}
             <div className="w-full">
               <FeaturedProjects projects={featuredProjects} />
             </div>
-            {/* Certificates - 3 Columns */}
+
+            {/* Certificates */}
             <div className="w-full">
               <LatestCertificates certificates={latestCertificates} />
             </div>
-            {/* Tech Stack - Full Width dengan Grid */}
-            <div className="w-full">
-              <TechStack />
-            </div>{" "}
-            {/* Contact Form - Full Width */}
+          </section>
+
+          {/* Tech Stack - FULL WIDTH MARQUEE */}
+          <section className="w-full py-20">
+            <TechStack />
+          </section>
+
+          {/* Contact Form - BACK TO CONTAINER */}
+          <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
             <div className="w-full">
               <ContactForm />
             </div>

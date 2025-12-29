@@ -93,8 +93,8 @@ export default function Hero({ profile }: HeroProps) {
                 </div>
 
                 <p className="text-lg text-neutral-600 dark:text-neutral-400 max-w-xl text-justify">
-                  From concept to production — solving challenges through
-                  thoughtful code.
+                  From concept to production, solving challenges through
+                  thoughtful codes.
                 </p>
 
                 <div className="flex flex-wrap gap-4 pt-4 justify-center lg:justify-start">
@@ -167,8 +167,8 @@ export default function Hero({ profile }: HeroProps) {
                   transition={{ delay: 0.5, duration: 0.6 }}
                   className="text-lg text-neutral-600 dark:text-neutral-400 max-w-xl text-justify"
                 >
-                  From concept to production — solving challenges through
-                  thoughtful code.
+                  From concept to production, solving challenges through
+                  thoughtful codes.
                 </motion.p>
 
                 <motion.div
@@ -368,7 +368,7 @@ export default function Hero({ profile }: HeroProps) {
                   </div>
 
                   {/* Subtle Radial Glow - Mobile */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-violet-500/5 to-purple-500/5 rounded-full blur-2xl -z-10" />
+                  <div className="absolute inset-0 bg-linear-to-br from-blue-500/5 via-violet-500/5 to-purple-500/5 rounded-full blur-2xl -z-10" />
                 </div>
               </div>
             ) : (
@@ -604,7 +604,7 @@ export default function Hero({ profile }: HeroProps) {
                   </motion.div>
 
                   {/* Subtle Radial Glow - Desktop */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-violet-500/5 to-purple-500/5 rounded-full blur-2xl -z-10" />
+                  <div className="absolute inset-0 bg-linear-to-br from-blue-500/5 via-violet-500/5 to-purple-500/5 rounded-full blur-2xl -z-10" />
                 </div>
               </motion.div>
             )}

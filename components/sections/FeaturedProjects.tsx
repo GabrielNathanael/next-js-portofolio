@@ -1,4 +1,3 @@
-// components\sections\FeaturedProjects.tsx
 // components/sections/FeaturedProjects.tsx
 "use client";
 
@@ -101,8 +100,6 @@ export default function FeaturedProjects({ projects }: FeaturedProjectsProps) {
       {/* Projects Grid with staggered positioning */}
       <div className="grid md:grid-cols-3 gap-6 relative">
         {projects.map((project, idx) => {
-          const isVertical = idx === 1;
-
           // Mobile: simple fade in
           // Desktop: complex animation
           const getInitialPosition = () => {
@@ -123,19 +120,12 @@ export default function FeaturedProjects({ projects }: FeaturedProjectsProps) {
                 ease: "easeOut",
               }}
               className="relative"
-              style={{
-                marginTop: isMobile ? 0 : idx === 1 ? "0" : "1.5rem",
-              }}
             >
               <Card
                 className="overflow-hidden cursor-pointer group relative"
                 onClick={() => setSelectedProject(project.id)}
               >
-                <div
-                  className={`relative ${
-                    isVertical ? "aspect-3/4" : "aspect-4/3"
-                  } overflow-hidden`}
-                >
+                <div className="relative aspect-4/3 overflow-hidden">
                   {getProjectTypeBadge(project.projectType)}
 
                   <Image

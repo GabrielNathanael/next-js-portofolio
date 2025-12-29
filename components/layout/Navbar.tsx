@@ -14,6 +14,8 @@ import {
 } from "lucide-react";
 import ThemeToggle from "@/components/ui/ThemeToggle";
 
+import Image from "next/image";
+
 const navLinks = [
   { href: "/", label: "Home", icon: Home },
   { href: "/projects", label: "Projects", icon: FolderOpen },
@@ -52,11 +54,22 @@ export default function Navbar() {
             {/* Logo */}
             <Link
               href="/"
-              className={`text-2xl font-bold from-blue-600 to-cyan-500 dark:from-blue-400 dark:to-cyan-300 bg-clip-text text-transparent bg-linear-to-r transition-all duration-300 ${
+              className={`flex items-center transition-all duration-300 ${
                 isOpen ? "blur-sm md:blur-none" : ""
               }`}
             >
-              Gabriel Nathanael
+              <span className="hidden md:block text-2xl font-bold from-blue-600 to-cyan-500 dark:from-blue-400 dark:to-cyan-300 bg-clip-text text-transparent bg-linear-to-r">
+                Gabriel Nathanael
+              </span>
+              <div className="md:hidden w-10 h-10 rounded-full overflow-hidden shadow-lg shadow-blue-500/10">
+                <Image
+                  src="/apple-icon.png"
+                  alt="Gabriel Nathanael"
+                  width={40}
+                  height={40}
+                  className="object-cover"
+                />
+              </div>
             </Link>
 
             {/* Desktop Navigation */}
