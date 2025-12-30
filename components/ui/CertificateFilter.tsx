@@ -4,7 +4,7 @@
 import * as Select from "@radix-ui/react-select";
 import { motion } from "framer-motion";
 import { SlidersHorizontal, ChevronDown, Check } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 interface CertificateFilterProps {
   availableIssuers: string[];
@@ -25,6 +25,13 @@ export default function CertificateFilter({
 }: CertificateFilterProps) {
   const [isOpen, setIsOpen] = useState(false);
 
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setIsMounted(true);
+  }, []);
+
   const toggleIssuer = (issuer: string) => {
     if (selectedIssuers.includes(issuer)) {
       onIssuersChange(selectedIssuers.filter((i) => i !== issuer));
@@ -38,6 +45,8 @@ export default function CertificateFilter({
   };
 
   const hasActiveFilters = selectedIssuers.length > 0;
+
+  if (!isMounted) return null;
 
   return (
     <motion.div
