@@ -1,5 +1,4 @@
-// app\experience\page.tsx
-// app/experience/page.tsx
+// app/experiences/page.tsx
 import ExperienceGrid from "@/components/sections/ExperienceGrid";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
@@ -28,7 +27,7 @@ export const metadata: Metadata = {
     title: `Work Experiences - ${siteConfig.name}`,
     description:
       "Professional journey and impactful projects as a Full Stack Developer specializing in Next.js and React.",
-    url: `${siteConfig.url}/experience`,
+    url: `${siteConfig.url}/experiences`,
     type: "website",
     images: [
       {
@@ -55,7 +54,7 @@ export const metadata: Metadata = {
 
 const breadcrumbItems = [
   { name: "Home", url: "/" },
-  { name: "Work Experiences", url: "/experience" },
+  { name: "Work Experiences", url: "/experiences" },
 ];
 
 export default async function ExperiencePage() {

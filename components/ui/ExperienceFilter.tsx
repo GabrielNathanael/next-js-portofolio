@@ -4,7 +4,7 @@
 import * as Select from "@radix-ui/react-select";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, ChevronRight, Check } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 interface ExperienceFilterProps {
   availableEmploymentTypes: string[];
@@ -37,6 +37,13 @@ export default function ExperienceFilter({
 }: ExperienceFilterProps) {
   const [expandedCategories, setExpandedCategories] = useState<string[]>([]);
   const [isOpen, setIsOpen] = useState(false);
+
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setIsMounted(true);
+  }, []);
 
   const toggleEmploymentType = (type: string) => {
     if (selectedEmploymentTypes.includes(type)) {
@@ -122,6 +129,8 @@ export default function ExperienceFilter({
       onToggle: toggleTool,
     },
   ];
+
+  if (!isMounted) return null;
 
   return (
     <div className="space-y-6">

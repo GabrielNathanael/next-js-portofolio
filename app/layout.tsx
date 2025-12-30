@@ -7,6 +7,7 @@ import { Toaster } from "sonner";
 import { siteConfig, jsonLdPerson } from "@/lib/seo/config";
 import { Analytics } from "@vercel/analytics/next";
 import { LoadingProvider } from "@/components/providers/LoadingProvider";
+import ChatWidget from "@/components/chat/ChatWidget";
 
 const urbanist = Urbanist({
   subsets: ["latin"],
@@ -78,6 +79,8 @@ export default function RootLayout({
               richColors
               closeButton
             />
+            {/* AI Chat Widget - Available on all pages */}
+            <ChatWidget />
           </LoadingProvider>
         </ThemeProvider>
         <Analytics />
