@@ -6,6 +6,7 @@ import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import { Toaster } from "sonner";
 import { siteConfig, jsonLdPerson } from "@/lib/seo/config";
 import { Analytics } from "@vercel/analytics/next";
+import { LoadingProvider } from "@/components/providers/LoadingProvider";
 
 const urbanist = Urbanist({
   subsets: ["latin"],
@@ -69,8 +70,15 @@ export default function RootLayout({
       </head>
       <body className={urbanist.className}>
         <ThemeProvider>
-          {children}
-          <Toaster position="top-right" expand={false} richColors closeButton />
+          <LoadingProvider>
+            {children}
+            <Toaster
+              position="top-right"
+              expand={false}
+              richColors
+              closeButton
+            />
+          </LoadingProvider>
         </ThemeProvider>
         <Analytics />
       </body>

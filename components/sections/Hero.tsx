@@ -6,19 +6,37 @@ import { MailOpen, Download } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import Button from "@/components/ui/Button";
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { TypeAnimation } from "react-type-animation";
 import { Profile } from "@/lib/contentful/types";
 import { useIsMobile } from "@/hooks/useIsMobile";
+import { useLoading } from "@/components/providers/LoadingProvider";
 
 interface HeroProps {
   profile: Profile | null;
 }
 
 export default function Hero({ profile }: HeroProps) {
+  const containerRef = useRef<HTMLElement>(null);
   const isMobile = useIsMobile();
+  const { isLoading } = useLoading();
   const photoUrl = profile?.photo || "/images/avatarful.webp";
   const resumeUrl = profile?.resume;
+
+  // Parallax Values
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"],
+  });
+
+  const yGrid = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
+  const yText = useTransform(scrollYProgress, [0, 1], ["0px", "200px"]);
+  const yImage = useTransform(scrollYProgress, [0, 1], ["0px", "150px"]);
+  const yDots1 = useTransform(scrollYProgress, [0, 1], ["0px", "-250px"]);
+  const yDots2 = useTransform(scrollYProgress, [0, 1], ["0px", "-180px"]);
+  const yDots3 = useTransform(scrollYProgress, [0, 1], ["0px", "-120px"]);
+  const yDots4 = useTransform(scrollYProgress, [0, 1], ["0px", "-200px"]);
 
   const handleDownloadResume = () => {
     if (resumeUrl) {
@@ -27,9 +45,12 @@ export default function Hero({ profile }: HeroProps) {
   };
 
   return (
-    <section className="min-h-screen w-full bg-gray-50 dark:bg-neutral-950 relative">
+    <section
+      ref={containerRef}
+      className="min-h-screen w-full bg-gray-50 dark:bg-neutral-950 relative overflow-hidden"
+    >
       {/* Light Mode Grid */}
-      <div
+      <motion.div
         className="absolute inset-0 z-0 dark:hidden"
         style={{
           backgroundImage: `
@@ -41,11 +62,12 @@ export default function Hero({ profile }: HeroProps) {
             "radial-gradient(ellipse 70% 60% at 50% 0%, #000 60%, transparent 100%)",
           maskImage:
             "radial-gradient(ellipse 70% 60% at 50% 0%, #000 60%, transparent 100%)",
+          y: !isMobile ? yGrid : 0,
         }}
       />
 
       {/* Dark Mode Grid */}
-      <div
+      <motion.div
         className="absolute inset-0 z-0 hidden dark:block"
         style={{
           backgroundImage: `
@@ -57,6 +79,8 @@ export default function Hero({ profile }: HeroProps) {
             "radial-gradient(ellipse 70% 60% at 50% 0%, #000 60%, transparent 100%)",
           maskImage:
             "radial-gradient(ellipse 70% 60% at 50% 0%, #000 60%, transparent 100%)",
+          y: !isMobile ? yGrid : 0,
+          opacity: 0.3,
         }}
       />
 
@@ -69,10 +93,29 @@ export default function Hero({ profile }: HeroProps) {
               <div className="space-y-6">
                 <div className="space-y-4">
                   <h1 className="text-4xl md:text-6xl font-bold from-blue-600 to-cyan-500 dark:from-blue-400 dark:to-cyan-300 bg-clip-text text-transparent bg-linear-to-r">
-                    <span className="block text-lg md:text-xl font-semibold mb-2">
+                    <motion.span
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={
+                        !isLoading
+                          ? { opacity: 1, y: 0 }
+                          : { opacity: 0, y: 10 }
+                      }
+                      transition={{ duration: 0.5 }}
+                      className="block text-lg md:text-xl font-semibold mb-2"
+                    >
                       Hi, I&apos;m{" "}
-                    </span>
-                    <span className="block">Gabriel Nathanael</span>
+                    </motion.span>
+                    <motion.span
+                      layoutId="gabriel-name"
+                      transition={{
+                        type: "spring",
+                        stiffness: 100,
+                        damping: 20,
+                      }}
+                      className="inline-block whitespace-nowrap"
+                    >
+                      Gabriel Nathanael
+                    </motion.span>
                   </h1>
                   <div className="text-2xl md:text-3xl font-semibold text-neutral-700 dark:text-neutral-200 min-h-12">
                     <TypeAnimation
@@ -121,26 +164,45 @@ export default function Hero({ profile }: HeroProps) {
             ) : (
               <motion.div
                 initial={{ opacity: 0, x: -50 }}
-                animate={{ opacity: 1, x: 0 }}
+                animate={
+                  !isLoading ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }
+                }
+                style={{ y: yText }}
                 transition={{ duration: 0.8, ease: "easeOut" }}
                 className="space-y-6"
               >
                 <div className="space-y-4">
-                  <motion.h1
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.2, duration: 0.6 }}
-                    className="text-4xl md:text-6xl font-bold from-blue-600 to-cyan-500 dark:from-blue-400 dark:to-cyan-300 bg-clip-text text-transparent bg-linear-to-r"
-                  >
-                    <span className="block text-lg md:text-xl font-semibold mb-2">
+                  <h1 className="text-4xl md:text-6xl font-bold from-blue-600 to-cyan-500 dark:from-blue-400 dark:to-cyan-300 bg-clip-text text-transparent bg-linear-to-r">
+                    <motion.span
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={
+                        !isLoading
+                          ? { opacity: 1, y: 0 }
+                          : { opacity: 0, y: 20 }
+                      }
+                      transition={{ delay: 0.2, duration: 0.6 }}
+                      className="block text-lg md:text-xl font-semibold mb-2"
+                    >
                       Hi, I&apos;m{" "}
-                    </span>
-                    Gabriel Nathanael
-                  </motion.h1>
+                    </motion.span>
+                    <motion.span
+                      layoutId="gabriel-name"
+                      transition={{
+                        type: "spring",
+                        stiffness: 100,
+                        damping: 20,
+                      }}
+                      className="inline-block whitespace-nowrap"
+                    >
+                      Gabriel Nathanael
+                    </motion.span>
+                  </h1>
 
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
+                    animate={
+                      !isLoading ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }
+                    }
                     transition={{ delay: 0.4, duration: 0.6 }}
                     className="text-2xl md:text-3xl font-semibold text-neutral-700 dark:text-neutral-200 min-h-12"
                   >
@@ -163,7 +225,9 @@ export default function Hero({ profile }: HeroProps) {
 
                 <motion.p
                   initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
+                  animate={
+                    !isLoading ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }
+                  }
                   transition={{ delay: 0.5, duration: 0.6 }}
                   className="text-lg text-neutral-600 dark:text-neutral-400 max-w-xl text-justify"
                 >
@@ -173,7 +237,9 @@ export default function Hero({ profile }: HeroProps) {
 
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
+                  animate={
+                    !isLoading ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }
+                  }
                   transition={{ delay: 0.6, duration: 0.6 }}
                   className="flex flex-wrap gap-4 pt-4 justify-center lg:justify-start"
                 >
@@ -374,7 +440,10 @@ export default function Hero({ profile }: HeroProps) {
             ) : (
               <motion.div
                 initial={{ opacity: 0, x: 50 }}
-                animate={{ opacity: 1, x: 0 }}
+                animate={
+                  !isLoading ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }
+                }
+                style={{ y: yImage }}
                 transition={{
                   duration: 0.8,
                   ease: "easeOut",
@@ -390,6 +459,7 @@ export default function Hero({ profile }: HeroProps) {
                       className="absolute top-0 right-0 w-32 h-32"
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
+                      style={{ y: yDots1 }}
                       transition={{ delay: 0.5 }}
                     >
                       <svg width="100%" height="100%" viewBox="0 0 100 100">
@@ -440,6 +510,7 @@ export default function Hero({ profile }: HeroProps) {
                       className="absolute top-8 left-0 w-24 h-24"
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
+                      style={{ y: yDots2 }}
                       transition={{ delay: 0.6 }}
                     >
                       <svg width="100%" height="100%" viewBox="0 0 100 100">
@@ -490,6 +561,7 @@ export default function Hero({ profile }: HeroProps) {
                       className="absolute bottom-0 right-8 w-28 h-28"
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
+                      style={{ y: yDots3 }}
                       transition={{ delay: 0.7 }}
                     >
                       <svg width="100%" height="100%" viewBox="0 0 100 100">
@@ -540,6 +612,7 @@ export default function Hero({ profile }: HeroProps) {
                       className="absolute bottom-8 left-4 w-20 h-20"
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
+                      style={{ y: yDots4 }}
                       transition={{ delay: 0.8 }}
                     >
                       <svg width="100%" height="100%" viewBox="0 0 100 100">

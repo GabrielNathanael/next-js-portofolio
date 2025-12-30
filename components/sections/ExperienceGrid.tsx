@@ -226,7 +226,7 @@ export default function ExperienceGrid({ experiences }: ExperienceGridProps) {
       {displayedExperiences.length > 0 ? (
         <div className="relative">
           {/* Timeline Line */}
-          <div className="absolute left-[11px] top-0 bottom-0 w-0.5 bg-gray-200 dark:bg-neutral-700" />
+          <div className="absolute left-2.75 top-0 bottom-0 w-0.5 bg-gray-200 dark:bg-neutral-700" />
 
           {/* Experience Items */}
           <div className="space-y-8">

@@ -31,7 +31,7 @@ const socials = [
 
 export default function About() {
   const [ref, inView] = useInView({
-    triggerOnce: true,
+    triggerOnce: false,
     threshold: 0.1,
   });
 
@@ -47,14 +47,42 @@ export default function About() {
         <>
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
-            animate={inView ? { opacity: 0.06, scale: 1 } : {}}
-            transition={{ duration: 1, delay: 0.3 }}
+            animate={
+              inView
+                ? {
+                    opacity: 0.08,
+                    scale: [1, 1.1, 1],
+                    x: [0, 20, 0],
+                    y: [0, -20, 0],
+                  }
+                : {}
+            }
+            transition={{
+              opacity: { duration: 1, delay: 0.3 },
+              scale: { duration: 8, repeat: Infinity, ease: "easeInOut" },
+              x: { duration: 10, repeat: Infinity, ease: "easeInOut" },
+              y: { duration: 9, repeat: Infinity, ease: "easeInOut" },
+            }}
             className="absolute -top-40 -left-40 w-96 h-96 bg-linear-to-br from-blue-400 to-cyan-500 rounded-full blur-3xl pointer-events-none"
           />
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
-            animate={inView ? { opacity: 0.06, scale: 1 } : {}}
-            transition={{ duration: 1, delay: 0.5 }}
+            animate={
+              inView
+                ? {
+                    opacity: 0.08,
+                    scale: [1, 1.2, 1],
+                    x: [0, -30, 0],
+                    y: [0, 30, 0],
+                  }
+                : {}
+            }
+            transition={{
+              opacity: { duration: 1, delay: 0.5 },
+              scale: { duration: 12, repeat: Infinity, ease: "easeInOut" },
+              x: { duration: 15, repeat: Infinity, ease: "easeInOut" },
+              y: { duration: 13, repeat: Infinity, ease: "easeInOut" },
+            }}
             className="absolute -bottom-40 -right-40 w-96 h-96 bg-linear-to-tl from-cyan-400 to-blue-500 rounded-full blur-3xl pointer-events-none"
           />
         </>
@@ -106,27 +134,34 @@ export default function About() {
                       href={social.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      initial={{ opacity: 0, scale: 0.5, rotate: -10 }}
+                      initial={{ opacity: 0, y: 20 }}
                       animate={
-                        inView ? { opacity: 1, scale: 1, rotate: 0 } : {}
+                        inView
+                          ? {
+                              opacity: 1,
+                              y: [0, -8, 0],
+                            }
+                          : {}
                       }
                       transition={{
-                        duration: 0.6,
-                        delay: 0.4 + idx * 0.1,
-                        type: "spring",
-                        stiffness: 260,
-                        damping: 20,
+                        opacity: { duration: 0.5, delay: 0.2 + idx * 0.1 },
+                        y: {
+                          duration: 4,
+                          repeat: Infinity,
+                          ease: "easeInOut",
+                          delay: idx * 0.2,
+                        },
                       }}
                       whileHover={{
-                        rotate: 8,
-                        y: -3,
-                        transition: { duration: 0.3, ease: "easeOut" },
+                        scale: 1.2,
+                        rotate: 5,
+                        transition: { duration: 0.2 },
                       }}
-                      whileTap={{ scale: 0.95 }}
-                      className="transition-all duration-300"
+                      whileTap={{ scale: 0.9 }}
+                      className="text-neutral-700 dark:text-neutral-300 hover:text-blue-500 dark:hover:text-blue-400 transition-colors"
                       title={social.name}
                     >
-                      <Icon className="w-8 h-8 lg:w-10 lg:h-10 text-neutral-700 dark:text-neutral-300" />
+                      <Icon className="w-8 h-8 lg:w-9 lg:h-9" />
                     </motion.a>
                   );
                 })}
@@ -167,13 +202,29 @@ export default function About() {
           >
             <div className="relative pl-6">
               <motion.div
-                className="absolute left-0 top-1 w-[3px] h-14 bg-linear-to-b from-blue-500 to-cyan-400 dark:from-blue-400 dark:to-cyan-300 rounded-full"
+                className="absolute left-0 top-1 w-0.75 bg-linear-to-b from-blue-500 to-cyan-400 dark:from-blue-400 dark:to-cyan-300 rounded-full"
                 initial={{ height: 0, opacity: 0 }}
-                animate={inView ? { height: 56, opacity: 1 } : {}}
+                animate={
+                  inView
+                    ? {
+                        height: [56, 70, 56],
+                        opacity: 1,
+                        boxShadow: [
+                          "0px 0px 0px rgba(59,130,246,0)",
+                          "0px 0px 15px rgba(59,130,246,0.5)",
+                          "0px 0px 0px rgba(59,130,246,0)",
+                        ],
+                      }
+                    : {}
+                }
                 transition={{
-                  duration: isMobile ? 0.6 : 0.8,
-                  delay: isMobile ? 0.35 : 0.7,
-                  ease: "easeOut",
+                  height: { duration: 4, repeat: Infinity, ease: "easeInOut" },
+                  opacity: { duration: 0.8, delay: isMobile ? 0.35 : 0.7 },
+                  boxShadow: {
+                    duration: 4,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  },
                 }}
               />
               <p className="text-lg lg:text-[1.05rem] text-neutral-700 dark:text-neutral-300 leading-relaxed max-w-md text-justify">
@@ -235,7 +286,7 @@ export default function About() {
                 </span>
               </h3>
 
-              <div className="flex justify-center gap-6">
+              <div className="flex justify-center gap-8">
                 {socials.map((social, idx) => {
                   const Icon = social.icon;
                   return (
@@ -244,27 +295,29 @@ export default function About() {
                       href={social.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      initial={{
-                        opacity: 0,
-                        scale: 0.5,
-                        y: isMobile ? 10 : 20,
-                      }}
-                      animate={inView ? { opacity: 1, scale: 1, y: 0 } : {}}
-                      transition={{
-                        duration: isMobile ? 0.5 : 0.6,
-                        delay: (isMobile ? 0.5 : 0.9) + idx * 0.1,
-                        type: "spring",
-                        stiffness: 260,
-                        damping: 20,
-                      }}
-                      whileHover={
-                        !isMobile ? { scale: 1.15, y: -5 } : undefined
+                      initial={{ opacity: 0, y: 15 }}
+                      animate={
+                        inView
+                          ? {
+                              opacity: 1,
+                              y: [0, -6, 0],
+                            }
+                          : {}
                       }
-                      whileTap={{ scale: 0.95 }}
-                      className="transition-all duration-300"
+                      transition={{
+                        opacity: { duration: 0.5, delay: 0.3 + idx * 0.1 },
+                        y: {
+                          duration: 4,
+                          repeat: Infinity,
+                          ease: "easeInOut",
+                          delay: idx * 0.2,
+                        },
+                      }}
+                      whileTap={{ scale: 0.9 }}
+                      className="text-neutral-700 dark:text-neutral-300 active:text-blue-500"
                       title={social.name}
                     >
-                      <Icon className="w-8 h-8 text-neutral-700 dark:text-neutral-300" />
+                      <Icon className="w-8 h-8" />
                     </motion.a>
                   );
                 })}

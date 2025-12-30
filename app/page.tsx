@@ -8,6 +8,8 @@ import RecentExperience from "@/components/sections/RecentExperience";
 import LatestCertificates from "@/components/sections/LatestCertificates";
 import TechStack from "@/components/sections/TechStack";
 import ContactForm from "@/components/sections/Contact";
+import LoadingScreen from "@/components/ui/LoadingScreen";
+import ClientWrapper from "@/components/layout/ClientWrapper";
 import {
   getFeaturedProjects,
   getLatestCertificates,
@@ -116,49 +118,52 @@ export default async function Home() {
       />
 
       <div className="bg-white dark:bg-neutral-950 min-h-screen">
-        <Navbar />
-        <main className="min-h-screen overflow-x-hidden">
-          {/* Hero Section */}
-          <Hero profile={profile} />
+        <LoadingScreen />
+        <ClientWrapper>
+          <Navbar />
+          <main className="min-h-screen overflow-x-hidden">
+            {/* Hero Section */}
+            <Hero profile={profile} />
 
-          {/* Main Content - WITH CONTAINER */}
-          <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 space-y-32 md:space-y-12">
-            {/* About Section */}
-            <div className="w-full">
-              <About />
-            </div>
-
-            {/* Experience */}
-            {recentExperience && (
+            {/* Main Content - WITH CONTAINER */}
+            <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 space-y-32 md:space-y-12">
+              {/* About Section */}
               <div className="w-full">
-                <RecentExperience experience={recentExperience} />
+                <About />
               </div>
-            )}
 
-            {/* Featured Projects */}
-            <div className="w-full">
-              <FeaturedProjects projects={featuredProjects} />
-            </div>
+              {/* Experience */}
+              {recentExperience && (
+                <div className="w-full">
+                  <RecentExperience experience={recentExperience} />
+                </div>
+              )}
 
-            {/* Certificates */}
-            <div className="w-full">
-              <LatestCertificates certificates={latestCertificates} />
-            </div>
-          </section>
+              {/* Featured Projects */}
+              <div className="w-full">
+                <FeaturedProjects projects={featuredProjects} />
+              </div>
 
-          {/* Tech Stack - FULL WIDTH MARQUEE */}
-          <section className="w-full py-20">
-            <TechStack />
-          </section>
+              {/* Certificates */}
+              <div className="w-full">
+                <LatestCertificates certificates={latestCertificates} />
+              </div>
+            </section>
 
-          {/* Contact Form - BACK TO CONTAINER */}
-          <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
-            <div className="w-full">
-              <ContactForm />
-            </div>
-          </section>
-        </main>
-        <Footer />
+            {/* Tech Stack - FULL WIDTH MARQUEE */}
+            <section className="w-full py-20">
+              <TechStack />
+            </section>
+
+            {/* Contact Form - BACK TO CONTAINER */}
+            <section className="relative w-full py-20">
+              <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+                <ContactForm />
+              </div>
+            </section>
+          </main>
+          <Footer />
+        </ClientWrapper>
       </div>
     </>
   );

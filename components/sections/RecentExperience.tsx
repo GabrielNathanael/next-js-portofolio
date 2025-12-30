@@ -27,7 +27,7 @@ export default function RecentExperience({
   experience,
 }: RecentExperienceProps) {
   const [ref, inView] = useInView({
-    triggerOnce: true,
+    triggerOnce: false,
     threshold: 0.1,
   });
 
@@ -84,8 +84,22 @@ export default function RecentExperience({
       {!isMobile && (
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
-          animate={inView ? { opacity: 0.15, scale: 1 } : {}}
-          transition={{ duration: 1, delay: 0.3 }}
+          animate={
+            inView
+              ? {
+                  opacity: 0.15,
+                  scale: [1, 1.15, 1],
+                  x: [0, 15, 0],
+                  y: [0, -15, 0],
+                }
+              : {}
+          }
+          transition={{
+            opacity: { duration: 1, delay: 0.3 },
+            scale: { duration: 6, repeat: Infinity, ease: "easeInOut" },
+            x: { duration: 8, repeat: Infinity, ease: "easeInOut" },
+            y: { duration: 7, repeat: Infinity, ease: "easeInOut" },
+          }}
           className="absolute -top-20 -right-20 w-64 h-64 bg-linear-to-br from-blue-500 to-cyan-400 rounded-full blur-3xl pointer-events-none"
         />
       )}
@@ -134,13 +148,13 @@ export default function RecentExperience({
             {/* Decorative timeline marker */}
             <motion.div
               initial={{ height: 0 }}
-              animate={inView ? { height: "100%" } : {}}
+              animate={inView ? { height: "100%" } : { height: 0 }}
               transition={{
-                duration: isMobile ? 0.8 : 1,
-                delay: isMobile ? 0.4 : 0.5,
-                ease: "easeOut",
+                duration: isMobile ? 1 : 1.5,
+                delay: 0.5,
+                ease: "easeInOut",
               }}
-              className="absolute left-0 top-0 w-1 bg-linear-to-b from-blue-500 via-cyan-400 to-transparent"
+              className="absolute left-0 top-0 w-1 bg-linear-to-b from-blue-600 via-cyan-400 to-transparent"
             />
 
             <div className="space-y-4 md:space-y-5 pl-4">
@@ -395,8 +409,20 @@ export default function RecentExperience({
             {!isMobile && (
               <motion.div
                 initial={{ opacity: 0, scale: 0 }}
-                animate={inView ? { opacity: 0.5, scale: 1 } : {}}
-                transition={{ duration: 0.8, delay: 0.7 }}
+                animate={
+                  inView
+                    ? {
+                        opacity: 0.3,
+                        scale: [1, 1.2, 1],
+                        x: [0, -20, 0],
+                      }
+                    : {}
+                }
+                transition={{
+                  opacity: { duration: 0.8, delay: 0.7 },
+                  scale: { duration: 5, repeat: Infinity, ease: "easeInOut" },
+                  x: { duration: 6, repeat: Infinity, ease: "easeInOut" },
+                }}
                 className="absolute -bottom-10 -right-10 w-32 h-32 bg-linear-to-tl from-cyan-400 to-blue-500 rounded-full blur-2xl"
               />
             )}
