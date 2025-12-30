@@ -307,7 +307,7 @@ export default function ContactForm() {
               type="submit"
               variant="primary"
               size="lg"
-              className="w-full group"
+              className="w-full group relative overflow-visible"
               disabled={isSubmitting}
             >
               {isSubmitting ? (
@@ -318,7 +318,13 @@ export default function ContactForm() {
               ) : (
                 <>
                   <span className="text-lg">Send Message</span>
-                  <Send className="w-5 h-5 ml-3 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                  <div className="relative ml-3">
+                    <Send className="w-5 h-5 absolute inset-0 rotate-45 opacity-0 group-hover:opacity-30 group-hover:translate-x-2 transition-all duration-500" />
+                    <Send className="w-5 h-5 absolute inset-0 rotate-45 opacity-0 group-hover:opacity-20 group-hover:translate-x-4 transition-all duration-700" />
+                    <Send className="w-5 h-5 absolute inset-0 rotate-45 opacity-0 group-hover:opacity-10 group-hover:translate-x-6 transition-all duration-900" />
+
+                    <Send className="w-5 h-5 relative rotate-45 group-hover:translate-x-2 transition-transform duration-300" />
+                  </div>
                 </>
               )}
             </Button>

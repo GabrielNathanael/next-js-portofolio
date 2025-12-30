@@ -27,7 +27,7 @@ export default function RecentExperience({
   experience,
 }: RecentExperienceProps) {
   const [ref, inView] = useInView({
-    triggerOnce: false,
+    triggerOnce: true,
     threshold: 0.1,
   });
 
