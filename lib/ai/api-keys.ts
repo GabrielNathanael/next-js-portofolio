@@ -100,7 +100,7 @@ export async function withFallback<T>(
           error.message.includes("429"))
       ) {
         markKeyAsFailed(key);
-        console.log(`Key ${key.slice(0, 10)}... failed, trying next key...`);
+
         continue; // Try next key
       }
 

@@ -14,6 +14,7 @@ import {
 import { withFallback, hasAvailableKeys } from "@/lib/ai/api-keys";
 import { ChatMessage } from "@/types/chat";
 import { rateLimit } from "@/lib/rate-limit";
+
 /* ================================
    RUNTIME
 ================================ */
@@ -27,6 +28,12 @@ const MAX_MESSAGE_LENGTH = 500;
 const MAX_HISTORY_LENGTH = 10;
 
 const VALID_PAGES = ["home", "projects", "certificates", "experience"] as const;
+
+/* ================================
+   🔥 SMART TOKEN ALLOCATION
+   Let AI decide response length naturally
+================================ */
+const DEFAULT_MAX_TOKENS = 800; // Balanced default for most responses
 
 /* ================================
    SECURITY: PROMPT INJECTION GUARDS
@@ -103,10 +110,12 @@ function validateInput(
 
   return { valid: true };
 }
+
 function getClientIp(req: NextRequest) {
   const forwardedFor = req.headers.get("x-forwarded-for");
   return forwardedFor?.split(",")[0]?.trim() ?? "unknown";
 }
+
 /* ================================
    POST /api/chat
 ================================ */
@@ -136,8 +145,6 @@ export async function POST(req: NextRequest) {
     if (contentLength && Number(contentLength) > MAX_BODY_SIZE) {
       return NextResponse.json({ error: "Payload too large" }, { status: 413 });
     }
-
-    /* lanjut logic AI lo seperti biasa */
 
     /* -------- PARSE BODY -------- */
     const body = await req.json();
@@ -221,7 +228,7 @@ export async function POST(req: NextRequest) {
           temperature: 0.7,
           topP: 0.95,
           topK: 40,
-          maxOutputTokens: 500,
+          maxOutputTokens: DEFAULT_MAX_TOKENS, // 🔥 AI will naturally adjust length
         },
       });
 
@@ -244,7 +251,14 @@ export async function POST(req: NextRequest) {
       });
 
       const result = await chat.sendMessage(sanitizedMessage);
-      return result.response.text();
+      const text = result.response.text();
+
+      // 🔥 VALIDATE RESPONSE NOT EMPTY
+      if (!text || text.trim().length === 0) {
+        throw new Error("AI returned empty response");
+      }
+
+      return text;
     });
 
     return NextResponse.json({
@@ -269,6 +283,14 @@ export async function POST(req: NextRequest) {
         return NextResponse.json(
           { error: "Service busy. Please try again shortly." },
           { status: 429 }
+        );
+      }
+
+      // 🔥 HANDLE EMPTY RESPONSE
+      if (error.message.includes("empty response")) {
+        return NextResponse.json(
+          { error: "AI is having trouble responding. Please try again." },
+          { status: 500 }
         );
       }
     }

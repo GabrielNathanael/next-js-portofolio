@@ -3,7 +3,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, AlertCircle } from "lucide-react";
+import { X, AlertCircle, Mail, Instagram } from "lucide-react";
 import Image from "next/image";
 import { useChat } from "@/hooks/useChat";
 import { useChatSession } from "@/hooks/useChatSession";
@@ -257,6 +257,40 @@ export default function ChatWidget() {
                   </div>
                 </div>
               )}
+
+              <div className="px-5 py-2.5 bg-neutral-50 dark:bg-neutral-800/50 border-t border-neutral-200 dark:border-neutral-700">
+                <div className="flex items-start gap-2 text-xs text-neutral-600 dark:text-neutral-400">
+                  <AlertCircle className="w-3.5 h-3.5 shrink-0 mt-0.5" />
+                  <div className="flex-1">
+                    <p className="mb-1.5">
+                      <strong>Note:</strong> This AI may make mistakes. For
+                      accurate information, contact Gabriel via email or
+                      Instagram:
+                    </p>
+                    <div className="flex items-center gap-3">
+                      <a
+                        href="mailto:gabrielnathanael81@gmail.com"
+                        className="flex items-center gap-1 text-blue-600 dark:text-blue-400 hover:underline"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <Mail className="w-3 h-3" />
+                        <span>Email</span>
+                      </a>
+
+                      <a
+                        href="https://www.instagram.com/gabrielnathanaelp"
+                        className="flex items-center gap-1 text-blue-600 dark:text-blue-400 hover:underline"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <Instagram className="w-3 h-3" />
+                        <span>Instagram</span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
               {/* Input Area */}
               <div className="px-5 py-4 border-t border-neutral-200 dark:border-neutral-800">
