@@ -43,7 +43,7 @@ export const techStack: TechItem[] = [
     color: "text-gray-900 dark:text-gray-100",
   },
   {
-    name: "React.js",
+    name: "React",
     category: "framework",
     icon: SiReact,
     color: "text-cyan-500 dark:text-cyan-400",
