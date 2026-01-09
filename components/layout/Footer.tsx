@@ -10,9 +10,6 @@ export default function Footer() {
           <p className="text-neutral-500 dark:text-neutral-400 text-xs">
             © {new Date().getFullYear()} Gabriel Nathanael Purba
           </p>
-          <p className="text-neutral-400 dark:text-neutral-500 text-xs">
-            Last updated: December 2025
-          </p>
         </div>
       </div>
     </footer>
