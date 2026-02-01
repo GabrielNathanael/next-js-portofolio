@@ -8,7 +8,6 @@ import Link from "next/link";
 import {
   Terminal as TerminalIcon,
   ChevronRight,
-  Sparkles,
   Github,
   Linkedin,
   Mail,
@@ -90,26 +89,72 @@ export default function InteractiveTerminal({
     ]);
   };
 
+  // ASCII art — Desktop & Tablet
+  const ASCII_DESKTOP = [
+    "   ____      _        ____     ____               U _____ u  _      ",
+    'U /"___|uU  /"\\  u U | __")uU |  _"\\ u     ___    \\| ___"|/ |"|     ',
+    '\\| |  _ / \\/ _ \\/   \\|  _ \\/ \\| |_) |/    |_"_|    |  _|" U | | u   ',
+    " | |_| |  / ___ \\    | |_) |  |  _ <       | |     | |___  \\| |/__  ",
+    "  \\____| /_/   \\_\\   |____/   |_| \\_\\    U/| |\\u   |_____|  |_____| ",
+    "  _)(|_   \\\\    >>  _|| \\\\_   //   \\\\_.-,_|___|_,-.<<   >>  //  \\\\  ",
+    " (__)__) (__)  (__)(__) (__) (__)  (__)\_)-' '-(_/(__) (__)(_\") (\"_) ",
+  ];
+
+  // ASCII art — Mobile
+  const ASCII_MOBILE = [
+    "   ____   ",
+    'U /"___|u ',
+    "\\| |  _ / ",
+    " | |_| |  ",
+    "  \\____|  ",
+    "  _)(|_   ",
+    " (__)__)  ",
+  ];
+
   // Welcome message on mount
   useEffect(() => {
     if (inView && lines.length === 0) {
       addLine(
         "output",
-        <div className="space-y-2">
-          <div className="flex items-center gap-2">
-            <Sparkles className="w-5 h-5 text-cyan-400" />
-            <span className="text-cyan-400 font-bold">
-              Welcome to Gabriel&apos;s Portfolio Terminal
-            </span>
+        <div className="space-y-3">
+          {/* ASCII art — Desktop & Tablet */}
+          <div className="hidden sm:block">
+            <pre className="text-cyan-400 leading-tight text-[9px] sm:text-[10px] md:text-[12px] lg:text-[14px]">
+              {ASCII_DESKTOP.join("\n")}
+            </pre>
           </div>
-          <div className="text-neutral-400 text-sm">
-            Type <span className="text-blue-400 font-mono">help</span> to see
-            available commands or click on suggestions below
+
+          {/* ASCII art — Mobile */}
+          <div className="sm:hidden">
+            <pre className="text-cyan-400 leading-tight text-[11px]">
+              {ASCII_MOBILE.join("\n")}
+            </pre>
+          </div>
+
+          {/* Divider */}
+          <div className="text-neutral-600 text-xs">
+            ══════════════════════════════════════
+          </div>
+
+          {/* Info line */}
+          <div className="text-neutral-400 text-sm flex flex-wrap items-center gap-1">
+            <span>Full Stack Developer</span>
+            <span className="text-neutral-600">│</span>
+            <span>Type</span>
+            <span className="text-blue-400 font-mono">help</span>
+            <span>to see available commands</span>
           </div>
         </div>,
       );
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [inView]);
+
+  // Focus input hanya saat terminal masuk viewport
+  useEffect(() => {
+    if (inView) {
+      inputRef.current?.focus();
+    }
   }, [inView]);
 
   // Auto scroll to bottom
@@ -622,7 +667,8 @@ export default function InteractiveTerminal({
         <div
           ref={terminalRef}
           onClick={focusInput}
-          className="p-4 h-125 overflow-y-auto font-mono text-sm cursor-text custom-scrollbar"
+          className="p-4 h-125 overflow-y-auto font-mono text-sm cursor-text"
+          style={{ scrollbarWidth: "thin", scrollbarColor: "#404040 #171717" }}
         >
           {/* Lines */}
           <AnimatePresence>
@@ -663,7 +709,6 @@ export default function InteractiveTerminal({
               onKeyDown={handleKeyDown}
               disabled={isTyping}
               className="flex-1 bg-transparent outline-none text-neutral-100 caret-green-400"
-              autoFocus
               spellCheck={false}
             />
             <motion.div
@@ -726,22 +771,6 @@ export default function InteractiveTerminal({
         transition={{ duration: 1, delay: 0.7 }}
         className="absolute -bottom-20 -left-20 w-64 h-64 bg-linear-to-tr from-cyan-500 to-blue-400 rounded-full blur-3xl pointer-events-none"
       />
-
-      <style jsx>{`
-        .custom-scrollbar::-webkit-scrollbar {
-          width: 8px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-track {
-          background: #171717;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-          background: #404040;
-          border-radius: 4px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-          background: #525252;
-        }
-      `}</style>
     </motion.div>
   );
 }
