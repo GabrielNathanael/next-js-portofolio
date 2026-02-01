@@ -7,6 +7,7 @@ import FeaturedProjects from "@/components/sections/FeaturedProjects";
 import RecentExperience from "@/components/sections/RecentExperience";
 import LatestCertificates from "@/components/sections/LatestCertificates";
 import TechStack from "@/components/sections/TechStack";
+import InteractiveTerminal from "@/components/sections/InteractiveTerminal";
 import ContactForm from "@/components/sections/Contact";
 import LoadingScreen from "@/components/ui/LoadingScreen";
 import ClientWrapper from "@/components/layout/ClientWrapper";
@@ -15,6 +16,8 @@ import {
   getLatestCertificates,
   getRecentExperience,
   getProfile,
+  getProjects,
+  getCertificates,
 } from "@/lib/contentful/api";
 import {
   siteConfig,
@@ -91,13 +94,21 @@ export const metadata: Metadata = {
 
 export default async function Home() {
   // Fetch data dari Contentful dengan parallel requests
-  const [featuredProjects, latestCertificates, recentExperience, profile] =
-    await Promise.all([
-      getFeaturedProjects(),
-      getLatestCertificates(),
-      getRecentExperience(),
-      getProfile(),
-    ]);
+  const [
+    featuredProjects,
+    latestCertificates,
+    recentExperience,
+    profile,
+    allProjects,
+    allCertificates,
+  ] = await Promise.all([
+    getFeaturedProjects(),
+    getLatestCertificates(),
+    getRecentExperience(),
+    getProfile(),
+    getProjects(), // For terminal
+    getCertificates(), // For terminal
+  ]);
 
   const breadcrumb = jsonLdBreadcrumb([{ name: "Home", url: "/" }]);
 
@@ -155,7 +166,16 @@ export default async function Home() {
               <TechStack />
             </section>
 
-            {/* Contact Form - BACK TO CONTAINER */}
+            {/* Interactive Terminal - BACK TO CONTAINER */}
+            <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+              <InteractiveTerminal
+                projects={allProjects}
+                certificates={allCertificates}
+                experience={recentExperience}
+              />
+            </section>
+
+            {/* Contact Form - CONTAINER */}
             <section className="relative w-full py-20">
               <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
                 <ContactForm />

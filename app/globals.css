@@ -28,10 +28,18 @@
 body {
   background: transparent;
   color: rgb(var(--foreground));
-  font-family: "Manrope", system-ui, -apple-system, sans-serif;
-  font-feature-settings: "rlig" 1, "calt" 1;
+  font-family:
+    "Manrope",
+    system-ui,
+    -apple-system,
+    sans-serif;
+  font-feature-settings:
+    "rlig" 1,
+    "calt" 1;
   font-optical-sizing: auto;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
 }
 
 /* === Smooth scrolling === */

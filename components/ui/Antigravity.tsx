@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/purity */
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import React, { useMemo, useRef } from "react";
+import React, { useMemo, useRef, useEffect } from "react";
 import * as THREE from "three";
 
 interface AntigravityProps {
@@ -45,6 +45,20 @@ const AntigravityInner: React.FC<AntigravityProps> = ({
   const lastMousePos = useRef({ x: 0, y: 0 });
   const lastMouseMoveTime = useRef(0);
   const virtualMouse = useRef({ x: 0, y: 0 });
+
+  const mouseRef = useRef({ x: 0, y: 0 });
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      mouseRef.current = {
+        x: (e.clientX / window.innerWidth) * 2 - 1,
+        y: -(e.clientY / window.innerHeight) * 2 + 1,
+      };
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, []);
 
   const particles = useMemo(() => {
     const temp = [];
@@ -91,11 +105,12 @@ const AntigravityInner: React.FC<AntigravityProps> = ({
     const mesh = meshRef.current;
     if (!mesh) return;
 
-    const { viewport: v, pointer: m } = state;
+    const { viewport: v } = state;
+    const m = mouseRef.current;
 
     const mouseDist = Math.sqrt(
       Math.pow(m.x - lastMousePos.current.x, 2) +
-        Math.pow(m.y - lastMousePos.current.y, 2)
+        Math.pow(m.y - lastMousePos.current.y, 2),
     );
 
     if (mouseDist > 0.001) {
@@ -162,7 +177,7 @@ const AntigravityInner: React.FC<AntigravityProps> = ({
 
       const currentDistToMouse = Math.sqrt(
         Math.pow(particle.cx - projectedTargetX, 2) +
-          Math.pow(particle.cy - projectedTargetY, 2)
+          Math.pow(particle.cy - projectedTargetY, 2),
       );
 
       const distFromRing = Math.abs(currentDistToMouse - ringRadius);

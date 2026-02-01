@@ -34,7 +34,7 @@ export default function AntigravityBackground() {
   return (
     <div className="absolute inset-0 w-full h-full pointer-events-none">
       <Antigravity
-        count={300}
+        count={500}
         magnetRadius={6}
         ringRadius={7}
         waveSpeed={0.4}
@@ -42,7 +42,7 @@ export default function AntigravityBackground() {
         particleSize={0.6}
         lerpSpeed={0.05}
         color={particleColor}
-        autoAnimate={false}
+        autoAnimate={true}
         particleVariance={1}
         rotationSpeed={0}
         depthFactor={1}
