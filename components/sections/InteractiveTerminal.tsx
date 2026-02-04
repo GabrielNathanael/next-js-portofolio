@@ -150,7 +150,6 @@ export default function InteractiveTerminal({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inView]);
 
-  // Focus input hanya saat terminal masuk viewport
   useEffect(() => {
     if (inView) {
       inputRef.current?.focus();

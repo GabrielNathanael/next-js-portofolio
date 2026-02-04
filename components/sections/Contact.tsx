@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { Send, User, Mail, MessageSquare, Loader2 } from "lucide-react";
+import { FaWhatsapp } from "react-icons/fa";
 import { toast } from "sonner";
 import Button from "@/components/ui/Button";
 import AntigravityBackground from "@/components/ui/AntigravityBackground";
@@ -127,6 +128,15 @@ export default function ContactForm() {
     }
   };
 
+  const handleWhatsAppClick = () => {
+    const phoneNumber = "6281290265801"; // Format internasional
+    const message = encodeURIComponent(
+      "Hello! I'd like to talk about working together on a project.",
+    );
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
+    window.open(whatsappUrl, "_blank");
+  };
+
   return (
     <>
       {/* Antigravity Particles Background */}
@@ -164,6 +174,31 @@ export default function ContactForm() {
 
           {/* Form Container */}
           <div className="relative bg-white/80 dark:bg-neutral-900/80 backdrop-blur-xl rounded-2xl border border-neutral-200/50 dark:border-neutral-700/50 p-6 lg:p-8 shadow-xl">
+            {/* WhatsApp Button - Primary Contact Method */}
+            <button
+              onClick={handleWhatsAppClick}
+              className="w-full mb-6 px-6 py-4 bg-gradient-to-br from-[#25D366] via-[#25D366] to-[#128C7E] hover:from-[#20BD5A] hover:via-[#20BD5A] hover:to-[#0F7A6D] dark:from-[#25D366] dark:via-[#25D366] dark:to-[#128C7E] dark:hover:from-[#2BE67D] dark:hover:via-[#2BE67D] dark:hover:to-[#1AA884] text-white rounded-xl font-semibold text-lg transition-all duration-300 flex items-center justify-center gap-3 shadow-lg hover:shadow-xl hover:shadow-green-500/30 dark:hover:shadow-green-400/30 hover:scale-[1.02] active:scale-[0.98] group relative overflow-hidden"
+            >
+              {/* Glossy overlay effect */}
+              <div className="absolute inset-0 bg-gradient-to-t from-transparent via-white/10 to-white/20 dark:via-white/5 dark:to-white/10"></div>
+
+              <FaWhatsapp className="w-6 h-6 relative z-10 group-hover:rotate-12 transition-transform duration-300" />
+              <span className="relative z-10">Chat on WhatsApp</span>
+            </button>
+
+            {/* Divider */}
+            <div className="relative mb-6">
+              <div className="absolute inset-0 flex items-center">
+                <div className="w-full border-t border-neutral-300 dark:border-neutral-700"></div>
+              </div>
+              <div className="relative flex justify-center text-sm">
+                <span className="px-4 bg-white/80 dark:bg-neutral-900/80 text-neutral-500 dark:text-neutral-400">
+                  or send via email
+                </span>
+              </div>
+            </div>
+
+            {/* Email Form */}
             <form onSubmit={handleSubmit} className="space-y-6">
               {/* Name Input */}
               <div className="relative">
