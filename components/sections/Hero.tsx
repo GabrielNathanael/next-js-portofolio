@@ -303,7 +303,7 @@ export default function Hero({ profile }: HeroProps) {
                               r="2"
                               fill="url(#dots-gradient-1-mobile)"
                             />
-                          ))
+                          )),
                         )}
                       </svg>
                     </div>
@@ -340,7 +340,7 @@ export default function Hero({ profile }: HeroProps) {
                               r="2.5"
                               fill="url(#dots-gradient-2-mobile)"
                             />
-                          ))
+                          )),
                         )}
                       </svg>
                     </div>
@@ -377,7 +377,7 @@ export default function Hero({ profile }: HeroProps) {
                               r="2"
                               fill="url(#dots-gradient-3-mobile)"
                             />
-                          ))
+                          )),
                         )}
                       </svg>
                     </div>
@@ -414,7 +414,7 @@ export default function Hero({ profile }: HeroProps) {
                               r="2.5"
                               fill="url(#dots-gradient-4-mobile)"
                             />
-                          ))
+                          )),
                         )}
                       </svg>
                     </div>
@@ -500,7 +500,7 @@ export default function Hero({ profile }: HeroProps) {
                                 repeatDelay: 3,
                               }}
                             />
-                          ))
+                          )),
                         )}
                       </svg>
                     </motion.div>
@@ -551,7 +551,7 @@ export default function Hero({ profile }: HeroProps) {
                                 repeatDelay: 4,
                               }}
                             />
-                          ))
+                          )),
                         )}
                       </svg>
                     </motion.div>
@@ -602,7 +602,7 @@ export default function Hero({ profile }: HeroProps) {
                                 repeatDelay: 3.5,
                               }}
                             />
-                          ))
+                          )),
                         )}
                       </svg>
                     </motion.div>
@@ -653,7 +653,7 @@ export default function Hero({ profile }: HeroProps) {
                                 repeatDelay: 4.5,
                               }}
                             />
-                          ))
+                          )),
                         )}
                       </svg>
                     </motion.div>

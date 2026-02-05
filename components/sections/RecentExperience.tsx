@@ -80,30 +80,6 @@ export default function RecentExperience({
       transition={{ duration: 0.6 }}
       className="space-y-6 relative"
     >
-      {/* Decorative floating blob - background accent - desktop only */}
-      {!isMobile && (
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={
-            inView
-              ? {
-                  opacity: 0.15,
-                  scale: [1, 1.15, 1],
-                  x: [0, 15, 0],
-                  y: [0, -15, 0],
-                }
-              : {}
-          }
-          transition={{
-            opacity: { duration: 1, delay: 0.3 },
-            scale: { duration: 6, repeat: Infinity, ease: "easeInOut" },
-            x: { duration: 8, repeat: Infinity, ease: "easeInOut" },
-            y: { duration: 7, repeat: Infinity, ease: "easeInOut" },
-          }}
-          className="absolute -top-20 -right-20 w-64 h-64 bg-linear-to-br from-blue-500 to-cyan-400 rounded-full blur-3xl pointer-events-none"
-        />
-      )}
-
       {/* Header with decorative bar */}
       <div className="flex items-center justify-between relative">
         <motion.h2
@@ -192,7 +168,7 @@ export default function RecentExperience({
                   )}
                   <div
                     className={`px-3 py-1.5 rounded-full text-sm font-medium ${getEmploymentTypeColor(
-                      experience.employmentType
+                      experience.employmentType,
                     )}`}
                   >
                     {experience.employmentType}
@@ -323,7 +299,7 @@ export default function RecentExperience({
                                       <ExternalLink className="w-4 h-4" />
                                       {project.title}
                                     </a>
-                                  )
+                                  ),
                                 )}
                               </div>
                             </div>
@@ -404,28 +380,6 @@ export default function RecentExperience({
                   </div>
                 )}
             </div>
-
-            {/* Bottom right decorative accent - desktop only */}
-            {!isMobile && (
-              <motion.div
-                initial={{ opacity: 0, scale: 0 }}
-                animate={
-                  inView
-                    ? {
-                        opacity: 0.3,
-                        scale: [1, 1.2, 1],
-                        x: [0, -20, 0],
-                      }
-                    : {}
-                }
-                transition={{
-                  opacity: { duration: 0.8, delay: 0.7 },
-                  scale: { duration: 5, repeat: Infinity, ease: "easeInOut" },
-                  x: { duration: 6, repeat: Infinity, ease: "easeInOut" },
-                }}
-                className="absolute -bottom-10 -right-10 w-32 h-32 bg-linear-to-tl from-cyan-400 to-blue-500 rounded-full blur-2xl"
-              />
-            )}
           </Card>
         </motion.div>
       </div>

@@ -64,14 +64,6 @@ export default function FeaturedProjects({ projects }: FeaturedProjectsProps) {
       transition={{ duration: 0.6 }}
       className="space-y-6 relative"
     >
-      {/* Decorative floating blob - left side */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={inView ? { opacity: isMobile ? 0.05 : 0.08, scale: 1 } : {}}
-        transition={{ duration: 1, delay: 0.3 }}
-        className="absolute -top-2 -left-16 w-56 h-56 bg-linear-to-br from-cyan-400 to-blue-500 rounded-full blur-2xl pointer-events-none"
-      />
-
       {/* Header with decorative elements */}
       <div className="flex items-center justify-between relative">
         <motion.h2
@@ -171,32 +163,11 @@ export default function FeaturedProjects({ projects }: FeaturedProjectsProps) {
                     )}
                   </div>
                 </div>
-
-                {/* Subtle glow on hover - disable on mobile */}
-                {!isMobile && (
-                  <motion.div
-                    className={`absolute ${
-                      idx === 0
-                        ? "-bottom-8 -left-8"
-                        : idx === 1
-                        ? "-top-8 -right-8"
-                        : "-bottom-8 -right-8"
-                    } w-24 h-24 bg-linear-to-br from-cyan-400 to-blue-500 rounded-full blur-2xl opacity-0 group-hover:opacity-30 transition-opacity duration-500`}
-                  />
-                )}
               </Card>
             </motion.div>
           );
         })}
       </div>
-
-      {/* Bottom right decorative accent blob */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={inView ? { opacity: isMobile ? 0.05 : 0.1, scale: 1 } : {}}
-        transition={{ duration: 1, delay: 0.6 }}
-        className="absolute -bottom-20 -right-20 w-64 h-64 bg-linear-to-tl from-blue-500 to-cyan-400 rounded-full blur-3xl pointer-events-none"
-      />
 
       {/* Project Detail Modal - Lazy loaded */}
       {selectedProject && (

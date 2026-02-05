@@ -42,52 +42,6 @@ export default function About() {
       className="min-h-screen bg-white dark:bg-neutral-950 py-20 px-4 sm:px-6 lg:px-8 mt-4 relative"
       ref={ref}
     >
-      {/* Decorative blobs - desktop only */}
-      {!isMobile && (
-        <>
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={
-              inView
-                ? {
-                    opacity: 0.08,
-                    scale: [1, 1.1, 1],
-                    x: [0, 20, 0],
-                    y: [0, -20, 0],
-                  }
-                : {}
-            }
-            transition={{
-              opacity: { duration: 1, delay: 0.3 },
-              scale: { duration: 8, repeat: Infinity, ease: "easeInOut" },
-              x: { duration: 10, repeat: Infinity, ease: "easeInOut" },
-              y: { duration: 9, repeat: Infinity, ease: "easeInOut" },
-            }}
-            className="absolute -top-40 -left-40 w-96 h-96 bg-linear-to-br from-blue-400 to-cyan-500 rounded-full blur-3xl pointer-events-none"
-          />
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={
-              inView
-                ? {
-                    opacity: 0.08,
-                    scale: [1, 1.2, 1],
-                    x: [0, -30, 0],
-                    y: [0, 30, 0],
-                  }
-                : {}
-            }
-            transition={{
-              opacity: { duration: 1, delay: 0.5 },
-              scale: { duration: 12, repeat: Infinity, ease: "easeInOut" },
-              x: { duration: 15, repeat: Infinity, ease: "easeInOut" },
-              y: { duration: 13, repeat: Infinity, ease: "easeInOut" },
-            }}
-            className="absolute -bottom-40 -right-40 w-96 h-96 bg-linear-to-tl from-cyan-400 to-blue-500 rounded-full blur-3xl pointer-events-none"
-          />
-        </>
-      )}
-
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Grid Container */}
         <div className="grid grid-cols-12 gap-6 lg:gap-8">

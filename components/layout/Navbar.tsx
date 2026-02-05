@@ -3,6 +3,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import {
   Menu,
   X,
@@ -27,6 +28,7 @@ const navLinks = [
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -40,6 +42,18 @@ export default function Navbar() {
   const handleNavClick = () => {
     setIsOpen(false);
   };
+
+  // Check if link is active
+  const isLinkActive = (href: string) => {
+    // Skip contact link - no active state
+    if (href === "/#contact") {
+      return false;
+    }
+
+    // Handle other routes
+    return pathname === href;
+  };
+
   return (
     <>
       <nav
@@ -74,16 +88,33 @@ export default function Navbar() {
 
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center gap-8">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  onClick={handleNavClick}
-                  className="text-neutral-800 dark:text-neutral-200 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200 font-medium"
-                >
-                  {link.label}
-                </Link>
-              ))}
+              {navLinks.map((link) => {
+                const active = isLinkActive(link.href);
+                return (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    onClick={handleNavClick}
+                    className="relative group"
+                  >
+                    <span
+                      className={`font-medium transition-all duration-200 ${
+                        active
+                          ? "bg-linear-to-r from-blue-600 to-cyan-500 dark:from-blue-400 dark:to-cyan-300 bg-clip-text text-transparent"
+                          : "text-neutral-800 dark:text-neutral-200 group-hover:text-blue-600 dark:group-hover:text-blue-400"
+                      }`}
+                    >
+                      {link.label}
+                    </span>
+                    {/* Underline */}
+                    <span
+                      className={`absolute -bottom-1 left-0 h-0.5 bg-linear-to-r from-blue-600 to-cyan-500 dark:from-blue-400 dark:to-cyan-300 transition-all duration-200 ${
+                        active ? "w-full" : "w-0 group-hover:w-full"
+                      }`}
+                    />
+                  </Link>
+                );
+              })}
               <ThemeToggle />
             </div>
 
@@ -126,6 +157,7 @@ export default function Navbar() {
             <div className="flex flex-col gap-3 items-end">
               {navLinks.map((link, index) => {
                 const Icon = link.icon;
+                const active = isLinkActive(link.href);
                 return (
                   <Link
                     key={link.href}
@@ -139,12 +171,24 @@ export default function Navbar() {
                     {/* Container with Icon and Label */}
                     <div className="flex items-center gap-3">
                       {/* Label - Glass morphism style */}
-                      <span className="px-4 py-2 rounded-xl bg-white/95 dark:bg-neutral-900/95 text-sm font-semibold whitespace-nowrap shadow-xl border border-neutral-200/50 dark:border-neutral-700/50 text-neutral-800 dark:text-neutral-100 backdrop-blur-sm group-hover:bg-blue-50/95 dark:group-hover:bg-blue-950/95 group-hover:text-blue-600 dark:group-hover:text-blue-400 group-hover:border-blue-200/50 dark:group-hover:border-blue-800/50 transition-all duration-300">
+                      <span
+                        className={`px-4 py-2 rounded-xl text-sm font-semibold whitespace-nowrap shadow-xl border backdrop-blur-sm transition-all duration-300 ${
+                          active
+                            ? "bg-blue-50/95 dark:bg-blue-950/95 border-blue-200/50 dark:border-blue-800/50 bg-linear-to-r from-blue-600 to-cyan-500 dark:from-blue-400 dark:to-cyan-300 bg-clip-text text-transparent"
+                            : "bg-white/95 dark:bg-neutral-900/95 border-neutral-200/50 dark:border-neutral-700/50 text-neutral-800 dark:text-neutral-100 group-hover:bg-blue-50/95 dark:group-hover:bg-blue-950/95 group-hover:text-blue-600 dark:group-hover:text-blue-400 group-hover:border-blue-200/50 dark:group-hover:border-blue-800/50"
+                        }`}
+                      >
                         {link.label}
                       </span>
 
                       {/* Icon Container - Gradient matching your theme */}
-                      <div className="flex items-center justify-center rounded-xl bg-linear-to-br from-blue-500 via-blue-600 to-cyan-500 dark:from-blue-600 dark:via-blue-700 dark:to-cyan-600 shadow-lg shadow-blue-500/30 dark:shadow-blue-900/30 hover:shadow-xl hover:shadow-blue-500/50 dark:hover:shadow-blue-900/50 transition-all duration-300 ease-out w-12 h-12 group-hover:scale-110 group-hover:rotate-3">
+                      <div
+                        className={`flex items-center justify-center rounded-xl shadow-lg transition-all duration-300 ease-out w-12 h-12 group-hover:scale-110 group-hover:rotate-3 ${
+                          active
+                            ? "bg-linear-to-br from-blue-500 via-blue-600 to-cyan-500 dark:from-blue-600 dark:via-blue-700 dark:to-cyan-600 shadow-blue-500/50 dark:shadow-blue-900/50"
+                            : "bg-linear-to-br from-blue-500 via-blue-600 to-cyan-500 dark:from-blue-600 dark:via-blue-700 dark:to-cyan-600 shadow-blue-500/30 dark:shadow-blue-900/30 group-hover:shadow-xl group-hover:shadow-blue-500/50 dark:group-hover:shadow-blue-900/50"
+                        }`}
+                      >
                         <Icon className="text-white w-6 h-6 drop-shadow-sm" />
                       </div>
                     </div>

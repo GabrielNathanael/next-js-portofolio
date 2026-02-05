@@ -756,20 +756,6 @@ export default function InteractiveTerminal({
           </div>
         </div>
       </motion.div>
-
-      {/* Decorative elements */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={inView ? { opacity: 0.08, scale: 1 } : {}}
-        transition={{ duration: 1, delay: 0.5 }}
-        className="absolute -top-20 -right-20 w-64 h-64 bg-linear-to-br from-blue-500 to-cyan-400 rounded-full blur-3xl pointer-events-none"
-      />
-      <motion.div
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={inView ? { opacity: 0.08, scale: 1 } : {}}
-        transition={{ duration: 1, delay: 0.7 }}
-        className="absolute -bottom-20 -left-20 w-64 h-64 bg-linear-to-tr from-cyan-500 to-blue-400 rounded-full blur-3xl pointer-events-none"
-      />
     </motion.div>
   );
 }
