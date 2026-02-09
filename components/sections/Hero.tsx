@@ -393,7 +393,7 @@ export default function Hero({ profile }: HeroProps) {
                       alt="Profile"
                       fill
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 384px"
-                      className="object-cover"
+                      className="object-cover object-[28%_28%]"
                       priority
                       fetchPriority="high"
                     />
@@ -634,7 +634,7 @@ export default function Hero({ profile }: HeroProps) {
                       alt="Profile"
                       fill
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 384px"
-                      className="object-cover"
+                      className="object-cover object-[28%_28%]"
                       priority
                       fetchPriority="high"
                     />
