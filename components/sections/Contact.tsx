@@ -145,7 +145,7 @@ export default function ContactForm() {
       <div id="contact" className="relative z-10">
         {/* Header */}
         <div className="text-center mb-16">
-          <h2 className="text-5xl lg:text-6xl font-black tracking-tight mb-4">
+          <h2 className="font-heading text-5xl lg:text-6xl font-black tracking-tight mb-4">
             <span className="bg-linear-to-r from-blue-600 to-cyan-500 dark:from-blue-400 dark:to-cyan-300 bg-clip-text text-transparent">
               Let&apos;s Create
             </span>
@@ -154,7 +154,7 @@ export default function ContactForm() {
               Something Amazing
             </span>
           </h2>
-          <p className="text-lg text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto">
+          <p className="font-body text-lg text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto">
             Got a project in mind? Drop me a message and let&apos;s turn your
             ideas into reality.
           </p>

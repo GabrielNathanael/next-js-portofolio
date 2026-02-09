@@ -14,7 +14,7 @@ import ClientWrapper from "@/components/layout/ClientWrapper";
 import {
   getFeaturedProjects,
   getLatestCertificates,
-  getRecentExperience,
+  getRecentExperiences,
   getProfile,
   getProjects,
   getCertificates,
@@ -97,14 +97,14 @@ export default async function Home() {
   const [
     featuredProjects,
     latestCertificates,
-    recentExperience,
+    recentExperiences,
     profile,
     allProjects,
     allCertificates,
   ] = await Promise.all([
     getFeaturedProjects(),
     getLatestCertificates(),
-    getRecentExperience(),
+    getRecentExperiences(),
     getProfile(),
     getProjects(), // For terminal
     getCertificates(), // For terminal
@@ -129,61 +129,60 @@ export default async function Home() {
       />
 
       <div className="bg-white dark:bg-neutral-950 min-h-screen">
-        <LoadingScreen />
-        <ClientWrapper>
-          <Navbar />
-          <main className="min-h-screen overflow-x-hidden">
-            {/* Hero Section */}
-            <Hero profile={profile} />
+        <Navbar />
+        <main className="min-h-screen overflow-x-hidden">
+          {/* Hero Section */}
+          <Hero profile={profile} />
 
-            {/* Main Content - WITH CONTAINER */}
-            <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 space-y-32 md:space-y-12">
-              {/* About Section */}
+          {/* Main Content - WITH CONTAINER */}
+          <section className="max-w-7xl mx-auto px-4 sm:px-6 md:px-0 py-20 space-y-32 md:space-y-12">
+            {/* About Section */}
+            <div className="w-full">
+              <About />
+            </div>
+
+            {/* Experience */}
+            {recentExperiences && recentExperiences.length > 0 && (
               <div className="w-full">
-                <About />
+                <RecentExperience experiences={recentExperiences} />
               </div>
+            )}
+          </section>
 
-              {/* Experience */}
-              {recentExperience && (
-                <div className="w-full">
-                  <RecentExperience experience={recentExperience} />
-                </div>
-              )}
+          {/* Featured Projects - FULL WIDTH SECTION (Horizontal Scroll) */}
+          <section className="w-full">
+            <FeaturedProjects projects={featuredProjects} />
+          </section>
 
-              {/* Featured Projects */}
-              <div className="w-full">
-                <FeaturedProjects projects={featuredProjects} />
-              </div>
+          {/* Certificates - BACK TO CONTAINER */}
+          <section className="max-w-7xl mx-auto px-4 sm:px-6 md:px-0 py-20">
+            <div className="w-full">
+              <LatestCertificates certificates={latestCertificates} />
+            </div>
+          </section>
 
-              {/* Certificates */}
-              <div className="w-full">
-                <LatestCertificates certificates={latestCertificates} />
-              </div>
-            </section>
+          {/* Tech Stack - FULL WIDTH MARQUEE */}
+          <section className="w-full py-20">
+            <TechStack />
+          </section>
 
-            {/* Tech Stack - FULL WIDTH MARQUEE */}
-            <section className="w-full py-20">
-              <TechStack />
-            </section>
-
-            {/* Interactive Terminal - BACK TO CONTAINER */}
-            <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+          {/* Interactive Terminal - BACK TO CONTAINER */}
+          {/* <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
               <InteractiveTerminal
                 projects={allProjects}
                 certificates={allCertificates}
                 experience={recentExperience}
               />
-            </section>
+            </section> */}
 
-            {/* Contact Form - CONTAINER */}
-            <section className="relative w-full py-20">
-              <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-                <ContactForm />
-              </div>
-            </section>
-          </main>
-          <Footer />
-        </ClientWrapper>
+          {/* Contact Form - CONTAINER */}
+          <section className="relative w-full py-20">
+            <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+              <ContactForm />
+            </div>
+          </section>
+        </main>
+        <Footer />
       </div>
     </>
   );

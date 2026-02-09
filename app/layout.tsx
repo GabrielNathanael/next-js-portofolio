@@ -1,18 +1,34 @@
 // app/layout.tsx
 import type { Metadata, Viewport } from "next";
-import { Urbanist } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import { Toaster } from "sonner";
 import { siteConfig, jsonLdPerson } from "@/lib/seo/config";
 import { Analytics } from "@vercel/analytics/next";
-import { LoadingProvider } from "@/components/providers/LoadingProvider";
 import ChatWidget from "@/components/chat/ChatWidget";
+import { Karla, Inconsolata } from "next/font/google";
 
-const urbanist = Urbanist({
+/* =========================
+   Fonts
+========================= */
+
+const karla = Karla({
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-heading",
   display: "swap",
 });
+
+const inconsolata = Inconsolata({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-body",
+  display: "swap",
+});
+
+/* =========================
+   Viewport
+========================= */
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -25,6 +41,10 @@ export const viewport: Viewport = {
   ],
 };
 
+/* =========================
+   Metadata
+========================= */
+
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
@@ -34,7 +54,6 @@ export const metadata: Metadata = {
   description: siteConfig.description,
   applicationName: siteConfig.name,
 
-  // Other
   formatDetection: {
     telephone: false,
     date: false,
@@ -43,13 +62,19 @@ export const metadata: Metadata = {
   },
 };
 
+/* =========================
+   Root Layout
+========================= */
+
 export default function RootLayout({
   children,
-}: Readonly<{ children: React.ReactNode }>) {
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        {/* Global Person Schema - Helps Google recognize brand across all pages */}
+        {/* Global Person Schema */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -57,32 +82,26 @@ export default function RootLayout({
           }}
         />
 
-        {/* Geographic Meta Tags for Local SEO */}
+        {/* Geographic Meta Tags */}
         <meta name="geo.region" content="ID-JK" />
         <meta name="geo.placename" content="Jakarta" />
         <meta name="geo.position" content="-6.2088;106.8456" />
         <meta name="ICBM" content="-6.2088, 106.8456" />
 
-        {/* Preconnect to Contentful CDN - reduce resource load delay */}
+        {/* Contentful Optimization */}
         <link rel="preconnect" href="https://images.ctfassets.net" />
         <link rel="preconnect" href="https://assets.ctfassets.net" />
         <link rel="dns-prefetch" href="https://images.ctfassets.net" />
         <link rel="dns-prefetch" href="https://assets.ctfassets.net" />
       </head>
-      <body className={urbanist.className}>
+
+      <body className={`${karla.variable} ${inconsolata.variable} antialiased`}>
         <ThemeProvider>
-          <LoadingProvider>
-            {children}
-            <Toaster
-              position="top-right"
-              expand={false}
-              richColors
-              closeButton
-            />
-            {/* AI Chat Widget - Available on all pages */}
-            <ChatWidget />
-          </LoadingProvider>
+          {children}
+          <Toaster position="top-right" expand={false} richColors closeButton />
+          <ChatWidget />
         </ThemeProvider>
+
         <Analytics />
       </body>
     </html>

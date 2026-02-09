@@ -114,43 +114,48 @@ export async function getFeaturedProjects(): Promise<Project[]> {
 }
 
 /**
- * Get Latest Certificates (for homepage)
- * Prioritizes highlighted certificates, then fills with non-highlighted
- * Sorts by year descending, takes top 3
+ * Get Latest Certificates (for homepage / section)
+ * Takes up to 7 certificates
+ * Priority:
+ * 1. Highlighted certificates (sorted by year desc)
+ * 2. Filled with latest non-highlighted certificates if needed
  */
 export async function getLatestCertificates(): Promise<Certificate[]> {
   const certificates = await getCertificates();
 
-  // Separate highlighted and non-highlighted certificates
-  const highlighted = certificates
-    .filter((c) => c.highlight)
-    .sort((a, b) => Number(b.year) - Number(a.year));
+  if (certificates.length === 0) return [];
 
-  const nonHighlighted = certificates
-    .filter((c) => !c.highlight)
-    .sort((a, b) => Number(b.year) - Number(a.year));
+  // Sort all certificates by year descending
+  const sorted = [...certificates].sort(
+    (a, b) => Number(b.year) - Number(a.year),
+  );
 
-  // Combine: take highlighted first, then fill with non-highlighted up to 3 total
-  const result = [...highlighted];
+  // Highlighted first
+  const highlighted = sorted.filter((c) => c.highlight);
 
-  if (result.length < 3) {
-    const remaining = 3 - result.length;
-    result.push(...nonHighlighted.slice(0, remaining));
-  }
+  // Non-highlighted (latest)
+  const nonHighlighted = sorted.filter((c) => !c.highlight);
 
-  return result.slice(0, 3);
+  // Combine: highlighted first, then fill with latest non-highlighted
+  const result = [
+    ...highlighted,
+    ...nonHighlighted.slice(0, Math.max(0, 5 - highlighted.length)),
+  ];
+
+  return result.slice(0, 5);
 }
 
 /**
- * Get Recent Experience (for homepage)
- * Prioritizes current jobs, sorts by startDate descending
+ * Get Recent Experiences (for homepage)
+ * Returns up to 3 recent experiences, prioritizing current jobs
+ * Sorted by: current first, then by start date descending
  */
-export async function getRecentExperience(): Promise<Experience | null> {
+export async function getRecentExperiences(): Promise<Experience[]> {
   const experiences = await getExperiences();
 
-  if (experiences.length === 0) return null;
+  if (experiences.length === 0) return [];
 
-  // Sort: current jobs first, then by start date
+  // Sort: current jobs first, then by start date descending
   const sorted = experiences.sort((a, b) => {
     if (a.iscurrent && !b.iscurrent) return -1;
     if (!a.iscurrent && b.iscurrent) return 1;
@@ -160,7 +165,7 @@ export async function getRecentExperience(): Promise<Experience | null> {
     return dateB.getTime() - dateA.getTime();
   });
 
-  return sorted[0];
+  return sorted.slice(0, 3); // Return max 3 experiences
 }
 
 /**

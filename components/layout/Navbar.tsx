@@ -72,7 +72,7 @@ export default function Navbar() {
                 isOpen ? "blur-sm md:blur-none" : ""
               }`}
             >
-              <span className="hidden md:block text-2xl font-bold from-blue-600 to-cyan-500 dark:from-blue-400 dark:to-cyan-300 bg-clip-text text-transparent bg-linear-to-r">
+              <span className="font-heading hidden md:block text-2xl font-bold from-blue-600 to-cyan-500 dark:from-blue-400 dark:to-cyan-300 bg-clip-text text-transparent bg-linear-to-r">
                 Gabriel Nathanael
               </span>
               <div className="md:hidden w-10 h-10 rounded-full overflow-hidden shadow-lg shadow-blue-500/10">
@@ -98,7 +98,7 @@ export default function Navbar() {
                     className="relative group"
                   >
                     <span
-                      className={`font-medium transition-all duration-200 ${
+                      className={`font-heading font-medium transition-all duration-200 ${
                         active
                           ? "bg-linear-to-r from-blue-600 to-cyan-500 dark:from-blue-400 dark:to-cyan-300 bg-clip-text text-transparent"
                           : "text-neutral-800 dark:text-neutral-200 group-hover:text-blue-600 dark:group-hover:text-blue-400"
@@ -172,7 +172,7 @@ export default function Navbar() {
                     <div className="flex items-center gap-3">
                       {/* Label - Glass morphism style */}
                       <span
-                        className={`px-4 py-2 rounded-xl text-sm font-semibold whitespace-nowrap shadow-xl border backdrop-blur-sm transition-all duration-300 ${
+                        className={`font-heading px-4 py-2 rounded-xl text-sm font-semibold whitespace-nowrap shadow-xl border backdrop-blur-sm transition-all duration-300 ${
                           active
                             ? "bg-blue-50/95 dark:bg-blue-950/95 border-blue-200/50 dark:border-blue-800/50 bg-linear-to-r from-blue-600 to-cyan-500 dark:from-blue-400 dark:to-cyan-300 bg-clip-text text-transparent"
                             : "bg-white/95 dark:bg-neutral-900/95 border-neutral-200/50 dark:border-neutral-700/50 text-neutral-800 dark:text-neutral-100 group-hover:bg-blue-50/95 dark:group-hover:bg-blue-950/95 group-hover:text-blue-600 dark:group-hover:text-blue-400 group-hover:border-blue-200/50 dark:group-hover:border-blue-800/50"

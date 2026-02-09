@@ -1,20 +1,14 @@
-// components\sections\LatestCertificates.tsx
 // components/sections/LatestCertificates.tsx
 "use client";
 
-import { useState, lazy, Suspense } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
-import Card from "@/components/ui/Card";
-import Button from "@/components/ui/Button";
+import { motion, AnimatePresence } from "framer-motion";
+import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { Certificate } from "@/lib/contentful/types";
-import { motion } from "framer-motion";
-import { useInView } from "react-intersection-observer";
 import { useIsMobile } from "@/hooks/useIsMobile";
-
-// Dynamic import modal - only load when needed
-const CertificateModal = lazy(() => import("@/components/ui/CertificateModal"));
+import gsap from "gsap";
 
 interface LatestCertificatesProps {
   certificates: Certificate[];
@@ -23,135 +17,372 @@ interface LatestCertificatesProps {
 export default function LatestCertificates({
   certificates,
 }: LatestCertificatesProps) {
-  const [ref, inView] = useInView({
-    triggerOnce: true,
-    threshold: 0.1,
-  });
-
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [direction, setDirection] = useState(0);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const isMobile = useIsMobile();
-  const [selectedCert, setSelectedCert] = useState<string | null>(null);
+  const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
 
-  const currentCertificate =
-    certificates.find((c) => c.id === selectedCert) || null;
+  const currentCert = certificates[currentIndex];
+  const prevIndex =
+    (currentIndex - 1 + certificates.length) % certificates.length;
+  const nextIndex = (currentIndex + 1) % certificates.length;
+
+  // Navigation handlers
+  const handleNext = useCallback(() => {
+    setDirection(1);
+    setCurrentIndex((prev) => (prev + 1) % certificates.length);
+    setIsAutoPlaying(false);
+  }, [certificates.length]);
+
+  const handlePrev = useCallback(() => {
+    setDirection(-1);
+    setCurrentIndex(
+      (prev) => (prev - 1 + certificates.length) % certificates.length,
+    );
+    setIsAutoPlaying(false);
+  }, [certificates.length]);
+
+  const handleDotClick = (index: number) => {
+    setDirection(index > currentIndex ? 1 : -1);
+    setCurrentIndex(index);
+    setIsAutoPlaying(false);
+  };
+
+  // Auto-rotate carousel
+  useEffect(() => {
+    if (!isAutoPlaying || certificates.length <= 1) return;
+
+    const interval = setInterval(() => {
+      setDirection(1);
+      setCurrentIndex((prev) => (prev + 1) % certificates.length);
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, [isAutoPlaying, certificates.length]);
+
+  // GSAP Smooth Slide Transition - card swap dengan momentum
+  useEffect(() => {
+    if (isMobile) return;
+
+    const cards = cardsRef.current.filter(Boolean);
+    if (cards.length === 0) return;
+
+    const tl = gsap.timeline();
+
+    // Determine slide direction
+    const slideDirection = direction > 0 ? 1 : -1;
+
+    // Animate outgoing card (current center becomes side)
+    cards.forEach((card, idx) => {
+      // Set initial states based on what card this will become
+      if (idx === 1) {
+        // This is the NEW center card (sliding in)
+        gsap.set(card, {
+          x: `${slideDirection * 100}%`,
+          rotateY: slideDirection * -20,
+          scale: 0.8,
+          z: -300,
+          opacity: 0,
+          filter: "blur(4px)",
+        });
+
+        tl.to(
+          card,
+          {
+            x: 0,
+            rotateY: 0,
+            scale: 1,
+            z: 0,
+            opacity: 1,
+            filter: "blur(0px)",
+            duration: 0.8,
+            ease: "power2.out",
+          },
+          0,
+        );
+      } else if (idx === 0) {
+        // Previous/Left card - subtle positioning
+        tl.to(
+          card,
+          {
+            x: "-35%",
+            rotateY: 15,
+            scale: 0.85,
+            z: -200,
+            opacity: 0.5,
+            filter: "blur(3px)",
+            duration: 0.8,
+            ease: "power2.out",
+          },
+          0,
+        );
+      } else if (idx === 2) {
+        // Next/Right card - subtle positioning
+        tl.to(
+          card,
+          {
+            x: "35%",
+            rotateY: -15,
+            scale: 0.85,
+            z: -200,
+            opacity: 0.5,
+            filter: "blur(3px)",
+            duration: 0.8,
+            ease: "power2.out",
+          },
+          0,
+        );
+      }
+    });
+
+    return () => {
+      tl.kill();
+    };
+  }, [currentIndex, direction, isMobile]);
+
+  // Swipe handlers for mobile
+  const [touchStart, setTouchStart] = useState(0);
+  const [touchEnd, setTouchEnd] = useState(0);
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    if (touchStart - touchEnd > 75) handleNext();
+    if (touchStart - touchEnd < -75) handlePrev();
+  };
 
   return (
     <motion.div
-      ref={ref}
       initial={{ opacity: 0 }}
-      animate={inView ? { opacity: 1 } : {}}
+      whileInView={{ opacity: 1 }}
       transition={{ duration: 0.6 }}
-      className="space-y-6 relative"
+      viewport={{ once: true }}
+      className="space-y-12"
     >
       {/* Header */}
-      <div className="flex items-center justify-between relative">
+      <div className="flex items-center justify-between">
         <motion.h2
           initial={{ opacity: 0, x: isMobile ? 0 : -30 }}
-          animate={inView ? { opacity: 1, x: 0 } : {}}
+          whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="text-3xl font-bold from-blue-600 to-cyan-500 dark:from-blue-400 dark:to-cyan-300 bg-clip-text text-transparent bg-linear-to-r"
+          viewport={{ once: true }}
+          className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-blue-600 to-cyan-500 dark:from-blue-400 dark:to-cyan-300 bg-clip-text text-transparent"
         >
           Highlighted Certifications
         </motion.h2>
 
         <motion.div
           initial={{ opacity: 0, x: isMobile ? 0 : 30 }}
-          animate={inView ? { opacity: 1, x: 0 } : {}}
+          whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
+          viewport={{ once: true }}
         >
-          <Link href="/certificates">
-            <Button
-              variant="ghost"
-              size="sm"
-              className="group text-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-900"
-            >
-              View All
-              <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-            </Button>
+          <Link
+            href="/projects"
+            className="inline-flex items-center gap-2 text-sm font-medium text-blue-600 dark:text-blue-400 group"
+          >
+            View All
+            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </Link>
         </motion.div>
       </div>
 
-      {/* Certificates Grid */}
-      <div className="grid md:grid-cols-3 gap-6 relative">
-        {certificates.map((cert, idx) => {
-          // Mobile: simple fade in
-          // Desktop: complex animation
-          const getInitialPosition = () => {
-            if (isMobile) return {};
-            if (idx === 0) return { x: -30, y: 30 };
-            if (idx === 1) return { y: -20 };
-            return { x: 30, y: 30 };
-          };
-
-          return (
-            <motion.div
-              key={cert.id}
-              initial={{ opacity: 0, ...getInitialPosition() }}
-              animate={inView ? { opacity: 1, x: 0, y: 0 } : {}}
-              transition={{
-                duration: isMobile ? 0.5 : 0.7,
-                delay: 0.3 + idx * (isMobile ? 0.1 : 0.12),
-                ease: "easeOut",
+      {/* Perspective Stack Carousel - Desktop */}
+      {!isMobile ? (
+        <div
+          className="relative"
+          onMouseEnter={() => setIsAutoPlaying(false)}
+          onMouseLeave={() => setIsAutoPlaying(true)}
+          style={{ perspective: "2000px" }}
+        >
+          {/* 3D Cards Container */}
+          <div className="relative h-[500px] flex items-center justify-center">
+            {/* Previous Card (Left Back) */}
+            <div
+              ref={(el) => {
+                cardsRef.current[0] = el;
               }}
-              className="relative"
-              style={{
-                marginTop: isMobile
-                  ? 0
-                  : idx === 0
-                    ? "1rem"
-                    : idx === 1
-                      ? "0"
-                      : "1rem",
-              }}
+              className="absolute w-[70%] max-w-[900px] h-[450px] cursor-pointer"
+              style={{ transformStyle: "preserve-3d" }}
+              onClick={handlePrev}
             >
-              <Card
-                className="overflow-hidden cursor-pointer group relative"
-                onClick={() => setSelectedCert(cert.id)}
+              <div className="relative w-full h-full rounded-2xl overflow-hidden shadow-2xl bg-neutral-100 dark:bg-neutral-800">
+                <Image
+                  src={certificates[prevIndex].image}
+                  alt={certificates[prevIndex].title}
+                  fill
+                  className="object-contain"
+                  sizes="(max-width: 768px) 100vw, 900px"
+                />
+              </div>
+            </div>
+
+            {/* Current Card (Center Front) */}
+            <div
+              ref={(el) => {
+                cardsRef.current[1] = el;
+              }}
+              className="absolute w-[70%] max-w-[900px] h-[450px] z-10"
+              style={{ transformStyle: "preserve-3d" }}
+            >
+              <div className="relative w-full h-full rounded-2xl overflow-hidden shadow-2xl bg-neutral-100 dark:bg-neutral-800">
+                <Image
+                  src={currentCert.image}
+                  alt={currentCert.title}
+                  fill
+                  className="object-contain"
+                  sizes="(max-width: 768px) 100vw, 900px"
+                  priority
+                />
+
+                {/* Counter Badge */}
+                <div className="absolute top-4 right-4 px-4 py-2 bg-white/90 dark:bg-neutral-800/90 backdrop-blur-md border border-neutral-200 dark:border-neutral-700 text-neutral-900 dark:text-white font-bold text-sm rounded-full shadow-lg">
+                  {currentIndex + 1} / {certificates.length}
+                </div>
+              </div>
+            </div>
+
+            {/* Next Card (Right Back) */}
+            <div
+              ref={(el) => {
+                cardsRef.current[2] = el;
+              }}
+              className="absolute w-[70%] max-w-[900px] h-[450px] cursor-pointer"
+              style={{ transformStyle: "preserve-3d" }}
+              onClick={handleNext}
+            >
+              <div className="relative w-full h-full rounded-2xl overflow-hidden shadow-2xl bg-neutral-100 dark:bg-neutral-800">
+                <Image
+                  src={certificates[nextIndex].image}
+                  alt={certificates[nextIndex].title}
+                  fill
+                  className="object-contain"
+                  sizes="(max-width: 768px) 100vw, 900px"
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Navigation Arrows */}
+          {certificates.length > 1 && (
+            <>
+              <button
+                onClick={handlePrev}
+                className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/90 dark:bg-neutral-800/90 backdrop-blur-sm shadow-xl hover:bg-white dark:hover:bg-neutral-700 transition-all hover:scale-110 flex items-center justify-center group z-20"
+                aria-label="Previous certificate"
               >
-                <div className="relative aspect-video overflow-hidden">
-                  <Image
-                    src={cert.image}
-                    alt={cert.title}
-                    fill
-                    sizes="(max-width: 768px) 100vw, (max-width: 1280px) 33vw, 400px"
-                    className="object-contain group-hover:scale-110 transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <ChevronLeft className="w-6 h-6 text-neutral-900 dark:text-white group-hover:-translate-x-0.5 transition-transform" />
+              </button>
 
-                  <motion.div
-                    initial={{ opacity: 0, y: isMobile ? 0 : -10 }}
-                    animate={inView ? { opacity: 1, y: 0 } : {}}
-                    transition={{ delay: 0.6 + idx * (isMobile ? 0.1 : 0.12) }}
-                    className="absolute top-3 right-3 px-3 py-1 bg-blue-500/90 dark:bg-blue-600/90 backdrop-blur-sm text-white text-xs font-bold rounded-full"
-                  >
-                    {cert.year}
-                  </motion.div>
+              <button
+                onClick={handleNext}
+                className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/90 dark:bg-neutral-800/90 backdrop-blur-sm shadow-xl hover:bg-white dark:hover:bg-neutral-700 transition-all hover:scale-110 flex items-center justify-center group z-20"
+                aria-label="Next certificate"
+              >
+                <ChevronRight className="w-6 h-6 text-neutral-900 dark:text-white group-hover:translate-x-0.5 transition-transform" />
+              </button>
+            </>
+          )}
+        </div>
+      ) : (
+        // Mobile: Flat Carousel
+        <div
+          className="relative"
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+        >
+          <div className="relative aspect-[4/3] overflow-hidden rounded-2xl shadow-2xl bg-neutral-100 dark:bg-neutral-800">
+            <AnimatePresence initial={false} mode="wait">
+              <motion.div
+                key={currentIndex}
+                initial={{ opacity: 0, x: direction > 0 ? 300 : -300 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: direction > 0 ? -300 : 300 }}
+                transition={{ duration: 0.3 }}
+                className="absolute inset-0"
+              >
+                <Image
+                  src={currentCert.image}
+                  alt={currentCert.title}
+                  fill
+                  className="object-contain"
+                  sizes="100vw"
+                  priority
+                />
+
+                {/* Counter Badge */}
+                <div className="absolute top-4 right-4 px-3 py-1.5 bg-white/90 dark:bg-neutral-800/90 backdrop-blur-md border border-neutral-200 dark:border-neutral-700 text-neutral-900 dark:text-white font-bold text-xs rounded-full shadow-lg">
+                  {currentIndex + 1} / {certificates.length}
                 </div>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+        </div>
+      )}
 
-                <div className="p-4 space-y-2 relative">
-                  <h3 className="font-semibold text-neutral-800 dark:text-neutral-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors line-clamp-1">
-                    {cert.title}
-                  </h3>
+      {/* Certificate Info - Below Cards */}
+      <motion.div
+        key={currentIndex}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.2 }}
+        className="space-y-4 text-center max-w-3xl mx-auto"
+      >
+        {/* Year Badge */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.4, delay: 0.3 }}
+          className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 dark:bg-blue-500 text-white rounded-full shadow-lg"
+        >
+          <span className="font-bold text-sm">{currentCert.year}</span>
+        </motion.div>
 
-                  <div className="flex items-center justify-between text-sm text-neutral-600 dark:text-neutral-300">
-                    <span className="font-medium">{cert.issuer}</span>
-                  </div>
-                </div>
-              </Card>
-            </motion.div>
-          );
-        })}
-      </div>
+        {/* Title */}
+        <motion.h3
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, delay: 0.4 }}
+          className="text-2xl md:text-3xl font-bold text-neutral-900 dark:text-white leading-tight"
+        >
+          {currentCert.title}
+        </motion.h3>
 
-      {/* Certificate Modal - Lazy loaded */}
-      {selectedCert && (
-        <Suspense fallback={null}>
-          <CertificateModal
-            certificate={currentCertificate}
-            isOpen={!!selectedCert}
-            onClose={() => setSelectedCert(null)}
-          />
-        </Suspense>
+        {/* Issuer */}
+        <motion.p
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, delay: 0.5 }}
+          className="text-lg md:text-xl text-neutral-600 dark:text-neutral-400 font-semibold"
+        >
+          {currentCert.issuer}
+        </motion.p>
+      </motion.div>
+
+      {/* Navigation Dots */}
+      {certificates.length > 1 && (
+        <div className="flex items-center justify-center gap-3 mt-8">
+          {certificates.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => handleDotClick(index)}
+              className={`transition-all ${
+                index === currentIndex
+                  ? "w-12 h-3 bg-blue-600 dark:bg-blue-400 rounded-full"
+                  : "w-3 h-3 bg-neutral-300 dark:bg-neutral-600 rounded-full hover:bg-neutral-400 dark:hover:bg-neutral-500"
+              }`}
+              aria-label={`Go to certificate ${index + 1}`}
+            />
+          ))}
+        </div>
       )}
     </motion.div>
   );

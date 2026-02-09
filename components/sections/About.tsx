@@ -52,7 +52,7 @@ export default function About() {
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: isMobile ? 0.5 : 0.8, ease: "easeOut" }}
           >
-            <h2 className="text-6xl lg:text-8xl font-black tracking-tight">
+            <h2 className="font-heading text-6xl lg:text-8xl font-black tracking-tight">
               <span className="bg-linear-to-r from-blue-600 to-cyan-500 dark:from-blue-400 dark:to-cyan-300 bg-clip-text text-transparent">
                 About
               </span>
@@ -69,7 +69,7 @@ export default function About() {
             transition={{ duration: 0.8, ease: "easeOut", delay: 0.1 }}
           >
             <div className="lg:text-right">
-              <h3 className="text-4xl lg:text-5xl font-bold tracking-tight mb-8">
+              <h3 className="font-heading text-4xl lg:text-5xl font-bold tracking-tight mb-8">
                 <span className="text-neutral-400 dark:text-neutral-600">
                   Let&apos;s
                 </span>
@@ -134,7 +134,7 @@ export default function About() {
               ease: "easeOut",
             }}
           >
-            <p className="text-lg lg:text-[1.1rem] text-neutral-700 dark:text-neutral-300 leading-relaxed max-w-2xl text-justify">
+            <p className="font-body text-lg lg:text-[1.1rem] text-neutral-700 dark:text-neutral-300 leading-relaxed max-w-2xl text-justify">
               Hey, I&apos;m Gabriel, a full stack developer and Computer Science
               student at Universitas Pendidikan Ganesha (Undiksha) in Bali. I
               build clean, scalable web applications using technologies like
@@ -181,7 +181,7 @@ export default function About() {
                   },
                 }}
               />
-              <p className="text-lg lg:text-[1.05rem] text-neutral-700 dark:text-neutral-300 leading-relaxed max-w-md text-justify">
+              <p className="font-body text-lg lg:text-[1.05rem] text-neutral-700 dark:text-neutral-300 leading-relaxed max-w-md text-justify">
                 I work across the full stack, from crafting responsive user
                 interfaces to developing backend logic, RESTful APIs, and
                 database-driven features. I enjoy translating complex
@@ -206,7 +206,7 @@ export default function About() {
               ease: "easeOut",
             }}
           >
-            <p className="text-lg lg:text-[1.05rem] text-neutral-600 dark:text-neutral-400 leading-relaxed max-w-lg italic text-justify">
+            <p className="font-body text-lg lg:text-[1.05rem] text-neutral-600 dark:text-neutral-400 leading-relaxed max-w-lg italic text-justify">
               Beyond application development, I explore DevOps and cloud
               fundamentals such as deployment workflows, containerization, and
               basic infrastructure concepts, while also learning about
@@ -231,7 +231,7 @@ export default function About() {
             }}
           >
             <div className="text-center">
-              <h3 className="text-4xl font-bold tracking-tight mb-6">
+              <h3 className="font-heading text-4xl font-bold tracking-tight mb-6">
                 <span className="text-neutral-400 dark:text-neutral-600">
                   Let&apos;s
                 </span>{" "}

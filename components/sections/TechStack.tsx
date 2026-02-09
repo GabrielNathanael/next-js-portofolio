@@ -36,7 +36,7 @@ export default function TechStack() {
           initial={{ opacity: 0, x: -30 }}
           animate={inView ? { opacity: 1, x: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="text-3xl font-bold from-blue-600 to-cyan-500 dark:from-blue-400 dark:to-cyan-300 bg-clip-text text-transparent bg-linear-to-r"
+          className="font-heading text-3xl font-bold from-blue-600 to-cyan-500 dark:from-blue-400 dark:to-cyan-300 bg-clip-text text-transparent bg-linear-to-r"
         >
           Technologies I&apos;ve Worked With
         </motion.h2>
@@ -46,7 +46,7 @@ export default function TechStack() {
           initial={{ opacity: 0, x: 30 }}
           animate={inView ? { opacity: 1, x: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-neutral-600 dark:text-neutral-300 max-w-xl text-justify mt-4"
+          className="font-body text-neutral-600 dark:text-neutral-300 max-w-xl text-justify mt-4"
         >
           A collection of languages, frameworks, and tools I&apos;ve used or
           explored throughout my studies, work experiences, and personal

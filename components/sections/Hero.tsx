@@ -11,7 +11,6 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { TypeAnimation } from "react-type-animation";
 import { Profile } from "@/lib/contentful/types";
 import { useIsMobile } from "@/hooks/useIsMobile";
-import { useLoading } from "@/components/providers/LoadingProvider";
 
 interface HeroProps {
   profile: Profile | null;
@@ -20,7 +19,6 @@ interface HeroProps {
 export default function Hero({ profile }: HeroProps) {
   const containerRef = useRef<HTMLElement>(null);
   const isMobile = useIsMobile();
-  const { isLoading } = useLoading();
   const photoUrl = profile?.photo || "/images/avatarful.webp";
   const resumeUrl = profile?.resume;
 
@@ -92,19 +90,7 @@ export default function Hero({ profile }: HeroProps) {
             {isMobile ? (
               <div className="space-y-6">
                 <div className="space-y-4">
-                  <h1 className="text-4xl md:text-6xl font-bold from-blue-600 to-cyan-500 dark:from-blue-400 dark:to-cyan-300 bg-clip-text text-transparent bg-linear-to-r">
-                    <motion.span
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={
-                        !isLoading
-                          ? { opacity: 1, y: 0 }
-                          : { opacity: 0, y: 10 }
-                      }
-                      transition={{ duration: 0.5 }}
-                      className="block text-lg md:text-xl font-semibold mb-2"
-                    >
-                      Hi, I&apos;m{" "}
-                    </motion.span>
+                  <h1 className="font-heading text-4xl md:text-6xl font-bold from-blue-600 to-cyan-500 dark:from-blue-400 dark:to-cyan-300 bg-clip-text text-transparent bg-linear-to-r">
                     <motion.span
                       layoutId="gabriel-name"
                       transition={{
@@ -117,7 +103,7 @@ export default function Hero({ profile }: HeroProps) {
                       Gabriel Nathanael
                     </motion.span>
                   </h1>
-                  <div className="text-2xl md:text-3xl font-semibold text-neutral-700 dark:text-neutral-200 min-h-12">
+                  <div className="font-heading text-2xl md:text-3xl font-semibold text-neutral-700 dark:text-neutral-200 min-h-12">
                     <TypeAnimation
                       sequence={[
                         "Full Stack Developer",
@@ -135,7 +121,7 @@ export default function Hero({ profile }: HeroProps) {
                   </div>
                 </div>
 
-                <p className="text-lg text-neutral-600 dark:text-neutral-400 max-w-xl text-justify">
+                <p className="font-body text-lg text-neutral-600 dark:text-neutral-400 max-w-xl text-justify">
                   From concept to production, solving challenges through
                   thoughtful codes.
                 </p>
@@ -164,27 +150,13 @@ export default function Hero({ profile }: HeroProps) {
             ) : (
               <motion.div
                 initial={{ opacity: 0, x: -50 }}
-                animate={
-                  !isLoading ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }
-                }
+                animate={{ opacity: 1, x: 0 }}
                 style={{ y: yText }}
                 transition={{ duration: 0.8, ease: "easeOut" }}
                 className="space-y-6"
               >
                 <div className="space-y-4">
-                  <h1 className="text-4xl md:text-6xl font-bold from-blue-600 to-cyan-500 dark:from-blue-400 dark:to-cyan-300 bg-clip-text text-transparent bg-linear-to-r">
-                    <motion.span
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={
-                        !isLoading
-                          ? { opacity: 1, y: 0 }
-                          : { opacity: 0, y: 20 }
-                      }
-                      transition={{ delay: 0.2, duration: 0.6 }}
-                      className="block text-lg md:text-xl font-semibold mb-2"
-                    >
-                      Hi, I&apos;m{" "}
-                    </motion.span>
+                  <h1 className="font-heading text-4xl md:text-6xl font-bold from-blue-600 to-cyan-500 dark:from-blue-400 dark:to-cyan-300 bg-clip-text text-transparent bg-linear-to-r">
                     <motion.span
                       layoutId="gabriel-name"
                       transition={{
@@ -200,11 +172,9 @@ export default function Hero({ profile }: HeroProps) {
 
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
-                    animate={
-                      !isLoading ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }
-                    }
+                    animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.4, duration: 0.6 }}
-                    className="text-2xl md:text-3xl font-semibold text-neutral-700 dark:text-neutral-200 min-h-12"
+                    className="font-heading text-2xl md:text-3xl font-semibold text-neutral-700 dark:text-neutral-200 min-h-12"
                   >
                     <TypeAnimation
                       sequence={[
@@ -225,11 +195,9 @@ export default function Hero({ profile }: HeroProps) {
 
                 <motion.p
                   initial={{ opacity: 0, y: 20 }}
-                  animate={
-                    !isLoading ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }
-                  }
+                  animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.5, duration: 0.6 }}
-                  className="text-lg text-neutral-600 dark:text-neutral-400 max-w-xl text-justify"
+                  className="font-body text-lg text-neutral-600 dark:text-neutral-400 max-w-xl text-justify"
                 >
                   From concept to production, solving challenges through
                   thoughtful codes.
@@ -237,9 +205,7 @@ export default function Hero({ profile }: HeroProps) {
 
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
-                  animate={
-                    !isLoading ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }
-                  }
+                  animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.6, duration: 0.6 }}
                   className="flex flex-wrap gap-4 pt-4 justify-center lg:justify-start"
                 >
@@ -440,9 +406,7 @@ export default function Hero({ profile }: HeroProps) {
             ) : (
               <motion.div
                 initial={{ opacity: 0, x: 50 }}
-                animate={
-                  !isLoading ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }
-                }
+                animate={{ opacity: 1, x: 0 }}
                 style={{ y: yImage }}
                 transition={{
                   duration: 0.8,

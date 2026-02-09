@@ -22,24 +22,34 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+
+  /* Font families */
+  --font-family-heading:
+    var(--font-heading), system-ui, -apple-system, sans-serif;
+  --font-family-body: var(--font-body), Georgia, serif;
 }
 
 /* === Global body styles === */
 body {
   background: transparent;
   color: rgb(var(--foreground));
-  font-family:
-    "Manrope",
-    system-ui,
-    -apple-system,
-    sans-serif;
+  font-family: theme(--font-family-body);
   font-feature-settings:
-    "rlig" 1,
-    "calt" 1;
+    "kern" 1,
+    "liga" 1;
   font-optical-sizing: auto;
   transition:
     background-color 0.3s ease,
     color 0.3s ease;
+}
+
+/* === Typography utilities === */
+.font-heading {
+  font-family: theme(--font-family-heading);
+}
+
+.font-body {
+  font-family: theme(--font-family-body);
 }
 
 /* === Smooth scrolling === */
