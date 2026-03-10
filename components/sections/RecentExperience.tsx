@@ -51,13 +51,13 @@ export default function RecentExperience({
       case "Full-time":
         return "bg-emerald-50 dark:bg-emerald-950/30 text-emerald-700 dark:text-emerald-400 border-emerald-200 dark:border-emerald-800";
       case "Internship":
-        return "bg-violet-50 dark:bg-violet-950/30 text-violet-700 dark:text-violet-400 border-violet-200 dark:border-violet-800";
+        return "bg-orange-50 dark:bg-orange-950/30 text-orange-700 dark:text-orange-400 border-orange-200 dark:border-orange-800";
       case "Part-time":
-        return "bg-blue-50 dark:bg-blue-950/30 text-blue-700 dark:text-blue-400 border-blue-200 dark:border-blue-800";
+        return "bg-amber-50 dark:bg-amber-950/30 text-amber-700 dark:text-amber-400 border-amber-200 dark:border-amber-800";
       case "Contract":
         return "bg-amber-50 dark:bg-amber-950/30 text-amber-700 dark:text-amber-400 border-amber-200 dark:border-amber-800";
       case "Freelance":
-        return "bg-cyan-50 dark:bg-cyan-950/30 text-cyan-700 dark:text-cyan-400 border-cyan-200 dark:border-cyan-800";
+        return "bg-rose-50 dark:bg-rose-950/30 text-rose-700 dark:text-rose-400 border-rose-200 dark:border-rose-800";
       default:
         return "bg-neutral-50 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 border-neutral-200 dark:border-neutral-700";
     }
@@ -84,7 +84,7 @@ export default function RecentExperience({
           viewport={{ once: true }}
           className="space-y-2"
         >
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-blue-600 to-cyan-500 dark:from-blue-400 dark:to-cyan-300 bg-clip-text text-transparent">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-amber-600 to-rose-500 dark:from-amber-400 dark:to-rose-300 bg-clip-text text-transparent">
             Recent Experiences
           </h2>
         </motion.div>
@@ -97,7 +97,7 @@ export default function RecentExperience({
         >
           <Link
             href="/experiences"
-            className="group inline-flex items-center gap-2 px-4 py-2 text-sm md:text-base font-medium text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors"
+            className="group inline-flex items-center gap-2 px-4 py-2 text-sm md:text-base font-medium text-amber-600 dark:text-amber-400 hover:text-amber-700 dark:hover:text-amber-300 transition-colors"
           >
             View All
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -108,7 +108,7 @@ export default function RecentExperience({
       {/* Experience Timeline */}
       <div className="relative">
         {/* Desktop Timeline Line */}
-        <div className="absolute left-8 top-0 bottom-0 w-px bg-gradient-to-b from-blue-500/50 via-blue-400/30 to-transparent dark:from-blue-400/50 dark:via-blue-500/30 hidden md:block" />
+        <div className="absolute left-8 top-0 bottom-0 w-px bg-gradient-to-b from-amber-500/50 via-amber-400/30 to-transparent dark:from-amber-400/50 dark:via-amber-500/30 hidden md:block" />
 
         {/* Experience Cards */}
         <div className="space-y-8 md:space-y-12">
@@ -130,8 +130,8 @@ export default function RecentExperience({
                 <motion.div
                   className={`w-full h-full rounded-full border-4 ${
                     exp.iscurrent
-                      ? "bg-blue-600 dark:bg-blue-400 border-white dark:border-neutral-950"
-                      : "bg-white dark:bg-neutral-950 border-blue-500/50 dark:border-blue-400/50"
+                      ? "bg-amber-600 dark:bg-amber-400 border-white dark:border-neutral-950"
+                      : "bg-white dark:bg-neutral-950 border-amber-500/50 dark:border-amber-400/50"
                   }`}
                   animate={exp.iscurrent ? { scale: [1, 1.2, 1] } : {}}
                   transition={
@@ -149,7 +149,7 @@ export default function RecentExperience({
                       repeat: Infinity,
                       ease: "easeOut",
                     }}
-                    className="absolute inset-0 rounded-full bg-blue-600 dark:bg-blue-400"
+                    className="absolute inset-0 rounded-full bg-amber-600 dark:bg-amber-400"
                   />
                 )}
               </div>
@@ -178,7 +178,7 @@ export default function RecentExperience({
                             href={exp.website}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex items-center gap-2 text-base md:text-lg font-semibold text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors"
+                            className="inline-flex items-center gap-2 text-base md:text-lg font-semibold text-amber-600 dark:text-amber-400 hover:text-amber-700 dark:hover:text-amber-300 transition-colors"
                           >
                             {exp.company}
                             <ExternalLink className="w-4 h-4" />
@@ -226,7 +226,7 @@ export default function RecentExperience({
                   {/* Expand Button */}
                   <button
                     onClick={() => toggleExpand(exp.id)}
-                    className="inline-flex items-center gap-2 text-sm font-medium text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors pt-2"
+                    className="inline-flex items-center gap-2 text-sm font-medium text-amber-600 dark:text-amber-400 hover:text-amber-700 dark:hover:text-amber-300 transition-colors pt-2"
                   >
                     {expandedId === exp.id ? (
                       <>
@@ -317,7 +317,7 @@ export default function RecentExperience({
                                     key={i}
                                     className="flex items-start gap-3 text-neutral-700 dark:text-neutral-300"
                                   >
-                                    <span className="w-1.5 h-1.5 bg-blue-600 dark:bg-blue-400 rounded-full mt-2 shrink-0" />
+                                    <span className="w-1.5 h-1.5 bg-amber-600 dark:bg-amber-400 rounded-full mt-2 shrink-0" />
                                     <span className="text-sm leading-relaxed">
                                       {resp}
                                     </span>
@@ -341,7 +341,7 @@ export default function RecentExperience({
                                     href={project.url}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-800 rounded-lg hover:bg-blue-100 dark:hover:bg-blue-950/50 transition-colors"
+                                    className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800 rounded-lg hover:bg-amber-100 dark:hover:bg-amber-950/50 transition-colors"
                                   >
                                     <ExternalLink className="w-4 h-4" />
                                     {project.title}

@@ -51,7 +51,7 @@ export default function ChatInput({
         className="flex-1 px-4 py-2.5 rounded-full bg-neutral-100 dark:bg-neutral-800 
                  text-neutral-900 dark:text-neutral-100 text-sm
                  placeholder:text-neutral-500 dark:placeholder:text-neutral-500
-                 focus:outline-none focus:ring-2 focus:ring-blue-500/50
+                 focus:outline-none focus:ring-2 focus:ring-amber-500/50
                  disabled:opacity-50 disabled:cursor-not-allowed
                  transition-all"
       />
@@ -62,11 +62,11 @@ export default function ChatInput({
         onClick={handleSend}
         disabled={isLoading || disabled || !input.trim()}
         className="shrink-0 w-10 h-10 rounded-full 
-                 bg-linear-to-r from-blue-500 to-cyan-500
-                 hover:from-blue-600 hover:to-cyan-600
+                 bg-linear-to-r from-amber-500 to-rose-500
+                 hover:from-amber-600 hover:to-rose-600
                  disabled:opacity-50 disabled:cursor-not-allowed
                  flex items-center justify-center
-                 transition-all shadow-lg shadow-blue-500/30"
+                 transition-all shadow-lg shadow-amber-500/30"
       >
         {isLoading ? (
           <Loader2 className="w-4 h-4 text-white animate-spin" />

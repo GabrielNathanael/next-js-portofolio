@@ -72,10 +72,10 @@ export default function Navbar() {
                 isOpen ? "blur-sm md:blur-none" : ""
               }`}
             >
-              <span className="font-heading hidden md:block text-2xl font-bold from-blue-600 to-cyan-500 dark:from-blue-400 dark:to-cyan-300 bg-clip-text text-transparent bg-linear-to-r">
+              <span className="font-heading hidden md:block text-2xl font-bold from-amber-600 to-rose-500 dark:from-amber-400 dark:to-rose-300 bg-clip-text text-transparent bg-linear-to-r">
                 Gabriel Nathanael
               </span>
-              <div className="md:hidden w-10 h-10 rounded-full overflow-hidden shadow-lg shadow-blue-500/10">
+              <div className="md:hidden w-10 h-10 rounded-full overflow-hidden shadow-lg shadow-amber-500/10">
                 <Image
                   src="/apple-icon.png"
                   alt="Gabriel Nathanael"
@@ -100,15 +100,15 @@ export default function Navbar() {
                     <span
                       className={`font-heading font-medium transition-all duration-200 ${
                         active
-                          ? "bg-linear-to-r from-blue-600 to-cyan-500 dark:from-blue-400 dark:to-cyan-300 bg-clip-text text-transparent"
-                          : "text-neutral-800 dark:text-neutral-200 group-hover:text-blue-600 dark:group-hover:text-blue-400"
+                          ? "bg-linear-to-r from-amber-600 to-rose-500 dark:from-amber-400 dark:to-rose-300 bg-clip-text text-transparent"
+                          : "text-neutral-800 dark:text-neutral-200 group-hover:text-amber-600 dark:group-hover:text-amber-400"
                       }`}
                     >
                       {link.label}
                     </span>
                     {/* Underline */}
                     <span
-                      className={`absolute -bottom-1 left-0 h-0.5 bg-linear-to-r from-blue-600 to-cyan-500 dark:from-blue-400 dark:to-cyan-300 transition-all duration-200 ${
+                      className={`absolute -bottom-1 left-0 h-0.5 bg-linear-to-r from-amber-600 to-rose-500 dark:from-amber-400 dark:to-rose-300 transition-all duration-200 ${
                         active ? "w-full" : "w-0 group-hover:w-full"
                       }`}
                     />
@@ -174,8 +174,8 @@ export default function Navbar() {
                       <span
                         className={`font-heading px-4 py-2 rounded-xl text-sm font-semibold whitespace-nowrap shadow-xl border backdrop-blur-sm transition-all duration-300 ${
                           active
-                            ? "bg-blue-50/95 dark:bg-blue-950/95 border-blue-200/50 dark:border-blue-800/50 bg-linear-to-r from-blue-600 to-cyan-500 dark:from-blue-400 dark:to-cyan-300 bg-clip-text text-transparent"
-                            : "bg-white/95 dark:bg-neutral-900/95 border-neutral-200/50 dark:border-neutral-700/50 text-neutral-800 dark:text-neutral-100 group-hover:bg-blue-50/95 dark:group-hover:bg-blue-950/95 group-hover:text-blue-600 dark:group-hover:text-blue-400 group-hover:border-blue-200/50 dark:group-hover:border-blue-800/50"
+                            ? "bg-amber-50/95 dark:bg-amber-950/95 border-amber-200/50 dark:border-amber-800/50 bg-linear-to-r from-amber-600 to-rose-500 dark:from-amber-400 dark:to-rose-300 bg-clip-text text-transparent"
+                            : "bg-white/95 dark:bg-neutral-900/95 border-neutral-200/50 dark:border-neutral-700/50 text-neutral-800 dark:text-neutral-100 group-hover:bg-amber-50/95 dark:group-hover:bg-amber-950/95 group-hover:text-amber-600 dark:group-hover:text-amber-400 group-hover:border-amber-200/50 dark:group-hover:border-amber-800/50"
                         }`}
                       >
                         {link.label}
@@ -185,8 +185,8 @@ export default function Navbar() {
                       <div
                         className={`flex items-center justify-center rounded-xl shadow-lg transition-all duration-300 ease-out w-12 h-12 group-hover:scale-110 group-hover:rotate-3 ${
                           active
-                            ? "bg-linear-to-br from-blue-500 via-blue-600 to-cyan-500 dark:from-blue-600 dark:via-blue-700 dark:to-cyan-600 shadow-blue-500/50 dark:shadow-blue-900/50"
-                            : "bg-linear-to-br from-blue-500 via-blue-600 to-cyan-500 dark:from-blue-600 dark:via-blue-700 dark:to-cyan-600 shadow-blue-500/30 dark:shadow-blue-900/30 group-hover:shadow-xl group-hover:shadow-blue-500/50 dark:group-hover:shadow-blue-900/50"
+                            ? "bg-linear-to-br from-amber-500 via-amber-600 to-rose-500 dark:from-amber-600 dark:via-amber-700 dark:to-rose-600 shadow-amber-500/50 dark:shadow-amber-900/50"
+                            : "bg-linear-to-br from-amber-500 via-amber-600 to-rose-500 dark:from-amber-600 dark:via-amber-700 dark:to-rose-600 shadow-amber-500/30 dark:shadow-amber-900/30 group-hover:shadow-xl group-hover:shadow-amber-500/50 dark:group-hover:shadow-amber-900/50"
                         }`}
                       >
                         <Icon className="text-white w-6 h-6 drop-shadow-sm" />

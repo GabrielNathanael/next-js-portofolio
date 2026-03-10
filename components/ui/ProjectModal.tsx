@@ -56,7 +56,7 @@ export default function ProjectModal({
       },
       Collab: {
         icon: Users,
-        bg: "bg-violet-500 dark:bg-violet-600",
+        bg: "bg-orange-500 dark:bg-orange-600",
         text: "text-white",
         label: "Collab",
       },
@@ -158,7 +158,7 @@ export default function ProjectModal({
                           {project.tags.map((tag) => (
                             <span
                               key={tag}
-                              className="px-3 py-1.5 text-xs md:text-sm font-medium bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 rounded-lg border border-blue-100 dark:border-blue-800/50"
+                              className="px-3 py-1.5 text-xs md:text-sm font-medium bg-amber-50 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400 rounded-lg border border-amber-100 dark:border-amber-800/50"
                             >
                               {tag}
                             </span>
@@ -177,7 +177,7 @@ export default function ProjectModal({
                               href={project.demoUrl ?? undefined}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="flex-1 flex items-center justify-center gap-2 px-4 py-3 bg-linear-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white rounded-lg font-semibold text-sm transition-all shadow-md hover:shadow-lg"
+                              className="flex-1 flex items-center justify-center gap-2 px-4 py-3 bg-linear-to-r from-amber-600 to-rose-500 hover:from-amber-700 hover:to-rose-600 text-white rounded-lg font-semibold text-sm transition-all shadow-md hover:shadow-lg"
                             >
                               <ExternalLink className="w-4 h-4" />
                               Live Website

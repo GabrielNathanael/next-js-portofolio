@@ -1,177 +1,158 @@
 // components/sections/LatestCertificates.tsx
 "use client";
 
-import { useEffect, useRef, useCallback } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
-import "./LatestCertificates.module.css";
+import { ArrowUpRight } from "lucide-react";
 import { Certificate } from "@/lib/contentful/types";
 
 interface LatestCertificatesProps {
   certificates: Certificate[];
 }
 
-const TIME_AUTO_NEXT = 7000;
+// REST: stacked like a deck — slight fan already visible
+// SPREAD: full kipas ke kanan saat hover
+const FAN_REST = [
+  { rotate: 8, x: 16, y: 12, z: 1, scale: 0.95 }, // back
+  { rotate: 3, x: 8, y: 5, z: 2, scale: 0.97 }, // middle
+  { rotate: -1, x: 0, y: 0, z: 3, scale: 1.0 }, // front (highlight)
+];
+
+const FAN_SPREAD = [
+  { rotate: 22, x: 240, y: 50, z: 1, scale: 0.93 },
+  { rotate: -2, x: 24, y: 12, z: 2, scale: 0.97 },
+  { rotate: -18, x: -100, y: 24, z: 3, scale: 1.0 },
+];
 
 export default function LatestCertificates({
   certificates,
 }: LatestCertificatesProps) {
-  const listRef = useRef<HTMLDivElement>(null);
-  const carouselRef = useRef<HTMLDivElement>(null);
-  const progressRef = useRef<HTMLDivElement>(null);
-  const autoNextRef = useRef<NodeJS.Timeout | null>(null);
+  const [hovered, setHovered] = useState(false);
 
-  const resetProgress = useCallback(() => {
-    const bar = progressRef.current;
-    if (!bar) return;
-    bar.style.animation = "none";
-    void bar.offsetHeight; // force reflow
-    bar.style.animation = `certProgress ${TIME_AUTO_NEXT / 1000}s linear 1 forwards`;
-  }, []);
-
-  const showSlider = useCallback(
-    function handleSlider(type: "next" | "prev") {
-      const list = listRef.current;
-      const carousel = carouselRef.current;
-      if (!list || !carousel) return;
-
-      const items = list.querySelectorAll<HTMLDivElement>(".cert-item");
-
-      if (type === "next") {
-        list.appendChild(items[0]);
-      } else {
-        list.prepend(items[items.length - 1]);
-      }
-
-      resetProgress();
-
-      // Schedule next slide using the internal function name
-      if (autoNextRef.current) clearTimeout(autoNextRef.current);
-      autoNextRef.current = setTimeout(
-        () => handleSlider("next"),
-        TIME_AUTO_NEXT,
-      );
-    },
-    [resetProgress],
-  );
-
-  useEffect(() => {
-    resetProgress();
-
-    // Start initial timer
-    if (autoNextRef.current) clearTimeout(autoNextRef.current);
-    autoNextRef.current = setTimeout(() => showSlider("next"), TIME_AUTO_NEXT);
-
-    const currentAutoNext = autoNextRef.current;
-    return () => {
-      if (currentAutoNext) clearTimeout(currentAutoNext);
-    };
-  }, [resetProgress, showSlider]);
+  // highlight cert goes to front (index 2), others behind
+  const sorted = (() => {
+    const hi = certificates.find((c) => c.highlight);
+    if (!hi) return certificates.slice(0, 3);
+    const others = certificates.filter((c) => c !== hi).slice(0, 2);
+    return [others[1] ?? hi, others[0] ?? hi, hi] as Certificate[];
+  })();
 
   return (
     <motion.div
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      transition={{ duration: 0.6 }}
+      initial={{ opacity: 0, y: 28 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
       viewport={{ once: true }}
+      className="flex flex-col md:flex-row items-center gap-12 md:gap-0"
     >
-      {/* Section Header */}
-      <div className="flex items-center justify-between mb-8">
-        <motion.h2
-          initial={{ opacity: 0, x: -30 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          viewport={{ once: true }}
-          className="text-3xl md:text-4xl font-bold bg-linear-to-r from-blue-600 to-cyan-500 dark:from-blue-400 dark:to-cyan-300 bg-clip-text text-transparent"
-        >
-          Highlighted Certifications
-        </motion.h2>
-
+      {/* ── LEFT: Copywriting ── */}
+      <div className="flex-1 flex flex-col gap-6 md:pr-12">
         <motion.div
-          initial={{ opacity: 0, x: 30 }}
+          initial={{ opacity: 0, x: -20 }}
           whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
+          transition={{ delay: 0.1, duration: 0.55 }}
+          viewport={{ once: true }}
+        >
+          {/* Eyebrow */}
+          <p className="text-xs font-bold tracking-[0.22em] uppercase text-amber-500 dark:text-amber-400 mb-3">
+            Certifications
+          </p>
+
+          {/* Headline */}
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.05] tracking-tight text-neutral-900 dark:text-neutral-50 mb-5">
+            Skills that are{" "}
+            <span className="italic font-normal text-neutral-400 dark:text-neutral-500">
+              verified,
+            </span>
+            <br />
+            not just listed.
+          </h2>
+
+          {/* Body */}
+          <p className="text-base text-neutral-500 dark:text-neutral-400 leading-relaxed max-w-sm">
+            A selection of certifications earned through courses, exams, and
+            continuous learning.
+          </p>
+        </motion.div>
+
+        {/* CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 8 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.25, duration: 0.45 }}
           viewport={{ once: true }}
         >
           <Link
             href="/certificates"
-            className="inline-flex items-center gap-2 text-sm font-medium text-blue-600 dark:text-blue-400 group"
+            className="
+              inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold w-fit
+              bg-neutral-900 text-white hover:bg-neutral-700
+              dark:bg-white dark:text-neutral-900 dark:hover:bg-neutral-100
+              transition-colors duration-200 shadow-md group
+            "
           >
-            View All
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            See all certifications
+            <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-150" />
           </Link>
         </motion.div>
       </div>
 
-      {/* Carousel — breaks out of parent container */}
-      <div className="-mx-4 sm:-mx-6 md:mx-0">
+      {/* ── RIGHT: Fan Card Stack ── */}
+      <motion.div
+        className="flex-1 flex items-center justify-center"
+        initial={{ opacity: 0, x: 24 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        transition={{ delay: 0.2, duration: 0.6 }}
+        viewport={{ once: true }}
+      >
         <div
-          ref={carouselRef}
-          className="cert-carousel relative w-full overflow-hidden rounded-none md:rounded-2xl bg-neutral-100 dark:bg-neutral-900"
+          className="relative"
+          style={{ width: 360, height: 360 }}
+          onMouseEnter={() => setHovered(true)}
+          onMouseLeave={() => setHovered(false)}
         >
-          {/* Progress bar */}
-          <div className="absolute top-0 left-0 right-0 h-0.75 z-40 bg-black/10 dark:bg-white/10">
-            <div ref={progressRef} className="h-full bg-blue-500" />
-          </div>
+          {sorted.map((cert, i) => {
+            const pos = hovered ? FAN_SPREAD[i] : FAN_REST[i];
+            const isFront = i === 2;
 
-          {/* Slide list — DOM manipulation target */}
-          <div ref={listRef} className="absolute inset-0">
-            {certificates.map((cert, i) => (
-              <div
-                key={cert.title}
-                className="cert-item absolute overflow-hidden bg-neutral-200 dark:bg-neutral-800"
+            return (
+              <motion.div
+                key={cert.title + i}
+                animate={{
+                  rotate: pos.rotate,
+                  x: pos.x,
+                  y: pos.y,
+                  scale: pos.scale,
+                }}
+                style={{ zIndex: pos.z, position: "absolute", top: 0, left: 0 }}
+                transition={{ type: "spring", stiffness: 200, damping: 24 }}
+                whileHover={{
+                  y: pos.y - 14,
+                  transition: { type: "spring", stiffness: 320, damping: 22 },
+                }}
+                className="cursor-pointer"
               >
-                {/* Image */}
-                <div className="relative w-full h-full">
+                {/* Card */}
+                <div
+                  className="relative overflow-hidden rounded-2xl shadow-2xl"
+                  style={{ width: 340, aspectRatio: "4/3" }}
+                >
                   <Image
                     src={cert.image}
                     alt={cert.title}
                     fill
-                    className="cert-img"
-                    sizes="(max-width: 768px) 100vw, 80vw"
-                    priority={i < 2}
+                    className="object-cover"
+                    sizes="360px"
+                    priority={isFront}
                   />
                 </div>
-
-                {/* Content — only visible when item is nth-child(2) via CSS */}
-                <div className="cert-content absolute inset-0 z-10 pointer-events-none">
-                  <div className="absolute bottom-16 left-6 md:left-10 space-y-1">
-                    <span className="cert-year block text-[11px] font-bold tracking-[0.2em] uppercase text-blue-400">
-                      {cert.year}
-                    </span>
-                    <h3 className="cert-title text-base md:text-lg font-extrabold text-white leading-snug max-w-xs line-clamp-3">
-                      {cert.title}
-                    </h3>
-                    <p className="cert-issuer text-xs text-white/60 font-medium">
-                      {cert.issuer}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Nav buttons */}
-          <div className="absolute bottom-5 left-6 md:left-10 z-30 flex items-center gap-2">
-            <button
-              onClick={() => showSlider("prev")}
-              aria-label="Previous certificate"
-              className="w-9 h-9 rounded-full bg-white/90 dark:bg-neutral-800/90 hover:bg-blue-500 hover:text-white dark:hover:bg-blue-500 text-neutral-900 dark:text-white flex items-center justify-center transition-colors duration-200 shadow-md backdrop-blur-sm"
-            >
-              <ChevronLeft className="w-4 h-4" />
-            </button>
-            <button
-              onClick={() => showSlider("next")}
-              aria-label="Next certificate"
-              className="w-9 h-9 rounded-full bg-white/90 dark:bg-neutral-800/90 hover:bg-blue-500 hover:text-white dark:hover:bg-blue-500 text-neutral-900 dark:text-white flex items-center justify-center transition-colors duration-200 shadow-md backdrop-blur-sm"
-            >
-              <ChevronRight className="w-4 h-4" />
-            </button>
-          </div>
+              </motion.div>
+            );
+          })}
         </div>
-      </div>
+      </motion.div>
     </motion.div>
   );
 }

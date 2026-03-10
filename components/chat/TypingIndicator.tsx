@@ -8,7 +8,7 @@ export default function TypingIndicator() {
   return (
     <div className="flex items-start gap-3">
       {/* Avatar - Bot Image */}
-      <div className="w-8 h-8 rounded-full bg-linear-to-br from-blue-500 to-cyan-500 flex items-center justify-center shrink-0 overflow-hidden">
+      <div className="w-8 h-8 rounded-full bg-linear-to-br from-amber-500 to-rose-500 flex items-center justify-center shrink-0 overflow-hidden">
         <Image
           src="/images/nobody.webp"
           alt="AI Assistant"

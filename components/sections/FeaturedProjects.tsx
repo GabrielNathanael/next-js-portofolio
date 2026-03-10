@@ -90,7 +90,7 @@ export default function FeaturedProjects({ projects }: FeaturedProjectsProps) {
       },
       Collab: {
         icon: Users,
-        bg: "bg-violet-500 dark:bg-violet-600",
+        bg: "bg-orange-500 dark:bg-orange-600",
         text: "text-white",
         label: "Collab",
       },
@@ -115,12 +115,12 @@ export default function FeaturedProjects({ projects }: FeaturedProjectsProps) {
         <div className="px-6">
           {/* Section Label */}
           <div className="flex items-center justify-between mb-8">
-            <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-blue-600 to-cyan-500 dark:from-blue-400 dark:to-cyan-300 bg-clip-text text-transparent">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold bg-linear-to-r from-amber-600 to-rose-500 dark:from-amber-400 dark:to-rose-300 bg-clip-text text-transparent">
               Featured Projects
             </h2>
             <Link
               href="/projects"
-              className="inline-flex items-center gap-2 text-sm font-medium text-blue-600 dark:text-blue-400 group"
+              className="inline-flex items-center gap-2 text-sm font-medium text-amber-600 dark:text-amber-400 group"
             >
               View All
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -214,9 +214,8 @@ export default function FeaturedProjects({ projects }: FeaturedProjectsProps) {
       ref={containerRef}
       className="relative h-screen overflow-hidden bg-white dark:bg-neutral-950"
     >
-      {/* Section Label - Fixed */}
-      <div className="absolute top-12 md:top-16 left-6 md:left-16 lg:left-24 z-20">
-        <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-blue-600 to-cyan-500 dark:from-blue-400 dark:to-cyan-300 bg-clip-text text-transparent">
+      <div className="absolute top-12 md:top-16 left-1/2 -translate-x-1/2 z-20 text-center">
+        <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold bg-linear-to-r from-amber-600 to-rose-500 dark:from-amber-400 dark:to-rose-300 bg-clip-text text-transparent">
           Featured Projects
         </h2>
       </div>
@@ -317,9 +316,9 @@ export default function FeaturedProjects({ projects }: FeaturedProjectsProps) {
             </p>
             <a
               href="/projects"
-              className="inline-flex w-20 h-20 md:w-24 md:h-24 rounded-full border-2 border-blue-600 dark:border-blue-400 items-center justify-center mx-auto hover:bg-linear-to-br hover:from-blue-600 hover:to-cyan-500 hover:border-transparent hover:scale-110 transition-all duration-500 cursor-pointer group"
+              className="inline-flex w-20 h-20 md:w-24 md:h-24 rounded-full border-2 border-amber-600 dark:border-amber-400 items-center justify-center mx-auto hover:bg-linear-to-br hover:from-amber-600 hover:to-rose-500 hover:border-transparent hover:scale-110 transition-all duration-500 cursor-pointer group"
             >
-              <ArrowRight className="w-6 h-6 md:w-8 md:h-8 text-blue-600 dark:text-blue-400 group-hover:text-white group-hover:translate-x-1 transition-all" />
+              <ArrowRight className="w-6 h-6 md:w-8 md:h-8 text-amber-600 dark:text-amber-400 group-hover:text-white group-hover:translate-x-1 transition-all" />
             </a>
           </div>
         </div>

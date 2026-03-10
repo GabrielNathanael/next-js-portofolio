@@ -185,13 +185,13 @@ export default function ExperienceGrid({ experiences }: ExperienceGridProps) {
       "Full-time":
         "bg-emerald-50 dark:bg-emerald-950/30 text-emerald-700 dark:text-emerald-400 border-emerald-200 dark:border-emerald-800",
       Internship:
-        "bg-violet-50 dark:bg-violet-950/30 text-violet-700 dark:text-violet-400 border-violet-200 dark:border-violet-800",
+        "bg-orange-50 dark:bg-orange-950/30 text-orange-700 dark:text-orange-400 border-orange-200 dark:border-orange-800",
       "Part-time":
-        "bg-blue-50 dark:bg-blue-950/30 text-blue-700 dark:text-blue-400 border-blue-200 dark:border-blue-800",
+        "bg-amber-50 dark:bg-amber-950/30 text-amber-700 dark:text-amber-400 border-amber-200 dark:border-amber-800",
       Contract:
         "bg-amber-50 dark:bg-amber-950/30 text-amber-700 dark:text-amber-400 border-amber-200 dark:border-amber-800",
       Freelance:
-        "bg-cyan-50 dark:bg-cyan-950/30 text-cyan-700 dark:text-cyan-400 border-cyan-200 dark:border-cyan-800",
+        "bg-rose-50 dark:bg-rose-950/30 text-rose-700 dark:text-rose-400 border-rose-200 dark:border-rose-800",
     };
     return (
       colors[type] ||
@@ -227,7 +227,7 @@ export default function ExperienceGrid({ experiences }: ExperienceGridProps) {
       {displayedExperiences.length > 0 ? (
         <div className="relative">
           {/* Timeline Line */}
-          <div className="absolute left-3 top-0 bottom-0 w-px bg-gradient-to-b from-blue-500/50 via-blue-400/30 to-transparent dark:from-blue-400/50 dark:via-blue-500/30" />
+          <div className="absolute left-3 top-0 bottom-0 w-px bg-linear-to-b from-amber-500/50 via-amber-400/30 to-transparent dark:from-amber-400/50 dark:via-amber-500/30" />
 
           {/* Experience Items */}
           <div className="space-y-8">
@@ -247,7 +247,7 @@ export default function ExperienceGrid({ experiences }: ExperienceGridProps) {
                     {exp.iscurrent ? (
                       <div className="relative">
                         <motion.div
-                          className="w-6 h-6 rounded-full bg-blue-600 dark:bg-blue-400 border-4 border-white dark:border-neutral-950"
+                          className="w-6 h-6 rounded-full bg-amber-600 dark:bg-amber-400 border-4 border-white dark:border-neutral-950"
                           animate={{ scale: [1, 1.2, 1] }}
                           transition={{ duration: 2, repeat: Infinity }}
                         />
@@ -261,11 +261,11 @@ export default function ExperienceGrid({ experiences }: ExperienceGridProps) {
                             repeat: Infinity,
                             ease: "easeOut",
                           }}
-                          className="absolute inset-0 rounded-full bg-blue-600 dark:bg-blue-400"
+                          className="absolute inset-0 rounded-full bg-amber-600 dark:bg-amber-400"
                         />
                       </div>
                     ) : (
-                      <div className="w-6 h-6 rounded-full border-4 bg-white dark:bg-neutral-950 border-blue-500/50 dark:border-blue-400/50" />
+                      <div className="w-6 h-6 rounded-full border-4 bg-white dark:bg-neutral-950 border-amber-500/50 dark:border-amber-400/50" />
                     )}
                   </div>
 
@@ -285,7 +285,7 @@ export default function ExperienceGrid({ experiences }: ExperienceGridProps) {
                                 href={exp.website}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="inline-flex items-center gap-2 text-base md:text-lg font-semibold text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors"
+                                className="inline-flex items-center gap-2 text-base md:text-lg font-semibold text-amber-600 dark:text-amber-400 hover:text-amber-700 dark:hover:text-amber-300 transition-colors"
                               >
                                 {exp.company}
                                 <ExternalLink className="w-4 h-4" />
@@ -333,7 +333,7 @@ export default function ExperienceGrid({ experiences }: ExperienceGridProps) {
                       {/* Expand Button */}
                       <button
                         onClick={() => toggleExpand(exp.id)}
-                        className="inline-flex items-center gap-2 text-sm font-medium text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors pt-2"
+                        className="inline-flex items-center gap-2 text-sm font-medium text-amber-600 dark:text-amber-400 hover:text-amber-700 dark:hover:text-amber-300 transition-colors pt-2"
                       >
                         {isExpanded ? (
                           <>
@@ -425,7 +425,7 @@ export default function ExperienceGrid({ experiences }: ExperienceGridProps) {
                                         key={i}
                                         className="flex items-start gap-3 text-neutral-700 dark:text-neutral-300"
                                       >
-                                        <span className="w-1.5 h-1.5 bg-blue-600 dark:bg-blue-400 rounded-full mt-2 shrink-0" />
+                                        <span className="w-1.5 h-1.5 bg-amber-600 dark:bg-amber-400 rounded-full mt-2 shrink-0" />
                                         <span className="text-sm leading-relaxed">
                                           {resp}
                                         </span>
@@ -449,7 +449,7 @@ export default function ExperienceGrid({ experiences }: ExperienceGridProps) {
                                         href={project.url}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-800 rounded-lg hover:bg-blue-100 dark:hover:bg-blue-950/50 transition-colors"
+                                        className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800 rounded-lg hover:bg-amber-100 dark:hover:bg-amber-950/50 transition-colors"
                                       >
                                         <ExternalLink className="w-4 h-4" />
                                         {project.title}

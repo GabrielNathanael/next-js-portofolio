@@ -79,7 +79,7 @@ export default function ProjectsGrid({
       },
       Collab: {
         icon: Users,
-        bgColor: "bg-violet-500",
+        bgColor: "bg-orange-500",
         textColor: "text-white",
       },
     };
@@ -207,7 +207,7 @@ export default function ProjectsGrid({
                   </div>
                   <div className="p-6 space-y-3">
                     <div className="flex items-start justify-between gap-3">
-                      <h3 className="text-xl font-bold text-neutral-900 dark:text-neutral-200 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors flex-1 line-clamp-2">
+                      <h3 className="text-xl font-bold text-neutral-900 dark:text-neutral-200 group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors flex-1 line-clamp-2">
                         {project.title}
                       </h3>
                       <span className="text-sm font-medium text-neutral-500 dark:text-neutral-400 shrink-0">
@@ -221,7 +221,7 @@ export default function ProjectsGrid({
                       {project.tags.slice(0, 3).map((tag) => (
                         <span
                           key={tag}
-                          className="px-3 py-1 text-xs font-medium bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-full"
+                          className="px-3 py-1 text-xs font-medium bg-amber-100 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400 rounded-full"
                         >
                           {tag}
                         </span>

@@ -90,7 +90,7 @@ export default function Hero({ profile }: HeroProps) {
             {isMobile ? (
               <div className="space-y-6">
                 <div className="space-y-4">
-                  <h1 className="font-heading text-4xl md:text-6xl font-bold from-blue-600 to-cyan-500 dark:from-blue-400 dark:to-cyan-300 bg-clip-text text-transparent bg-linear-to-r">
+                  <h1 className="font-heading text-4xl md:text-6xl font-bold from-amber-600 to-rose-500 dark:from-amber-400 dark:to-rose-300 bg-clip-text text-transparent bg-linear-to-r">
                     <motion.span
                       layoutId="gabriel-name"
                       transition={{
@@ -156,7 +156,7 @@ export default function Hero({ profile }: HeroProps) {
                 className="space-y-6"
               >
                 <div className="space-y-4">
-                  <h1 className="font-heading text-4xl md:text-6xl font-bold from-blue-600 to-cyan-500 dark:from-blue-400 dark:to-cyan-300 bg-clip-text text-transparent bg-linear-to-r">
+                  <h1 className="font-heading text-4xl md:text-6xl font-bold from-amber-600 to-rose-500 dark:from-amber-400 dark:to-rose-300 bg-clip-text text-transparent bg-linear-to-r">
                     <motion.span
                       layoutId="gabriel-name"
                       transition={{
@@ -400,7 +400,7 @@ export default function Hero({ profile }: HeroProps) {
                   </div>
 
                   {/* Subtle Radial Glow - Mobile */}
-                  <div className="absolute inset-0 bg-linear-to-br from-blue-500/5 via-violet-500/5 to-purple-500/5 rounded-full blur-2xl -z-10" />
+                  <div className="absolute inset-0 bg-linear-to-br from-amber-500/5 via-orange-500/5 to-rose-500/5 rounded-full blur-2xl -z-10" />
                 </div>
               </div>
             ) : (
@@ -641,7 +641,7 @@ export default function Hero({ profile }: HeroProps) {
                   </motion.div>
 
                   {/* Subtle Radial Glow - Desktop */}
-                  <div className="absolute inset-0 bg-linear-to-br from-blue-500/5 via-violet-500/5 to-purple-500/5 rounded-full blur-2xl -z-10" />
+                  <div className="absolute inset-0 bg-linear-to-br from-amber-500/5 via-orange-500/5 to-rose-500/5 rounded-full blur-2xl -z-10" />
                 </div>
               </motion.div>
             )}

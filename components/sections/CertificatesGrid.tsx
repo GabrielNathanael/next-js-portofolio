@@ -154,11 +154,11 @@ export default function CertificatesGrid({
                     <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   </div>
                   <div className="p-5 space-y-3">
-                    <h3 className="text-lg font-bold text-neutral-900 dark:text-neutral-200 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors line-clamp-1">
+                    <h3 className="text-lg font-bold text-neutral-900 dark:text-neutral-200 group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors line-clamp-1">
                       {cert.title}
                     </h3>
                     <div className="flex items-center justify-between gap-3">
-                      <span className="px-3 py-1 text-xs font-medium bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-full">
+                      <span className="px-3 py-1 text-xs font-medium bg-amber-100 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400 rounded-full">
                         {cert.issuer}
                       </span>
                       <span className="text-sm font-medium text-neutral-500 dark:text-neutral-400">

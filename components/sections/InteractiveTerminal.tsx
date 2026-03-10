@@ -119,14 +119,14 @@ export default function InteractiveTerminal({
         <div className="space-y-3">
           {/* ASCII art — Desktop & Tablet */}
           <div className="hidden sm:block">
-            <pre className="text-cyan-400 leading-tight text-[9px] sm:text-[10px] md:text-[12px] lg:text-[14px]">
+            <pre className="text-rose-400 leading-tight text-[9px] sm:text-[10px] md:text-[12px] lg:text-[14px]">
               {ASCII_DESKTOP.join("\n")}
             </pre>
           </div>
 
           {/* ASCII art — Mobile */}
           <div className="sm:hidden">
-            <pre className="text-cyan-400 leading-tight text-[11px]">
+            <pre className="text-rose-400 leading-tight text-[11px]">
               {ASCII_MOBILE.join("\n")}
             </pre>
           </div>
@@ -141,7 +141,7 @@ export default function InteractiveTerminal({
             <span>Full Stack Developer</span>
             <span className="text-neutral-600">│</span>
             <span>Type</span>
-            <span className="text-blue-400 font-mono">help</span>
+            <span className="text-amber-400 font-mono">help</span>
             <span>to see available commands</span>
           </div>
         </div>,
@@ -206,7 +206,7 @@ export default function InteractiveTerminal({
         addLine(
           "output",
           <div className="space-y-3">
-            <div className="text-cyan-400 font-semibold flex items-center gap-2">
+            <div className="text-rose-400 font-semibold flex items-center gap-2">
               <HelpCircle className="w-5 h-5" />
               Available Commands
             </div>
@@ -219,8 +219,8 @@ export default function InteractiveTerminal({
                     className="flex items-start gap-3 text-sm hover:bg-neutral-800/50 p-2 rounded cursor-pointer transition-colors"
                     onClick={() => typeCommand(cmd.cmd)}
                   >
-                    <Icon className="w-4 h-4 text-blue-400 mt-0.5 shrink-0" />
-                    <span className="text-blue-400 font-mono min-w-25">
+                    <Icon className="w-4 h-4 text-amber-400 mt-0.5 shrink-0" />
+                    <span className="text-amber-400 font-mono min-w-25">
                       {cmd.cmd}
                     </span>
                     <span className="text-neutral-400">{cmd.desc}</span>
@@ -236,7 +236,7 @@ export default function InteractiveTerminal({
         addLine(
           "output",
           <div className="space-y-3">
-            <div className="text-cyan-400 font-semibold text-lg flex items-center gap-2">
+            <div className="text-rose-400 font-semibold text-lg flex items-center gap-2">
               <User className="w-5 h-5" />
               About Gabriel
             </div>
@@ -265,7 +265,7 @@ export default function InteractiveTerminal({
         addLine(
           "output",
           <div className="space-y-3">
-            <div className="text-cyan-400 font-semibold flex items-center gap-2">
+            <div className="text-rose-400 font-semibold flex items-center gap-2">
               <Wrench className="w-5 h-5" />
               Tech Stack ({techStack.length} technologies)
             </div>
@@ -307,7 +307,7 @@ export default function InteractiveTerminal({
           addLine(
             "output",
             <div className="space-y-3">
-              <div className="text-cyan-400 font-semibold flex items-center gap-2">
+              <div className="text-rose-400 font-semibold flex items-center gap-2">
                 <Briefcase className="w-5 h-5" />
                 Projects ({projects.length} total{hasMore ? ", showing 6" : ""})
               </div>
@@ -318,10 +318,10 @@ export default function InteractiveTerminal({
                     className="p-3 bg-neutral-800/50 rounded hover:bg-neutral-800 transition-colors border border-neutral-700/50"
                   >
                     <div className="flex items-start justify-between gap-2 mb-2">
-                      <div className="font-semibold text-blue-400">
+                      <div className="font-semibold text-amber-400">
                         {idx + 1}. {project.title}
                       </div>
-                      <span className="text-xs px-2 py-1 bg-violet-500/20 text-violet-300 rounded">
+                      <span className="text-xs px-2 py-1 bg-orange-500/20 text-orange-300 rounded">
                         {project.projectType}
                       </span>
                     </div>
@@ -332,7 +332,7 @@ export default function InteractiveTerminal({
                       {project.tags.slice(0, 4).map((tag) => (
                         <span
                           key={tag}
-                          className="text-xs px-2 py-0.5 bg-blue-500/20 text-blue-300 rounded"
+                          className="text-xs px-2 py-0.5 bg-amber-500/20 text-amber-300 rounded"
                         >
                           {tag}
                         </span>
@@ -345,7 +345,7 @@ export default function InteractiveTerminal({
                 <div className="pt-2">
                   <Link
                     href="/projects"
-                    className="text-blue-400 hover:text-blue-300 transition-colors text-sm flex items-center gap-1 group"
+                    className="text-amber-400 hover:text-amber-300 transition-colors text-sm flex items-center gap-1 group"
                   >
                     <ExternalLink className="w-3.5 h-3.5" />
                     <span className="group-hover:underline">
@@ -366,13 +366,13 @@ export default function InteractiveTerminal({
           addLine(
             "output",
             <div className="space-y-3">
-              <div className="text-cyan-400 font-semibold flex items-center gap-2">
+              <div className="text-rose-400 font-semibold flex items-center gap-2">
                 <Briefcase className="w-5 h-5" />
                 Recent Experience
               </div>
               <div className="p-3 bg-neutral-800/50 rounded border border-neutral-700/50">
                 <div className="flex items-start justify-between gap-2 mb-2">
-                  <div className="font-semibold text-blue-400">
+                  <div className="font-semibold text-amber-400">
                     {experience.position}
                   </div>
                   {experience.iscurrent && (
@@ -407,7 +407,7 @@ export default function InteractiveTerminal({
           addLine(
             "output",
             <div className="space-y-3">
-              <div className="text-cyan-400 font-semibold flex items-center gap-2">
+              <div className="text-rose-400 font-semibold flex items-center gap-2">
                 <Award className="w-5 h-5" />
                 Certificates ({certificates.length} total
                 {hasMore ? ", showing 6" : ""})
@@ -420,7 +420,7 @@ export default function InteractiveTerminal({
                   >
                     <div className="flex items-start justify-between gap-2">
                       <div>
-                        <div className="font-semibold text-blue-400">
+                        <div className="font-semibold text-amber-400">
                           {idx + 1}. {cert.title}
                         </div>
                         <div className="text-neutral-400 text-sm">
@@ -440,7 +440,7 @@ export default function InteractiveTerminal({
                 <div className="pt-2">
                   <Link
                     href="/certificates"
-                    className="text-blue-400 hover:text-blue-300 transition-colors text-sm flex items-center gap-1 group"
+                    className="text-amber-400 hover:text-amber-300 transition-colors text-sm flex items-center gap-1 group"
                   >
                     <ExternalLink className="w-3.5 h-3.5" />
                     <span className="group-hover:underline">
@@ -458,22 +458,22 @@ export default function InteractiveTerminal({
         addLine(
           "output",
           <div className="space-y-3">
-            <div className="text-cyan-400 font-semibold flex items-center gap-2">
+            <div className="text-rose-400 font-semibold flex items-center gap-2">
               <MessageSquare className="w-5 h-5" />
               Contact Info
             </div>
             <div className="space-y-2 text-sm">
               <div className="flex items-center gap-2">
-                <Mail className="w-4 h-4 text-blue-400" />
+                <Mail className="w-4 h-4 text-amber-400" />
                 <a
                   href="mailto:gabrielnathanael81@gmail.com"
-                  className="text-neutral-300 hover:text-blue-400 transition-colors"
+                  className="text-neutral-300 hover:text-amber-400 transition-colors"
                 >
                   gabrielnathanael81@gmail.com
                 </a>
               </div>
               <div className="text-neutral-500 text-xs mt-3">
-                Type <span className="text-blue-400 font-mono">social</span> to
+                Type <span className="text-amber-400 font-mono">social</span> to
                 see all social links
               </div>
             </div>
@@ -485,7 +485,7 @@ export default function InteractiveTerminal({
         addLine(
           "output",
           <div className="space-y-3">
-            <div className="text-cyan-400 font-semibold flex items-center gap-2">
+            <div className="text-rose-400 font-semibold flex items-center gap-2">
               <Globe className="w-5 h-5" />
               Find Me Online
             </div>
@@ -508,7 +508,7 @@ export default function InteractiveTerminal({
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 p-2 bg-neutral-800/50 rounded hover:bg-neutral-800 transition-colors group"
               >
-                <Linkedin className="w-5 h-5 text-blue-500 group-hover:text-blue-400" />
+                <Linkedin className="w-5 h-5 text-amber-500 group-hover:text-amber-400" />
                 <span className="text-neutral-300 text-sm">
                   LinkedIn - Gabriel Nathanael Purba
                 </span>
@@ -555,7 +555,7 @@ export default function InteractiveTerminal({
           <div className="text-red-400">
             Command not found: <span className="font-mono">{trimmedCmd}</span>
             <div className="text-neutral-500 text-sm mt-1">
-              Type <span className="text-blue-400 font-mono">help</span> to see
+              Type <span className="text-amber-400 font-mono">help</span> to see
               available commands
             </div>
           </div>,
@@ -627,8 +627,8 @@ export default function InteractiveTerminal({
           transition={{ duration: 0.6, delay: 0.1 }}
           className="flex items-center gap-3 mb-3"
         >
-          <TerminalIcon className="w-8 h-8 text-cyan-400" />
-          <h2 className="text-3xl font-bold bg-linear-to-r from-blue-600 to-cyan-500 dark:from-blue-400 dark:to-cyan-300 bg-clip-text text-transparent">
+          <TerminalIcon className="w-8 h-8 text-rose-400" />
+          <h2 className="text-3xl font-bold bg-linear-to-r from-amber-600 to-rose-500 dark:from-amber-400 dark:to-rose-300 bg-clip-text text-transparent">
             Interactive Terminal
           </h2>
         </motion.div>
@@ -731,7 +731,7 @@ export default function InteractiveTerminal({
                     typeCommand(suggestion);
                     setSuggestions([]);
                   }}
-                  className="text-neutral-500 hover:text-blue-400 transition-colors text-sm font-mono"
+                  className="text-neutral-500 hover:text-amber-400 transition-colors text-sm font-mono"
                 >
                   {suggestion}
                 </button>

@@ -15,7 +15,7 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
       : "bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-700";
 
     const hoverStyles = hover
-      ? "hover:shadow-2xl hover:-translate-y-1 hover:border-blue-300 dark:hover:border-blue-600"
+      ? "hover:shadow-2xl hover:-translate-y-1 hover:border-amber-300 dark:hover:border-amber-600"
       : "";
 
     return (

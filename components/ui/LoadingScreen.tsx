@@ -54,7 +54,7 @@ export default function LoadingScreen() {
                 stiffness: 120,
                 damping: 18,
               }}
-              className="text-4xl md:text-6xl font-bold bg-linear-to-r from-blue-600 to-cyan-500 dark:from-blue-400 dark:to-cyan-300 bg-clip-text text-transparent mb-8 whitespace-nowrap"
+              className="text-4xl md:text-6xl font-bold bg-linear-to-r from-amber-600 to-rose-500 dark:from-amber-400 dark:to-rose-300 bg-clip-text text-transparent mb-8 whitespace-nowrap"
             >
               Gabriel Nathanael
             </motion.h1>
@@ -71,7 +71,7 @@ export default function LoadingScreen() {
                   initial={{ width: 0 }}
                   animate={{ width: `${progress}%` }}
                   transition={{ ease: "linear" }}
-                  className="absolute left-0 top-0 h-px bg-linear-to-r from-blue-600 to-cyan-500 dark:from-blue-400 dark:to-cyan-300"
+                  className="absolute left-0 top-0 h-px bg-linear-to-r from-amber-600 to-rose-500 dark:from-amber-400 dark:to-rose-300"
                 />
               </div>
 

@@ -123,7 +123,7 @@ export default function Pagination({
                 onClick={() => onPageChange(pageNum)}
                 className={`min-w-10 px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
                   isActive
-                    ? "bg-blue-600 text-white shadow-md shadow-blue-500/30 dark:shadow-blue-400/20"
+                    ? "bg-amber-600 text-white shadow-md shadow-amber-500/30 dark:shadow-amber-400/20"
                     : "text-neutral-800 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-900"
                 }`}
                 aria-label={`Page ${pageNum}`}

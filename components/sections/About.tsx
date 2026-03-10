@@ -53,7 +53,7 @@ export default function About() {
             transition={{ duration: isMobile ? 0.5 : 0.8, ease: "easeOut" }}
           >
             <h2 className="font-heading text-6xl lg:text-8xl font-black tracking-tight">
-              <span className="bg-linear-to-r from-blue-600 to-cyan-500 dark:from-blue-400 dark:to-cyan-300 bg-clip-text text-transparent">
+              <span className="bg-linear-to-r from-amber-600 to-rose-500 dark:from-amber-400 dark:to-rose-300 bg-clip-text text-transparent">
                 About
               </span>
               <br />
@@ -74,7 +74,7 @@ export default function About() {
                   Let&apos;s
                 </span>
                 <br />
-                <span className="bg-linear-to-r from-cyan-500 to-blue-600 dark:from-cyan-300 dark:to-blue-400 bg-clip-text text-transparent">
+                <span className="bg-linear-to-r from-rose-500 to-amber-600 dark:from-rose-300 dark:to-amber-400 bg-clip-text text-transparent">
                   Connect
                 </span>
               </h3>
@@ -112,7 +112,7 @@ export default function About() {
                         transition: { duration: 0.2 },
                       }}
                       whileTap={{ scale: 0.9 }}
-                      className="text-neutral-700 dark:text-neutral-300 hover:text-blue-500 dark:hover:text-blue-400 transition-colors"
+                      className="text-neutral-700 dark:text-neutral-300 hover:text-amber-500 dark:hover:text-amber-400 transition-colors"
                       title={social.name}
                     >
                       <Icon className="w-8 h-8 lg:w-9 lg:h-9" />
@@ -156,7 +156,7 @@ export default function About() {
           >
             <div className="relative pl-6">
               <motion.div
-                className="absolute left-0 top-1 w-0.75 bg-linear-to-b from-blue-500 to-cyan-400 dark:from-blue-400 dark:to-cyan-300 rounded-full"
+                className="absolute left-0 top-1 w-0.75 bg-linear-to-b from-amber-500 to-rose-400 dark:from-amber-400 dark:to-rose-300 rounded-full"
                 initial={{ height: 0, opacity: 0 }}
                 animate={
                   inView
@@ -235,7 +235,7 @@ export default function About() {
                 <span className="text-neutral-400 dark:text-neutral-600">
                   Let&apos;s
                 </span>{" "}
-                <span className="bg-linear-to-r from-cyan-500 to-blue-600 dark:from-cyan-300 dark:to-blue-400 bg-clip-text text-transparent">
+                <span className="bg-linear-to-r from-rose-500 to-amber-600 dark:from-rose-300 dark:to-amber-400 bg-clip-text text-transparent">
                   Connect
                 </span>
               </h3>
@@ -268,7 +268,7 @@ export default function About() {
                         },
                       }}
                       whileTap={{ scale: 0.9 }}
-                      className="text-neutral-700 dark:text-neutral-300 active:text-blue-500"
+                      className="text-neutral-700 dark:text-neutral-300 active:text-amber-500"
                       title={social.name}
                     >
                       <Icon className="w-8 h-8" />

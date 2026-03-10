@@ -74,7 +74,7 @@ export default function ProjectFilter({
             }
             onOpenChange={setIsOpen}
           >
-            <Select.Trigger className="inline-flex items-center justify-between gap-2 rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 px-4 py-2 text-sm font-medium text-neutral-700 dark:text-neutral-300 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all min-w-40">
+            <Select.Trigger className="inline-flex items-center justify-between gap-2 rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 px-4 py-2 text-sm font-medium text-neutral-700 dark:text-neutral-300 focus:outline-none focus:ring-2 focus:ring-amber-500 transition-all min-w-40">
               <Select.Value placeholder="Sort by" />
               <motion.div
                 animate={{ rotate: isOpen ? 180 : 0 }}
@@ -103,7 +103,7 @@ export default function ProjectFilter({
                 >
                   <Select.ItemText>Newest First</Select.ItemText>
                   {sortBy === "newest" && (
-                    <Check className="w-4 h-4 text-blue-600" />
+                    <Check className="w-4 h-4 text-amber-600" />
                   )}
                 </Select.Item>
 
@@ -113,7 +113,7 @@ export default function ProjectFilter({
                 >
                   <Select.ItemText>Oldest First</Select.ItemText>
                   {sortBy === "oldest" && (
-                    <Check className="w-4 h-4 text-blue-600" />
+                    <Check className="w-4 h-4 text-amber-600" />
                   )}
                 </Select.Item>
               </Select.Viewport>
@@ -131,7 +131,7 @@ export default function ProjectFilter({
           {selectedTags.length > 0 && (
             <button
               onClick={clearAll}
-              className="text-sm text-blue-600 dark:text-blue-400 hover:underline"
+              className="text-sm text-amber-600 dark:text-amber-400 hover:underline"
             >
               Clear all ({selectedTags.length})
             </button>
@@ -151,7 +151,7 @@ export default function ProjectFilter({
             }
             onOpenChange={setIsOpen}
           >
-            <Select.Trigger className="inline-flex items-center justify-between gap-2 rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 px-4 py-2 text-sm font-medium text-neutral-700 dark:text-neutral-300 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all min-w-40">
+            <Select.Trigger className="inline-flex items-center justify-between gap-2 rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 px-4 py-2 text-sm font-medium text-neutral-700 dark:text-neutral-300 focus:outline-none focus:ring-2 focus:ring-amber-500 transition-all min-w-40">
               <Select.Value placeholder="Sort by" />
               <motion.div
                 animate={{ rotate: isOpen ? 180 : 0 }}
@@ -180,7 +180,7 @@ export default function ProjectFilter({
                 >
                   <Select.ItemText>Newest First</Select.ItemText>
                   {sortBy === "newest" && (
-                    <Check className="w-4 h-4 text-blue-600" />
+                    <Check className="w-4 h-4 text-amber-600" />
                   )}
                 </Select.Item>
 
@@ -190,7 +190,7 @@ export default function ProjectFilter({
                 >
                   <Select.ItemText>Oldest First</Select.ItemText>
                   {sortBy === "oldest" && (
-                    <Check className="w-4 h-4 text-blue-600" />
+                    <Check className="w-4 h-4 text-amber-600" />
                   )}
                 </Select.Item>
               </Select.Viewport>
@@ -207,7 +207,7 @@ export default function ProjectFilter({
         {selectedTags.length > 0 && (
           <button
             onClick={clearAll}
-            className="text-sm text-blue-600 dark:text-blue-400 hover:underline"
+            className="text-sm text-amber-600 dark:text-amber-400 hover:underline"
           >
             Clear all ({selectedTags.length})
           </button>
@@ -229,7 +229,7 @@ export default function ProjectFilter({
               {/* Category Header */}
               <button
                 onClick={() => toggleCategory(category)}
-                className="flex items-center gap-2 text-sm font-semibold text-neutral-700 dark:text-neutral-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                className="flex items-center gap-2 text-sm font-semibold text-neutral-700 dark:text-neutral-300 hover:text-amber-600 dark:hover:text-amber-400 transition-colors"
               >
                 <motion.div
                   animate={{ rotate: isExpanded ? 90 : 0 }}
@@ -265,7 +265,7 @@ export default function ProjectFilter({
                             onClick={() => toggleTag(tag)}
                             className={`px-4 py-2 text-sm font-medium rounded-full transition-all duration-200 ${
                               isSelected
-                                ? "bg-blue-600 text-white shadow-lg shadow-blue-500/30 scale-105"
+                                ? "bg-amber-600 text-white shadow-lg shadow-amber-500/30 scale-105"
                                 : "bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700"
                             }`}
                           >

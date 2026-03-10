@@ -16,9 +16,9 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 
     const variants = {
       primary:
-        "bg-blue-600 text-white hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-400 shadow-lg shadow-blue-500/30 hover:shadow-xl hover:shadow-blue-500/40 dark:shadow-blue-500/20 dark:hover:shadow-blue-500/30",
+        "bg-amber-600 text-white hover:bg-amber-700 dark:bg-amber-500 dark:hover:bg-amber-400 shadow-lg shadow-amber-500/30 hover:shadow-xl hover:shadow-amber-500/40 dark:shadow-amber-500/20 dark:hover:shadow-amber-500/30",
       secondary:
-        "bg-violet-600 text-white hover:bg-violet-700 dark:bg-violet-500 dark:hover:bg-violet-400 shadow-lg shadow-violet-500/30 hover:shadow-xl hover:shadow-violet-500/40 dark:shadow-violet-500/20 dark:hover:shadow-violet-500/30",
+        "bg-orange-600 text-white hover:bg-orange-700 dark:bg-orange-500 dark:hover:bg-orange-400 shadow-lg shadow-orange-500/30 hover:shadow-xl hover:shadow-orange-500/40 dark:shadow-orange-500/20 dark:hover:shadow-orange-500/30",
       ghost: `
   bg-white/40 dark:bg-white/5
   backdrop-blur-sm

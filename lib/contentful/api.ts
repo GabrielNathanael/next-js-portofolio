@@ -139,10 +139,10 @@ export async function getLatestCertificates(): Promise<Certificate[]> {
   // Combine: highlighted first, then fill with latest non-highlighted
   const result = [
     ...highlighted,
-    ...nonHighlighted.slice(0, Math.max(0, 5 - highlighted.length)),
+    ...nonHighlighted.slice(0, Math.max(0, 3 - highlighted.length)),
   ];
 
-  return result.slice(0, 5);
+  return result.slice(0, 3);
 }
 
 /**

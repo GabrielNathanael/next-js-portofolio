@@ -6,22 +6,20 @@ import { Toaster } from "sonner";
 import { siteConfig, jsonLdPerson } from "@/lib/seo/config";
 import { Analytics } from "@vercel/analytics/next";
 import ChatWidget from "@/components/chat/ChatWidget";
-import { Karla, Inconsolata } from "next/font/google";
+import { Outfit, DM_Sans } from "next/font/google";
 
 /* =========================
    Fonts
 ========================= */
 
-const karla = Karla({
+const outfit = Outfit({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
   variable: "--font-heading",
   display: "swap",
 });
 
-const inconsolata = Inconsolata({
+const dmsans = DM_Sans({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
   variable: "--font-body",
   display: "swap",
 });
@@ -95,7 +93,7 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="https://assets.ctfassets.net" />
       </head>
 
-      <body className={`${karla.variable} ${inconsolata.variable} antialiased`}>
+      <body className={`${outfit.variable} ${dmsans.variable} antialiased`}>
         <ThemeProvider>
           {children}
           <Toaster position="top-right" expand={false} richColors closeButton />

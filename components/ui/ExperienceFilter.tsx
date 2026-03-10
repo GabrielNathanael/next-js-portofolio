@@ -92,14 +92,14 @@ export default function ExperienceFilter({
     }
 
     const colors: Record<string, string> = {
-      "Full-time": "bg-blue-600 text-white shadow-lg shadow-blue-500/30",
-      Internship: "bg-purple-600 text-white shadow-lg shadow-purple-500/30",
-      "Part-time": "bg-violet-600 text-white shadow-lg shadow-violet-500/30",
+      "Full-time": "bg-amber-600 text-white shadow-lg shadow-amber-500/30",
+      Internship: "bg-rose-600 text-white shadow-lg shadow-rose-500/30",
+      "Part-time": "bg-orange-600 text-white shadow-lg shadow-orange-500/30",
       Contract: "bg-orange-600 text-white shadow-lg shadow-orange-500/30",
-      Freelance: "bg-cyan-600 text-white shadow-lg shadow-cyan-500/30",
+      Freelance: "bg-rose-600 text-white shadow-lg shadow-rose-500/30",
     };
     return (
-      colors[type] || "bg-blue-600 text-white shadow-lg shadow-blue-500/30"
+      colors[type] || "bg-amber-600 text-white shadow-lg shadow-amber-500/30"
     );
   };
 
@@ -148,7 +148,7 @@ export default function ExperienceFilter({
             }
             onOpenChange={setIsOpen}
           >
-            <Select.Trigger className="inline-flex items-center justify-between gap-2 rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 px-4 py-2 text-sm font-medium text-neutral-700 dark:text-neutral-300 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all min-w-40">
+            <Select.Trigger className="inline-flex items-center justify-between gap-2 rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 px-4 py-2 text-sm font-medium text-neutral-700 dark:text-neutral-300 focus:outline-none focus:ring-2 focus:ring-amber-500 transition-all min-w-40">
               <Select.Value />
               <motion.div
                 animate={{ rotate: isOpen ? 180 : 0 }}
@@ -177,7 +177,7 @@ export default function ExperienceFilter({
                 >
                   <Select.ItemText>Newest First</Select.ItemText>
                   {sortOrder === "newest" && (
-                    <Check className="w-4 h-4 text-blue-600" />
+                    <Check className="w-4 h-4 text-amber-600" />
                   )}
                 </Select.Item>
 
@@ -187,7 +187,7 @@ export default function ExperienceFilter({
                 >
                   <Select.ItemText>Oldest First</Select.ItemText>
                   {sortOrder === "oldest" && (
-                    <Check className="w-4 h-4 text-blue-600" />
+                    <Check className="w-4 h-4 text-amber-600" />
                   )}
                 </Select.Item>
               </Select.Viewport>
@@ -205,7 +205,7 @@ export default function ExperienceFilter({
           {totalSelectedFilters > 0 && (
             <button
               onClick={clearAll}
-              className="text-sm text-blue-600 dark:text-blue-400 hover:underline"
+              className="text-sm text-amber-600 dark:text-amber-400 hover:underline"
             >
               Clear all ({totalSelectedFilters})
             </button>
@@ -225,7 +225,7 @@ export default function ExperienceFilter({
             }
             onOpenChange={setIsOpen}
           >
-            <Select.Trigger className="inline-flex items-center justify-between gap-2 rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 px-4 py-2 text-sm font-medium text-neutral-700 dark:text-neutral-300 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all min-w-40">
+            <Select.Trigger className="inline-flex items-center justify-between gap-2 rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 px-4 py-2 text-sm font-medium text-neutral-700 dark:text-neutral-300 focus:outline-none focus:ring-2 focus:ring-amber-500 transition-all min-w-40">
               <Select.Value />
               <motion.div
                 animate={{ rotate: isOpen ? 180 : 0 }}
@@ -254,7 +254,7 @@ export default function ExperienceFilter({
                 >
                   <Select.ItemText>Newest First</Select.ItemText>
                   {sortOrder === "newest" && (
-                    <Check className="w-4 h-4 text-blue-600" />
+                    <Check className="w-4 h-4 text-amber-600" />
                   )}
                 </Select.Item>
 
@@ -264,7 +264,7 @@ export default function ExperienceFilter({
                 >
                   <Select.ItemText>Oldest First</Select.ItemText>
                   {sortOrder === "oldest" && (
-                    <Check className="w-4 h-4 text-blue-600" />
+                    <Check className="w-4 h-4 text-amber-600" />
                   )}
                 </Select.Item>
               </Select.Viewport>
@@ -281,7 +281,7 @@ export default function ExperienceFilter({
         {totalSelectedFilters > 0 && (
           <button
             onClick={clearAll}
-            className="text-sm text-blue-600 dark:text-blue-400 hover:underline"
+            className="text-sm text-amber-600 dark:text-amber-400 hover:underline"
           >
             Clear all ({totalSelectedFilters})
           </button>
@@ -300,7 +300,7 @@ export default function ExperienceFilter({
               {/* Category Header */}
               <button
                 onClick={() => toggleCategory(category.name)}
-                className="flex items-center gap-2 text-sm font-semibold text-neutral-700 dark:text-neutral-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                className="flex items-center gap-2 text-sm font-semibold text-neutral-700 dark:text-neutral-300 hover:text-amber-600 dark:hover:text-amber-400 transition-colors"
               >
                 <motion.div
                   animate={{ rotate: isExpanded ? 90 : 0 }}
@@ -331,7 +331,7 @@ export default function ExperienceFilter({
                         const colorClass = category.getColorClass
                           ? category.getColorClass(item, isSelected)
                           : isSelected
-                          ? "bg-blue-600 text-white shadow-lg shadow-blue-500/30 scale-105"
+                          ? "bg-amber-600 text-white shadow-lg shadow-amber-500/30 scale-105"
                           : "bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700";
 
                         return (

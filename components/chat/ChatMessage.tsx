@@ -27,8 +27,8 @@ export default function ChatMessage({ message }: ChatMessageProps) {
       <div
         className={`shrink-0 w-8 h-8 rounded-full flex items-center justify-center overflow-hidden ${
           isUser
-            ? "bg-blue-500 text-white"
-            : "bg-linear-to-br from-blue-500 to-cyan-500"
+            ? "bg-amber-500 text-white"
+            : "bg-linear-to-br from-amber-500 to-rose-500"
         }`}
       >
         {isUser ? (
@@ -51,7 +51,7 @@ export default function ChatMessage({ message }: ChatMessageProps) {
         <div
           className={`inline-block px-4 py-2.5 rounded-2xl ${
             isUser
-              ? "bg-blue-500 text-white rounded-tr-sm"
+              ? "bg-amber-500 text-white rounded-tr-sm"
               : "bg-neutral-100 dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100 rounded-tl-sm"
           }`}
         >
@@ -66,7 +66,7 @@ export default function ChatMessage({ message }: ChatMessageProps) {
                     return (
                       <Link
                         href={href}
-                        className="text-blue-600 dark:text-blue-400 hover:underline font-medium"
+                        className="text-amber-600 dark:text-amber-400 hover:underline font-medium"
                       >
                         {children}
                       </Link>
@@ -78,7 +78,7 @@ export default function ChatMessage({ message }: ChatMessageProps) {
                       href={href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-blue-600 dark:text-blue-400 hover:underline font-medium"
+                      className="text-amber-600 dark:text-amber-400 hover:underline font-medium"
                       {...props}
                     >
                       {children}

@@ -146,7 +146,7 @@ export default function ContactForm() {
         {/* Header */}
         <div className="text-center mb-16">
           <h2 className="font-heading text-5xl lg:text-6xl font-black tracking-tight mb-4">
-            <span className="bg-linear-to-r from-blue-600 to-cyan-500 dark:from-blue-400 dark:to-cyan-300 bg-clip-text text-transparent">
+            <span className="bg-linear-to-r from-amber-600 to-rose-500 dark:from-amber-400 dark:to-rose-300 bg-clip-text text-transparent">
               Let&apos;s Create
             </span>
             <br />
@@ -212,7 +212,7 @@ export default function ContactForm() {
                   className={`peer w-full px-4 pt-6 pb-2 bg-white dark:bg-black border-2 rounded-xl text-neutral-900 dark:text-neutral-100 placeholder-transparent focus:outline-none transition-all disabled:opacity-50 disabled:cursor-not-allowed ${
                     errors.name
                       ? "border-red-500 dark:border-red-500"
-                      : "border-gray-300 dark:border-neutral-700 focus:border-blue-500 dark:focus:border-blue-400"
+                      : "border-gray-300 dark:border-neutral-700 focus:border-amber-500 dark:focus:border-amber-400"
                   }`}
                   placeholder="Your Name"
                 />
@@ -220,7 +220,7 @@ export default function ContactForm() {
                   htmlFor="name"
                   className={`absolute left-4 transition-all duration-200 pointer-events-none ${
                     formData.name || focusedField === "name"
-                      ? "top-2 text-xs text-blue-600 dark:text-blue-400 font-semibold"
+                      ? "top-2 text-xs text-amber-600 dark:text-amber-400 font-semibold"
                       : "top-4 text-sm text-neutral-500 dark:text-neutral-400"
                   } ${errors.name && "text-red-600 dark:text-red-400"}`}
                 >
@@ -237,7 +237,7 @@ export default function ContactForm() {
                     className={`h-5 w-5 ${
                       errors.name
                         ? "text-red-500"
-                        : "text-blue-500 dark:text-blue-400"
+                        : "text-amber-500 dark:text-amber-400"
                     }`}
                   />
                 </div>
@@ -262,7 +262,7 @@ export default function ContactForm() {
                   className={`peer w-full px-4 pt-6 pb-2 bg-white dark:bg-black border-2 rounded-xl text-neutral-900 dark:text-neutral-100 placeholder-transparent focus:outline-none transition-all disabled:opacity-50 disabled:cursor-not-allowed ${
                     errors.email
                       ? "border-red-500 dark:border-red-500"
-                      : "border-gray-300 dark:border-neutral-700 focus:border-blue-500 dark:focus:border-blue-400"
+                      : "border-gray-300 dark:border-neutral-700 focus:border-amber-500 dark:focus:border-amber-400"
                   }`}
                   placeholder="Email Address"
                 />
@@ -270,7 +270,7 @@ export default function ContactForm() {
                   htmlFor="email"
                   className={`absolute left-4 transition-all duration-200 pointer-events-none ${
                     formData.email || focusedField === "email"
-                      ? "top-2 text-xs text-blue-600 dark:text-blue-400 font-semibold"
+                      ? "top-2 text-xs text-amber-600 dark:text-amber-400 font-semibold"
                       : "top-4 text-sm text-neutral-500 dark:text-neutral-400"
                   } ${errors.email && "text-red-600 dark:text-red-400"}`}
                 >
@@ -287,7 +287,7 @@ export default function ContactForm() {
                     className={`h-5 w-5 ${
                       errors.email
                         ? "text-red-500"
-                        : "text-blue-500 dark:text-blue-400"
+                        : "text-amber-500 dark:text-amber-400"
                     }`}
                   />
                 </div>
@@ -312,7 +312,7 @@ export default function ContactForm() {
                   className={`peer w-full px-4 pt-6 pb-2 bg-white dark:bg-black border-2 rounded-xl text-neutral-900 dark:text-neutral-100 placeholder-transparent focus:outline-none transition-all resize-none disabled:opacity-50 disabled:cursor-not-allowed ${
                     errors.message
                       ? "border-red-500 dark:border-red-500"
-                      : "border-gray-300 dark:border-neutral-700 focus:border-blue-500 dark:focus:border-blue-400"
+                      : "border-gray-300 dark:border-neutral-700 focus:border-amber-500 dark:focus:border-amber-400"
                   }`}
                   placeholder="Your Message"
                 />
@@ -320,7 +320,7 @@ export default function ContactForm() {
                   htmlFor="message"
                   className={`absolute left-4 transition-all duration-200 pointer-events-none ${
                     formData.message || focusedField === "message"
-                      ? "top-2 text-xs text-blue-600 dark:text-blue-400 font-semibold"
+                      ? "top-2 text-xs text-amber-600 dark:text-amber-400 font-semibold"
                       : "top-4 text-sm text-neutral-500 dark:text-neutral-400"
                   } ${errors.message && "text-red-600 dark:text-red-400"}`}
                 >
@@ -337,7 +337,7 @@ export default function ContactForm() {
                     className={`h-5 w-5 ${
                       errors.message
                         ? "text-red-500"
-                        : "text-blue-500 dark:text-blue-400"
+                        : "text-amber-500 dark:text-amber-400"
                     }`}
                   />
                 </div>

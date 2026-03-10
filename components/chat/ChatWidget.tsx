@@ -129,9 +129,9 @@ export default function ChatWidget() {
         whileTap={{ scale: 0.9 }}
         onClick={() => setIsOpen(true)}
         className="fixed bottom-6 right-6 z-40 w-14 h-14 rounded-full 
-                 bg-linear-to-r from-blue-500 to-cyan-500
-                 hover:from-blue-600 hover:to-cyan-600
-                 shadow-lg shadow-blue-500/50 hover:shadow-xl hover:shadow-blue-500/60
+                 bg-linear-to-r from-amber-500 to-rose-500
+                 hover:from-amber-600 hover:to-rose-600
+                 shadow-lg shadow-amber-500/50 hover:shadow-xl hover:shadow-amber-500/60
                  flex items-center justify-center
                  transition-all duration-300
                  overflow-hidden"
@@ -172,7 +172,7 @@ export default function ChatWidget() {
                        border border-neutral-200 dark:border-neutral-800"
             >
               {/* Header */}
-              <div className="flex items-center justify-between px-5 py-4 border-b border-neutral-200 dark:border-neutral-800 bg-linear-to-r from-blue-500 to-cyan-500">
+              <div className="flex items-center justify-between px-5 py-4 border-b border-neutral-200 dark:border-neutral-800 bg-linear-to-r from-amber-500 to-rose-500">
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center overflow-hidden">
                     <Image
@@ -270,7 +270,7 @@ export default function ChatWidget() {
                     <div className="flex items-center gap-3">
                       <a
                         href="mailto:gabrielnathanael81@gmail.com"
-                        className="flex items-center gap-1 text-blue-600 dark:text-blue-400 hover:underline"
+                        className="flex items-center gap-1 text-amber-600 dark:text-amber-400 hover:underline"
                         target="_blank"
                         rel="noopener noreferrer"
                       >
@@ -280,7 +280,7 @@ export default function ChatWidget() {
 
                       <a
                         href="https://www.instagram.com/gabrielnathanaelp"
-                        className="flex items-center gap-1 text-blue-600 dark:text-blue-400 hover:underline"
+                        className="flex items-center gap-1 text-amber-600 dark:text-amber-400 hover:underline"
                         target="_blank"
                         rel="noopener noreferrer"
                       >

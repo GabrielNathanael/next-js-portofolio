@@ -59,7 +59,7 @@ export default function CertificateModal({
                 </h3>
                 {/* Issuer & Year with badge - centered layout */}
                 <div className="flex items-center justify-center gap-3">
-                  <span className="px-4 py-1.5 text-sm font-semibold bg-linear-to-r from-blue-600 to-blue-500 text-white rounded-full shadow-lg">
+                  <span className="px-4 py-1.5 text-sm font-semibold bg-linear-to-r from-amber-600 to-amber-500 text-white rounded-full shadow-lg">
                     {certificate.issuer}
                   </span>
                   <span className="text-xl text-neutral-400">•</span>
